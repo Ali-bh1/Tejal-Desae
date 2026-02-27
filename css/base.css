@@ -1,0 +1,308 @@
+/* ============================================
+   Base Styles — Reset, Typography, Utilities
+   ============================================ */
+
+/* --- Reset --- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- Document --- */
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background: var(--bg-primary);
+    color: var(--text-main);
+    font-family: var(--sans);
+    font-weight: var(--font-light);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+/* Prevent scroll during loader */
+body.loading {
+    overflow: hidden;
+}
+
+/* --- Typography Base --- */
+h1,
+h2,
+h3,
+h4 {
+    font-weight: var(--font-light);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- Selection --- */
+::selection {
+    background: var(--espresso);
+    color: var(--blush);
+}
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gold-30);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold);
+}
+
+/* --- Focus Visible --- */
+:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+}
+
+/* --- Utility: Container --- */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+/* --- Utility: Section defaults --- */
+section {
+    padding: var(--space-3xl) var(--space-lg);
+}
+
+/* --- Utility: Section Labels --- */
+.section-eyebrow {
+    font-size: 0.72rem;
+    font-weight: var(--font-bold);
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 1;
+    margin-bottom: var(--space-md);
+}
+
+.section-title {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: var(--font-medium);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    color: var(--text-main);
+    margin-bottom: var(--space-md);
+}
+
+.section-title em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: inherit;
+}
+
+.gold-line {
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 1;
+    margin-bottom: 36px;
+}
+
+/* --- Buttons --- */
+.btn-primary {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: var(--font-bold);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--gold);
+    padding: 22px 52px;
+    /* Slightly larger */
+    border: 1px solid var(--gold);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-default);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary:hover {
+    background: var(--espresso);
+    border-color: var(--espresso);
+    color: var(--white);
+}
+
+.btn-ghost {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: var(--font-bold);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: transparent;
+    padding: 22px 52px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-default);
+}
+
+.btn-ghost:hover {
+    border-color: var(--white);
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Ghost button on light backgrounds */
+.authority .btn-ghost {
+    color: var(--espresso);
+    border-color: var(--gold-30);
+}
+
+.authority .btn-ghost:hover {
+    border-color: var(--espresso);
+    color: var(--espresso);
+    background: rgba(var(--espresso-rgb), 0.05);
+}
+
+/* --- Emerald Hover Accents (select sections) --- */
+.intro-strip .btn-primary:hover,
+.final-cta .btn-primary:hover,
+.offer-actions .btn-primary:hover {
+    background: #3D6B5E;
+    border-color: #3D6B5E;
+    color: var(--cognac);
+}
+
+/* --- Reveal Animation Base --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s var(--ease-default), transform 0.8s var(--ease-default);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger children */
+.reveal-children>* {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s var(--ease-default), transform 0.6s var(--ease-default);
+}
+
+.reveal-children.visible>* {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-children.visible>*:nth-child(1) {
+    transition-delay: 0s;
+}
+
+.reveal-children.visible>*:nth-child(2) {
+    transition-delay: 0.1s;
+}
+
+.reveal-children.visible>*:nth-child(3) {
+    transition-delay: 0.2s;
+}
+
+.reveal-children.visible>*:nth-child(4) {
+    transition-delay: 0.3s;
+}
+
+.reveal-children.visible>*:nth-child(5) {
+    transition-delay: 0.35s;
+}
+
+.reveal-children.visible>*:nth-child(6) {
+    transition-delay: 0.4s;
+}
+
+/* --- Loader --- */
+.loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--blush);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s var(--ease-default), visibility 0.6s;
+}
+
+.loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loader-brand {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--espresso);
+    opacity: 0;
+    transform: translateY(10px);
+    animation: loaderFadeIn 0.8s 0.2s var(--ease-default) forwards;
+}
+
+.loader-line {
+    width: 60px;
+    height: 1px;
+    background: var(--gold-30);
+    margin-top: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.loader-line::after {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gold);
+    animation: loaderSlide 1.2s 0.4s var(--ease-default) forwards;
+}
+
+@keyframes loaderFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes loaderSlide {
+    to {
+        left: 0;
+    }
+}

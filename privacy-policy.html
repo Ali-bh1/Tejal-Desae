@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Tejal Desae</title>
+    <meta name="description" content="Privacy Policy for Tejal Desae — Identity & Wealth Manifestation Mentor.">
+    <meta name="robots" content="noindex">
+    <link rel="canonical" href="https://tejaldesae.com/privacy-policy">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/sections.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        /* Privacy-page specific overrides */
+        .privacy-hero {
+            position: relative;
+            background: var(--espresso);
+            background-image: url('images/hero-bg.jpg');
+            background-size: 120%;
+            background-position: center 40%;
+            padding: 180px var(--space-lg) 100px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .privacy-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom,
+                    rgba(38, 19, 11, 0.72) 0%,
+                    rgba(38, 19, 11, 0.85) 100%);
+        }
+
+        .privacy-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .privacy-hero-eyebrow {
+            font-size: 0.7rem;
+            font-weight: var(--font-bold);
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0.7;
+            margin-bottom: 24px;
+        }
+
+        .privacy-hero h1 {
+            font-family: var(--serif);
+            font-size: clamp(2.8rem, 5vw, 5rem);
+            font-weight: var(--font-light);
+            color: var(--white);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .privacy-hero-sub {
+            font-size: 0.85rem;
+            color: var(--champagne);
+            opacity: 0.6;
+            margin-top: 20px;
+            letter-spacing: 0.1em;
+        }
+
+        /* Content */
+        .privacy-body {
+            background: var(--bg-primary);
+            padding: 100px var(--space-lg) 120px;
+        }
+
+        .privacy-inner {
+            max-width: 740px;
+            margin: 0 auto;
+        }
+
+        .privacy-intro {
+            font-family: var(--serif);
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 72px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid var(--gold-12);
+        }
+
+        .privacy-section {
+            margin-bottom: 56px;
+        }
+
+        .privacy-section h2 {
+            font-family: var(--serif);
+            font-size: 1.4rem;
+            font-weight: var(--font-medium);
+            color: var(--espresso);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--gold-12);
+        }
+
+        .privacy-section p,
+        .privacy-section li {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.85;
+            margin-bottom: 14px;
+        }
+
+        .privacy-section ul {
+            padding-left: 20px;
+            margin-bottom: 14px;
+        }
+
+        .privacy-section li {
+            margin-bottom: 8px;
+        }
+
+        .privacy-section strong {
+            color: var(--espresso);
+            font-weight: var(--font-bold);
+        }
+
+        .privacy-contact-block {
+            background: var(--champagne);
+            background-image: url('images/champagne-bg.jpg');
+            background-size: 120%;
+            background-position: center;
+            border-left: 3px solid var(--gold);
+            padding: 32px 40px;
+            margin-top: 16px;
+            position: relative;
+        }
+
+        .privacy-contact-block::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(var(--champagne-rgb), 0.78);
+        }
+
+        .privacy-contact-block p {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 6px !important;
+        }
+
+        .privacy-contact-block a {
+            color: var(--gold);
+            font-weight: var(--font-bold);
+        }
+
+        .privacy-section-number {
+            font-size: 0.68rem;
+            font-weight: var(--font-bold);
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0.7;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .privacy-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-weight: var(--font-bold);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--espresso);
+            opacity: 0.5;
+            margin-bottom: 64px;
+            transition: all 0.3s;
+        }
+
+        .privacy-back:hover {
+            opacity: 1;
+            gap: 12px;
+        }
+
+        .disclaimer-box {
+            background: var(--blush);
+            background-image: url('images/blush-bg.jpg');
+            background-size: 120%;
+            background-position: center;
+            border: 1px solid var(--gold-12);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .disclaimer-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(var(--blush-rgb), 0.72);
+        }
+
+        .disclaimer-box>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .disclaimer-box h2 {
+            border-bottom-color: var(--gold-20);
+        }
+
+        .privacy-updated {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+            letter-spacing: 0.1em;
+            margin-top: 64px;
+            padding-top: 32px;
+            border-top: 1px solid var(--gold-12);
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav scrolled" role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="nav-logo">Tejal Desae</a>
+        <ul class="nav-links" role="list">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#work">The Work</a></li>
+            <li><a href="index.html#testimonials">Results</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <a href="index.html#contact" class="btn-nav">Apply Now</a>
+    </nav>
+
+    <!-- Hero -->
+    <div class="privacy-hero">
+        <div class="privacy-hero-content">
+            <p class="privacy-hero-eyebrow">Tejal Desae</p>
+            <h1>Privacy Policy</h1>
+            <p class="privacy-hero-sub">Effective Date: January 2025 &nbsp;·&nbsp; Bangalore, Karnataka, India</p>
+        </div>
+    </div>
+
+    <!-- Body -->
+    <div class="privacy-body">
+        <div class="privacy-inner">
+
+            <a href="index.html" class="privacy-back">← Return to Main Site</a>
+
+            <p class="privacy-intro">
+                At Tejal Desae, your privacy is not a formality — it is a reflection of the trust you place in this
+                space. This policy explains what we collect, why we collect it, and how it is held.
+            </p>
+
+            <div class="privacy-section">
+                <span class="privacy-section-number">01</span>
+                <h2>Information We Collect</h2>
+                <p>We may collect the following types of information when you engage with this website or its services:
+                </p>
+                <ul>
+                    <li><strong>Personal Identification:</strong> Name, email address, phone number, country, and
+                        payment details — when you register, purchase a programme, or submit an application form.</li>
+                    <li><strong>Voluntary Information:</strong> Information you share during coaching sessions, contact
+                        forms, or surveys.</li>
+                    <li><strong>Technical Data:</strong> IP address, browser type, device information, and usage
+                        statistics collected via cookies or analytics tools.</li>
+                </ul>
+            </div>
+
+            <div class="privacy-section">
+                <span class="privacy-section-number">02</span>
+                <h2>How We Use Your Information</h2>
+                <p>Your information is used solely to serve you better:</p>
+                <ul>
+                    <li>To deliver programmes, courses, and services you have purchased</li>
+                    <li>To send updates, newsletters, and programme-related communication</li>
+                    <li>To provide support and respond to your inquiries</li>
+                    <li>To improve our offerings through analytics and feedback</li>
+                    <li>To comply with legal obligations under Indian law</li>
+                </ul>
+                <p><strong>We do not sell, rent, or trade your information with third parties.</strong></p>
+            </div>
+
+            <div class="privacy-section">
+                <span class="privacy-section-number">03</span>
+                <h2>Storage and Protection of Data</h2>
+                <p>Your personal information is stored securely and accessed only by authorised personnel. We use
+                    industry-standard encryption and secure servers. As required under the <em>Information Technology
+                        (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules,
+                        2011</em>, we take reasonable steps to protect your data from unauthorised access, loss, or
+                    misuse.</p>
+            </div>
+
+            <div class="privacy-section">
+                <span class="privacy-section-number">04</span>
+                <h2>Sharing of Information</h2>
+                <p>We may share information only in the following limited circumstances:</p>
+                <ul>
+                    <li>With trusted third-party service providers (such as payment gateways and email services)
+                        strictly for service delivery.</li>
+                    <li>If required by law, government authorities, or legal proceedings.</li>
+                </ul>
+                <p>International users acknowledge that their data may be processed outside their country, in compliance
+                    with Indian data protection regulations.</p>
+            </div>
+
+            <div class="privacy-section">
+                <span class="privacy-section-number">05</span>
+                <h2>Cookies and Tracking</h2>
+                <p>We may use cookies and similar tracking technologies to enhance your browsing experience, analyse
+                    trends, and understand how visitors interact with this site. You may disable cookies in your browser
+                    settings, though some site features may not function as intended.</p>
+            </div>
+
+            <div class="privacy-section">
+                <span class="privacy-section-number">06</span>
+                <h2>Your Rights</h2>
+                <p>As per applicable Indian law and global best practices, you have the right to:</p>
+                <ul>
+                    <li>Access and review the personal data we hold about you</li>
+                    <li>Request corrections to inaccurate or outdated information</li>
+                    <li>Withdraw consent for data processing (subject to contractual or legal limitations)</li>
+                    <li>Request deletion of your information, where applicable</li>
+                </ul>
+                <p>To exercise any of these rights, reach us at <a href="mailto:hello@tejaldesae.com"
+                        style="color:var(--gold);font-weight:600;">hello@tejaldesae.com</a></p>
+            </div>
+
+            <div class="privacy-section disclaimer-box">
+                <span class="privacy-section-number">07</span>
+                <h2>Disclaimer</h2>
+                <p>When addressing the potential effects and benefits of any content, programmes, or resources on this
+                    site, every effort is made to represent them accurately.</p>
+                <p>However, please understand:</p>
+                <ul>
+                    <li>We do not guarantee results in any specific timeframe or that your physical, mental,
+                        psychological, or emotional well-being will be immediately or significantly improved.</li>
+                    <li>We do not diagnose, treat, or claim to cure any medical or psychological conditions.</li>
+                    <li>Our approach is intended for educational and spiritual growth purposes only.</li>
+                    <li>Nothing on this site constitutes professional medical, psychiatric, legal, or financial advice.
+                    </li>
+                </ul>
+                <p>By engaging with this content, you acknowledge and agree to take full responsibility for your own
+                    well-being and outcomes.</p>
+            </div>
+
+            <div class="privacy-section">
+                <span class="privacy-section-number">08</span>
+                <h2>Updates to This Policy</h2>
+                <p>We reserve the right to modify this Privacy Policy at any time. Any updates will be posted on this
+                    page. Continued use of this website constitutes acceptance of the revised policy.</p>
+            </div>
+
+            <div class="privacy-section">
+                <span class="privacy-section-number">09</span>
+                <h2>Contact Us</h2>
+                <div class="privacy-contact-block">
+                    <p><strong>Tejal Desae</strong></p>
+                    <p>Email: <a href="mailto:hello@tejaldesae.com">hello@tejaldesae.com</a></p>
+                    <p>Location: Bangalore, Karnataka, India</p>
+                </div>
+            </div>
+
+            <p class="privacy-updated">Last updated: January 2025</p>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <div>
+                <div class="footer-logo">Tejal Desae</div>
+                <p class="footer-tagline">Identity &amp; Wealth Manifestation Mentor.<br>
+                    Guiding women to embody the frequency of their next level — permanently.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigate</h4>
+                <ul>
+                    <li><a href="index.html#about">About Tejal</a></li>
+                    <li><a href="index.html#work">The Work</a></li>
+                    <li><a href="index.html#testimonials">Client Stories</a></li>
+                    <li><a href="index.html#apply">Apply</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-quote">
+            <p>"She stopped asking the world to make room for her.<br>She realised she was the room."</p>
+            <span class="footer-hashtags">#SovereignRising · #TalkWithTheWhales · #WomenOf2026</span>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 Tejal Desae. All Rights Reserved.</span>
+            <span>Designed for the woman who has already decided.</span>
+        </div>
+    </footer>
+
+</body>
+
+</html>
