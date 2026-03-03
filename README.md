@@ -126,19 +126,6 @@ Also update `PAYMENT_FALLBACK` with your default payment link (used as a safety 
 
 The application form submits directly to Web3Forms. Every response is emailed to your inbox with zero backend code.
 
-### Setup
-
-1. Go to [web3forms.com](https://web3forms.com) and sign up with the email you want submissions sent to
-2. Web3Forms generates a unique **Access Key**
-3. Open `js/form.js` and find:
-
-```js
-const ACCESS_KEY = '5c1e2ca1-ad51-4e82-9e77-e00ca2ad6fd9';
-```
-
-4. Replace with your actual key if different
-5. Save the file — submissions will now email you automatically
-
 ### Downloading Submissions as Excel
 
 1. Log in to [web3forms.com](https://web3forms.com)
@@ -209,22 +196,7 @@ To change it, search for `tidycal.com` across all HTML files and update the URL.
 
 ---
 
-## 6. Going Live (Hosting)
 
-The site is a static HTML/CSS/JS project — no server or database required.
-
-### Recommended: Netlify (Free)
-
-1. Go to [netlify.com](https://netlify.com) and create a free account
-2. Drag and drop the entire project folder onto the Netlify dashboard
-3. Your site goes live instantly at a `*.netlify.app` URL
-4. To connect a custom domain (e.g., `tejaldesae.com`), go to **Domain Settings** and follow the DNS instructions
-
-### Alternative: Vercel
-
-1. Go to [vercel.com](https://vercel.com), sign in with GitHub
-2. Import the project repository
-3. Vercel auto-deploys on every push
 
 ### File Structure
 
