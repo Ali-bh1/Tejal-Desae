@@ -1,0 +1,909 @@
+/* =============================================
+   PROGRAM PAGE STYLES — v2
+   Matches the full Tejal Desae site aesthetic.
+   Font: Playfair Display (serif) + Montserrat (sans)
+   Palette: blush bg, espresso text, cognac gold
+   Backgrounds: textured jpgs like main site sections
+   ============================================= */
+
+/* ---- Page Base ---- */
+body {
+    background: var(--bg-primary);
+    color: var(--text-main);
+    font-family: var(--sans);
+}
+
+/* ==========================================
+   HERO — dark textured (coffee-bg, like pillars)
+   ========================================== */
+.program-hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Center horizontally */
+    text-align: center;
+    /* Center text naturally */
+    padding: 140px 24px 80px;
+    position: relative;
+    overflow: hidden;
+    background: var(--espresso);
+    background-image: url('../images/coffee-bg.jpg');
+    background-size: cover;
+    background-position: center 20%;
+    background-repeat: no-repeat;
+}
+
+.program-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(38, 19, 11, 0.70);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.program-hero>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* Invitation hero — match other heroes with coffee background */
+.program-hero--invitation {
+    background-image: url('../images/coffee-bg.jpg');
+    background-size: cover;
+    background-position: center 20%;
+}
+
+.program-hero--invitation::before {
+    background: rgba(38, 19, 11, 0.70);
+}
+
+/* Inner Sanctum hero — deepest overlay */
+.program-hero--sanctum {
+    background-image: url('../images/coffee-bg.jpg');
+    background-size: cover;
+    background-position: center 20%;
+}
+
+.program-hero--sanctum::before {
+    background: rgba(38, 19, 11, 0.82);
+}
+
+/* Hero positioning */
+.program-hero-top {
+    position: absolute;
+    top: 100px;
+    left: 60px;
+    right: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 2;
+}
+
+.program-back {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-family: var(--sans);
+    font-weight: var(--font-bold);
+    color: var(--champagne);
+    opacity: 0.55;
+    transition: opacity 0.25s;
+}
+
+.program-back:hover {
+    opacity: 1;
+}
+
+.program-tier-badge {
+    font-size: 0.62rem;
+    font-weight: var(--font-bold);
+    font-family: var(--sans);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--espresso);
+    background: var(--gold);
+    padding: 7px 18px;
+}
+
+.program-tier-badge--invitation {
+    background: var(--champagne);
+    color: var(--espresso);
+}
+
+.program-tier-badge--waitlist {
+    background: transparent;
+    color: var(--champagne);
+    border: 1px solid rgba(230, 200, 183, 0.5);
+}
+
+.program-hero-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Large editorial title — fitted to ~4 vertical lines */
+.program-hero-title {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 6.5vw, 6rem);
+    font-weight: var(--font-light);
+    color: var(--white);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    margin: 12px 0 20px;
+    text-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.6),
+        0 8px 40px rgba(0, 0, 0, 0.45),
+        0 0 100px rgba(38, 19, 11, 0.7);
+}
+
+.program-hero-title em {
+    font-style: italic;
+    color: var(--champagne);
+}
+
+.program-hero-tagline {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--champagne);
+    opacity: 0.7;
+    margin-bottom: 32px;
+    letter-spacing: 0.08em;
+}
+
+/* Section eyebrow inside hero */
+.program-hero .section-eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-family: var(--sans);
+    font-weight: var(--font-bold);
+    color: var(--champagne);
+    opacity: 0.55;
+    margin-bottom: 0;
+}
+
+/* Meta row — Investment / Duration / Enrolment */
+.program-hero-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.hero-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hero-meta-label {
+    font-family: var(--sans);
+    font-size: 0.58rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--champagne);
+    opacity: 0.45;
+    font-weight: var(--font-bold);
+}
+
+.hero-meta-value {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--white);
+    font-style: italic;
+}
+
+.hero-meta-divider {
+    width: 1px;
+    height: 36px;
+    background: rgba(230, 200, 183, 0.25);
+}
+
+/* ==========================================
+   PROGRAM MAIN — textured light sections
+   ========================================== */
+.program-main {
+    background: var(--blush);
+}
+
+.program-container {
+    max-width: 1100px;
+    /* Increased for better line length */
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* ==========================================
+   INTRO SECTION — blush-bg light
+   ========================================== */
+.program-intro {
+    position: relative;
+    padding: 100px 0;
+    background: var(--blush);
+    background-image: url('../images/blush-bg.jpg');
+    background-size: auto;
+    background-position: center 35%;
+    background-repeat: repeat;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(195, 149, 91, 0.2);
+}
+
+.program-intro::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(249, 237, 240, 0.50);
+    pointer-events: none;
+}
+
+.program-intro>* {
+    position: relative;
+    z-index: 1;
+}
+
+.program-intro p {
+    font-family: var(--sans);
+    color: var(--text-muted);
+    line-height: 1.85;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.program-intro-lead {
+    font-family: var(--serif) !important;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem) !important;
+    /* Increased font size */
+    font-weight: var(--font-light) !important;
+    color: var(--text-main) !important;
+    line-height: 1.25 !important;
+    margin-bottom: 32px !important;
+    text-align: center;
+    /* Centered as per request */
+}
+
+.program-intro--sanctum .program-intro p {
+    text-align: center;
+}
+
+.sanctum-lead {
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 3.2rem) !important;
+    line-height: 1.15 !important;
+}
+
+/* Pull-quote */
+.program-pullquote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+    color: var(--text-main);
+    line-height: 1.6;
+    border-left: 1px solid var(--gold-40);
+    padding-left: 48px;
+    margin: 64px auto;
+    max-width: 900px;
+    opacity: 0.95;
+    text-align: center;
+}
+
+/* ==========================================
+   SHARED SECTION BLOCKS
+   ========================================== */
+.program-thread,
+.program-for-you,
+.program-modules,
+.program-includes,
+.program-outcomes {
+    position: relative;
+    padding: 100px 0;
+    overflow: hidden;
+    background-repeat: repeat;
+    background-position: center 35%;
+    border-bottom: 1px solid rgba(195, 149, 91, 0.15);
+}
+
+.program-thread {
+    background: var(--champagne);
+    background-image: url('../images/champagne-bg.jpg');
+    background-size: auto;
+    background-position: center 35%;
+    background-repeat: repeat;
+}
+
+.program-thread::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(var(--champagne-rgb), 0.65);
+    pointer-events: none;
+}
+
+.program-for-you {
+    background: var(--blush);
+    background-image: url('../images/blush-bg.jpg');
+    background-size: auto;
+    background-position: center 35%;
+    background-repeat: repeat;
+}
+
+.program-for-you::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(249, 237, 240, 0.50);
+    pointer-events: none;
+}
+
+.program-section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: var(--font-light);
+    color: var(--espresso);
+    margin-bottom: 28px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.program-for-you p,
+.program-outcomes p,
+.program-thread p,
+.program-modules p {
+    color: var(--espresso);
+    opacity: 0.9;
+}
+
+/* Blush-bg sections — subheadings must be Espresso (coffee) for readability */
+.program-for-you .program-section-title,
+.program-outcomes .program-section-title,
+.program-includes .program-section-title,
+.program-intro .program-section-title {
+    color: var(--cognac);
+}
+
+/* Champagne-bg sections — subheadings must be near-black for maximum contrast */
+.program-thread .program-section-title {
+    color: #000000;
+}
+
+.program-thread .program-thread-sub {
+    color: #1a0f0a;
+    opacity: 0.75;
+}
+
+.program-for-you .program-list li,
+.program-outcomes .outcomes-list li {
+    color: var(--text-main) !important;
+}
+
+.program-thread-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--espresso);
+    opacity: 0.85;
+    line-height: 1.75;
+    margin-bottom: 32px;
+    font-size: 0.95rem;
+}
+
+/* ---- "This Is For You If" list ---- */
+.program-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.program-list li {
+    font-family: var(--sans);
+    color: var(--text-main);
+    padding-left: 22px;
+    position: relative;
+    line-height: 1.7;
+    font-size: 0.92rem;
+}
+
+.program-list li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-weight: var(--font-bold);
+}
+
+/* ==========================================
+   MODULE GRID — champagne-bg dark strip
+   ========================================== */
+.program-modules {
+    background: var(--espresso);
+    background-image: url('../images/champagne-bg.jpg');
+    background-size: 130%;
+    background-position: center 35%;
+    background-repeat: repeat;
+    border-bottom: none;
+}
+
+.program-modules::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(var(--champagne-rgb), 0.75);
+    pointer-events: none;
+}
+
+.program-modules>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* Override section-title for champagne (modules) — near-black for contrast */
+.program-modules .program-section-title {
+    color: #1a0f0a;
+}
+
+.program-modules .program-thread-sub {
+    color: #1a0f0a;
+    opacity: 0.75;
+}
+
+.program-modules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+}
+
+.program-modules-grid--3col {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.program-module {
+    display: flex;
+    gap: 20px;
+    padding: 32px 24px;
+    border-bottom: 1px solid rgba(var(--espresso-rgb), 0.08);
+    border-right: 1px solid rgba(var(--espresso-rgb), 0.08);
+    transition: background 0.3s;
+}
+
+.program-module:hover {
+    background: rgba(var(--espresso-rgb), 0.03);
+}
+
+.program-modules-grid .program-module:nth-child(2n) {
+    border-right: none;
+}
+
+.program-modules-grid--3col .program-module:nth-child(2n) {
+    border-right: 1px solid rgba(var(--espresso-rgb), 0.08);
+}
+
+.program-modules-grid--3col .program-module:nth-child(3n) {
+    border-right: none;
+}
+
+/* Bottom border: remove from last row */
+.program-modules-grid .program-module:nth-last-child(-n+2) {
+    border-bottom: none;
+}
+
+.program-modules-grid--3col .program-module:nth-last-child(-n+3) {
+    border-bottom: none;
+}
+
+.program-module--pillar {
+    flex-direction: column;
+    border: 1px solid rgba(var(--espresso-rgb), 0.08);
+    border-bottom: none;
+    border-right: none;
+}
+
+.module-num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: var(--font-light);
+    color: var(--espresso);
+    opacity: 0.3;
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 40px;
+}
+
+.module-title {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: var(--font-medium);
+    color: var(--text-main);
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.module-body {
+    font-size: 0.85rem;
+    font-family: var(--sans);
+    color: var(--text-muted);
+    line-height: 1.75;
+}
+
+/* ==========================================
+   12 DIMENSIONS GRID (Divine Wealth)
+   ========================================== */
+.dimensions-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.dimension-pill {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: var(--font-bold);
+    color: var(--champagne);
+    border: 1px solid rgba(230, 200, 183, 0.3);
+    padding: 8px 20px;
+    opacity: 0.8;
+    transition: all 0.25s;
+    cursor: default;
+}
+
+.dimension-pill:hover {
+    background: rgba(195, 149, 91, 0.12);
+    color: var(--champagne);
+    border-color: rgba(230, 200, 183, 0.6);
+    opacity: 1;
+}
+
+/* ==========================================
+   INCLUDES — blush-bg light strip
+   ========================================== */
+.program-includes {
+    background: var(--blush);
+    background-image: url('../images/blush-bg.jpg');
+    background-size: auto;
+    background-position: center 35%;
+    background-repeat: repeat;
+}
+
+.program-includes::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(249, 237, 240, 0.50);
+    pointer-events: none;
+}
+
+.program-includes>* {
+    position: relative;
+    z-index: 1;
+}
+
+.program-includes .program-section-title {
+    color: var(--espresso);
+}
+
+.includes-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.includes-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    font-family: var(--sans);
+    color: var(--text-muted);
+    line-height: 1.75;
+    font-size: 0.92rem;
+}
+
+.includes-star {
+    color: var(--gold);
+    font-size: 0.7rem;
+    flex-shrink: 0;
+    line-height: 1.8;
+}
+
+/* ==========================================
+   OUTCOMES — plain blush
+   ========================================== */
+.program-outcomes {
+    padding: 64px 0;
+    background: var(--blush);
+    background-image: url('../images/blush-bg.jpg');
+    background-size: auto;
+    background-position: center 35%;
+    background-repeat: repeat;
+}
+
+.program-outcomes::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(249, 237, 240, 0.50);
+    pointer-events: none;
+}
+
+.outcomes-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.outcomes-list li {
+    font-family: var(--sans);
+    color: var(--text-main);
+    padding-left: 28px;
+    position: relative;
+    line-height: 1.7;
+    font-size: 0.92rem;
+}
+
+.outcomes-list li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.6rem;
+    top: 7px;
+}
+
+/* ==========================================
+   INVITATION NOTE — champagne translucent
+   ========================================== */
+.program-invitation-note {
+    padding: 48px 0;
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(195, 149, 91, 0.12);
+}
+
+.invitation-inner {
+    padding: 40px 48px;
+    border: 1px solid rgba(195, 149, 91, 0.25);
+    background: rgba(230, 200, 183, 0.12);
+    text-align: center;
+}
+
+.invitation-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: var(--font-bold);
+    color: var(--gold);
+    margin-bottom: 16px;
+}
+
+.invitation-inner p {
+    font-family: var(--sans);
+    color: var(--text-muted);
+    line-height: 1.75;
+    font-size: 0.9rem;
+}
+
+/* ==========================================
+   SANCTUM SPECIFIC
+   ========================================== */
+.sanctum-join-block {
+    padding: 44px;
+    border: 1px solid rgba(195, 149, 91, 0.2);
+    background: rgba(195, 149, 91, 0.05);
+}
+
+.sanctum-join-block p {
+    font-family: var(--sans);
+    color: var(--text-muted);
+    opacity: 0.9;
+    line-height: 1.85;
+    margin-bottom: 16px;
+    font-size: 0.92rem;
+}
+
+.sanctum-call {
+    font-family: var(--serif) !important;
+    font-style: italic !important;
+    font-size: 1.15rem !important;
+    color: var(--gold) !important;
+    opacity: 1 !important;
+    margin-top: 28px !important;
+    line-height: 1.5 !important;
+}
+
+/* ==========================================
+   FINAL CTA BLOCK — dark coffee-bg
+   ========================================== */
+.program-cta-block {
+    position: relative;
+    text-align: center;
+    padding: 140px 0;
+    background: var(--blush);
+    background-image: url('../images/blush-bg.jpg');
+    background-size: auto;
+    background-position: center 35%;
+    background-repeat: repeat;
+    overflow: hidden;
+    border-top: 1px solid rgba(195, 149, 91, 0.2);
+}
+
+.program-cta-block::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(249, 237, 240, 0.50);
+    pointer-events: none;
+}
+
+.program-cta-block--sanctum::before {
+    background: rgba(38, 19, 11, 0.88);
+}
+
+.program-cta-block>* {
+    position: relative;
+    z-index: 1;
+}
+
+.program-cta-label {
+    font-family: var(--sans);
+    font-size: 0.6rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: var(--font-bold);
+    color: var(--text-main);
+    opacity: 0.6;
+    margin-bottom: 20px;
+}
+
+.program-cta-title {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: var(--font-light);
+    color: var(--text-main);
+    line-height: 1.05;
+    margin-bottom: 40px;
+    letter-spacing: -0.03em;
+}
+
+.program-cta-title em {
+    font-style: italic;
+    color: var(--gold);
+}
+
+.program-cta-btn {
+    display: inline-block;
+    margin-bottom: 24px;
+    background: var(--espresso);
+    color: var(--white);
+    padding: 16px 40px;
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: var(--font-bold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: 1px solid var(--gold);
+    transition: all 0.3s var(--ease-default);
+}
+
+.program-cta-btn:hover {
+    background: var(--gold);
+    color: var(--espresso);
+    transform: translateY(-2px);
+}
+
+.program-cta-note {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.program-cta-note a {
+    color: var(--text-main);
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity 0.2s;
+}
+
+.program-cta-note a:hover {
+    opacity: 0.8;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 1024px) {
+
+    .program-intro,
+    .program-modules,
+    .program-includes,
+    .program-cta-block {
+        /* Content padding is now handled by .program-container inner div */
+        /* We just ensure the sections themselves have no side padding here */
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .program-hero {
+        padding: 140px 24px 60px;
+        min-height: 85vh;
+        background-size: 200%;
+    }
+
+    .program-hero-top {
+        left: 24px;
+        right: 24px;
+        top: 90px;
+    }
+
+    .program-hero-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .hero-meta-divider {
+        display: none;
+    }
+
+    .program-container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .program-intro,
+    .program-modules,
+    .program-includes,
+    .program-cta-block {
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .program-modules-grid,
+    .program-modules-grid--3col {
+        grid-template-columns: 1fr;
+    }
+
+    .program-module {
+        border-right: none !important;
+        border-bottom: 1px solid rgba(230, 200, 183, 0.12);
+    }
+
+    /* Remove bottom border from last module */
+    .program-module:last-child {
+        border-bottom: none;
+    }
+
+    .dimensions-grid {
+        gap: 8px;
+    }
+
+    .invitation-inner {
+        padding: 28px 24px;
+    }
+
+    .program-cta-block {
+        padding-top: 72px;
+        padding-bottom: 72px;
+    }
+
+    .sanctum-join-block {
+        padding: 28px 20px;
+    }
+}

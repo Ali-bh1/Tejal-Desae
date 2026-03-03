@@ -23,6 +23,24 @@
     .testimonial-others {
         grid-template-columns: 1fr;
     }
+
+    /* 4-column grids drop to 2-col on tablet */
+    .testimonial-four-col {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .programs-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .program-card {
+        border-right: none;
+        border-bottom: 1px solid rgba(var(--gold-rgb), 0.12);
+    }
+
+    .program-card:last-child {
+        border-bottom: none;
+    }
 }
 
 /* --- Mobile Nav Trigger (≤ 900px) --- */
@@ -162,6 +180,12 @@
         margin-top: 24px;
     }
 
+    /* Programs & expanded testimonials: 1-col on mobile */
+    .programs-grid,
+    .testimonial-four-col {
+        grid-template-columns: 1fr;
+    }
+
     .pillar-card {
         padding: 32px 24px;
         border-right: none;
@@ -189,6 +213,38 @@
 
     .pillar-cta {
         margin-top: 20px;
+    }
+
+    /* ----- Programs Tier Grid (mobile) ----- */
+    .programs-tier-2col,
+    .programs-tier-3col {
+        grid-template-columns: 1fr;
+    }
+
+    .program-card--course,
+    .program-card--invitation,
+    .program-card--waitlist {
+        border-right: none !important;
+        border-bottom: 1px solid rgba(var(--gold-rgb), 0.12);
+        padding: 36px 24px;
+    }
+
+    .program-card--course:last-child {
+        border-bottom: none;
+    }
+
+    .sovereign-journey-path {
+        padding: 24px 16px;
+        margin-top: 40px;
+    }
+
+    .journey-steps {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .journey-arrow {
+        transform: none;
     }
 
     /* ----- Offer / Mentorship ----- */
@@ -267,17 +323,23 @@
         margin-bottom: 32px;
     }
 
-    .testimonial-others {
-        grid-template-columns: 1fr;
-        margin-top: 40px;
+    .testimonial-marquee-wrap {
+        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        margin-top: 60px;
     }
 
-    .testimonial-mini {
-        padding: 28px 20px;
+    .testimonial-marquee-track {
+        gap: 20px;
     }
 
-    .testimonial-mini p {
-        font-size: 0.9rem;
+    .marquee-card {
+        width: 320px;
+        padding: 32px 24px;
+    }
+
+    .marquee-card p {
+        font-size: 0.95rem;
+        line-height: 1.6;
     }
 
     /* ----- Featured / Logos ----- */

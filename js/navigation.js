@@ -76,15 +76,22 @@ const Navigation = (() => {
     }
 
     /**
-     * Handle click on nav links — smooth scroll + close mobile menu
+     * Handle click on nav links — smooth scroll + close mobile menu.
+     * IMPORTANT: Only intercept same-page anchor links (href starts with "#").
+     * Cross-page links like "index.html#about" are navigated normally by the browser.
      */
     function handleNavClick(e) {
         const href = e.currentTarget.getAttribute('href');
-        if (!href || !href.startsWith('#')) return;
+        if (!href) return;
 
-        e.preventDefault();
+        // Only smooth-scroll on true same-page anchors (e.g. href="#about")
+        // Let cross-page links like "index.html#about" navigate normally
+        if (!href.startsWith('#')) return;
+
         const target = document.querySelector(href);
         if (!target) return;
+
+        e.preventDefault();
 
         // Close mobile menu if open
         if (mobileMenu?.classList.contains('open')) {
@@ -126,8 +133,8 @@ const Navigation = (() => {
             const bottom = top + section.offsetHeight;
             const id = section.getAttribute('id');
 
-            // Find matching desktop nav links
-            const desktopLink = document.querySelector(`.nav-links a[href="#${id}"]`);
+            // Find matching desktop nav links (handles both #id and index.html#id)
+            const desktopLink = document.querySelector(`.nav-links a[href="#${id}"], .nav-links a[href="index.html#${id}"]`);
 
             if (scrollPos >= top && scrollPos < bottom) {
                 desktopLink?.classList.add('active');

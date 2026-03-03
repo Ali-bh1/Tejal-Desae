@@ -1,6 +1,16 @@
 /**
  * Multi-Step Application Form
- * Handles: step navigation, per-step validation, progress bar, Web3Forms submission
+ * Handles: step navigation, per-step validation, progress bar, Web3Forms submission.
+ * Routes to the correct Razorpay payment link based on which program the user enrolled for.
+ *
+ * SETUP INSTRUCTIONS (for Tejal):
+ * ───────────────────────────────────────────────────────────
+ * 1. Log in to Razorpay Dashboard → Payment Links → Create New
+ * 2. Create one link per program with the correct amount & description
+ * 3. Copy the Short URL (e.g. https://rzp.io/l/yourlink)
+ * 4. Paste each link into RAZORPAY_LINKS below
+ * 5. DO NOT change the program key names (money-energetics, etc.)
+ * ───────────────────────────────────────────────────────────
  */
 
 const ContactForm = (() => {
@@ -9,8 +19,24 @@ const ContactForm = (() => {
     // Replace with your Web3Forms access key (register at web3forms.com)
     const ACCESS_KEY = '5c1e2ca1-ad51-4e82-9e77-e00ca2ad6fd9';
 
-    // localStorage keys
+    // ─── Razorpay Payment Links ─────────────────────────────────
+    // HOW: Razorpay Dashboard → Payment Links → Create → copy Short URL
+    // FORMAT: https://rzp.io/l/your-link-here
+    const RAZORPAY_LINKS = {
+        'money-energetics': 'https://rzp.io/l/MONEY_ENERGETICS',   // €555 — TODO: replace
+        'wealth-oracle': 'https://rzp.io/l/WEALTH_ORACLE',      // €1,555 — TODO: replace
+        'divine-wealth': 'https://rzp.io/l/DIVINE_WEALTH',      // TODO: replace
+        'sovereign-mentor': 'https://rzp.io/l/SOVEREIGN_MENTOR',   // TODO: replace
+        'inner-sanctum': 'https://rzp.io/l/INNER_SANCTUM',      // TODO: replace
+    };
+    const PAYMENT_FALLBACK = 'https://rzp.io/l/MONEY_ENERGETICS'; // TODO: replace
+    // ─────────────────────────────────────────────────
+
+    // localStorage key for draft autosave
     const STORAGE_KEY = 'tejal_form_draft';
+
+    // sessionStorage key set by video.html or wealth-oracle.html CTAs
+    const PROGRAM_KEY = 'tejal_program';
 
     // State
     let currentStep = 0;
@@ -19,6 +45,54 @@ const ContactForm = (() => {
     // DOM refs
     let form, steps, progressSteps, connectors, backBtn, nextBtn, submitBtn;
     let successMsg, errorMsg;
+
+    /**
+     * Resolve which Razorpay link to use based on the enrolled program.
+     * Reads from sessionStorage first (set by apply page hidden field logic),
+     * then URL params as fallback.
+     */
+    function resolvePaymentLink() {
+        // Primary: read from sessionStorage (set by apply page on load)
+        let program = sessionStorage.getItem(PROGRAM_KEY);
+
+        if (!program) {
+            // Fallback 1: standard query string
+            program = new URLSearchParams(window.location.search).get('program');
+        }
+
+        if (!program) {
+            // Fallback 2: param after hash (e.g. index.html#apply?program=wealth-oracle)
+            const hashQuery = window.location.hash.split('?')[1];
+            if (hashQuery) {
+                program = new URLSearchParams(hashQuery).get('program');
+            }
+        }
+
+        return RAZORPAY_LINKS[program] || PAYMENT_FALLBACK;
+    }
+
+    /**
+     * Resolve a human-readable program name for the email subject.
+     */
+    function resolveEmailSubject() {
+        let program = sessionStorage.getItem(PROGRAM_KEY);
+        if (!program) program = new URLSearchParams(window.location.search).get('program');
+        if (!program) {
+            const hashQuery = window.location.hash.split('?')[1];
+            if (hashQuery) program = new URLSearchParams(hashQuery).get('program');
+        }
+        program = program || 'unknown';
+
+        const labels = {
+            'money-energetics': 'Money Energetics (€555)',
+            'wealth-oracle': 'Wealth Oracle (€1,555)',
+            'divine-wealth': 'Divine Wealth',
+            'sovereign-mentor': 'Sovereign Mentor',
+            'inner-sanctum': 'Inner Sanctum',
+        };
+        const label = labels[program] || 'Program Application';
+        return `New Application — ${label} — Tejal Desae`;
+    }
 
     /**
      * Initialize form
@@ -63,28 +137,32 @@ const ContactForm = (() => {
     }
 
     /**
-     * Persistence logic
+     * Persistence — draft autosave
      */
     function saveDraft() {
         const formData = new FormData(form);
         const data = {};
         formData.forEach((value, key) => {
-            // Don't save honeypot or sensitive temp keys
+            // Never persist honeypot or access key
             if (key !== 'access_key' && key !== '_honeypot') {
                 data[key] = value;
             }
         });
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({
-            step: currentStep,
-            data: data
-        }));
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                step: currentStep,
+                data: data
+            }));
+        } catch (e) {
+            // localStorage unavailable (e.g. private browsing) — fail silently
+        }
     }
 
     function loadDraft() {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (!saved) return;
-
         try {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) return;
+
             const { step, data } = JSON.parse(saved);
 
             // Populate fields
@@ -102,8 +180,10 @@ const ContactForm = (() => {
                 }
             });
 
-            // Restore step
-            currentStep = step;
+            // Restore step position
+            if (typeof step === 'number' && step >= 0 && step < totalSteps) {
+                currentStep = step;
+            }
 
             // Sync range display
             const rangeInput = form.querySelector('input[type="range"]');
@@ -112,12 +192,15 @@ const ContactForm = (() => {
                 rangeValue.textContent = rangeInput.value;
             }
         } catch (e) {
-            console.error('Failed to load draft:', e);
+            // Corrupted draft — start fresh
+            clearDraft();
         }
     }
 
     function clearDraft() {
-        localStorage.removeItem(STORAGE_KEY);
+        try {
+            localStorage.removeItem(STORAGE_KEY);
+        } catch (e) { /* ignore */ }
     }
 
     /**
@@ -194,10 +277,9 @@ const ContactForm = (() => {
                 const name = field.name;
                 const groupChecked = activeStep.querySelector(`input[name="${name}"]:checked`);
                 if (!groupChecked) {
-                    // Highlight the radio group
                     const group = field.closest('.radio-group');
                     if (group) {
-                        group.style.outline = '1px solid #e74c3c';
+                        group.style.outline = '1px solid #c0392b';
                         group.style.outlineOffset = '4px';
                         setTimeout(() => {
                             group.style.outline = '';
@@ -210,7 +292,7 @@ const ContactForm = (() => {
             }
 
             if (!field.value.trim()) {
-                field.style.borderColor = '#e74c3c';
+                field.style.borderColor = '#c0392b';
                 isValid = false;
                 field.addEventListener('input', () => {
                     field.style.borderColor = '';
@@ -218,10 +300,10 @@ const ContactForm = (() => {
             }
         });
 
-        // Validate email
+        // Validate email format
         const emailField = activeStep.querySelector('input[type="email"]');
         if (emailField && emailField.value && !isValidEmail(emailField.value)) {
-            emailField.style.borderColor = '#e74c3c';
+            emailField.style.borderColor = '#c0392b';
             isValid = false;
         }
 
@@ -238,7 +320,7 @@ const ContactForm = (() => {
         // Honeypot check (bot protection)
         const honeypot = form.querySelector('[name="_honeypot"]')?.value;
         if (honeypot) {
-            console.warn('Honeypot triggered');
+            // Bot detected — fail silently to avoid revealing the check
             return;
         }
 
@@ -248,7 +330,7 @@ const ContactForm = (() => {
         try {
             const formData = new FormData(form);
             formData.append('access_key', ACCESS_KEY);
-            formData.append('subject', 'New Application — Tejal Desae Website');
+            formData.append('subject', resolveEmailSubject());
             formData.append('from_name', 'Tejal Desae Website');
 
             const response = await fetch(ENDPOINT, {
@@ -256,27 +338,37 @@ const ContactForm = (() => {
                 body: formData
             });
 
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`);
+            }
+
             const result = await response.json();
 
             if (result.success) {
+                const paymentUrl = resolvePaymentLink();
+
+                // Clear draft and enrolled program from storage
                 clearDraft();
-                showSuccess();
+                try { sessionStorage.removeItem(PROGRAM_KEY); } catch (e) { /* ignore */ }
+
+                showSuccess(paymentUrl);
                 form.reset();
+
                 // Reset to step 1
                 currentStep = 0;
                 updateUI();
 
-                // Redirect logic
-                const stripeUrl = 'https://buy.stripe.com/PAYMENT_LINK_ID'; // USER: Change this
+                // Redirect to Razorpay after 3 seconds
                 setTimeout(() => {
-                    window.location.href = stripeUrl;
+                    window.location.href = paymentUrl;
                 }, 3000);
             } else {
                 showError('Something went wrong. Please try again or email hello@tejaldesae.com directly.');
             }
         } catch (error) {
-            console.error('Submission error:', error);
-            showError('Network error. Please check your connection and try again.');
+            // Log in dev; suppress details in production to avoid leaking info
+            console.error('[Form] Submission error:', error);
+            showError('A network error occurred. Please check your connection and try again.');
         } finally {
             setLoading(false);
         }
@@ -286,23 +378,28 @@ const ContactForm = (() => {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
-    function showSuccess() {
-        if (successMsg) {
-            const stripeUrl = 'https://buy.stripe.com/PAYMENT_LINK_ID'; // USER: Change this
-            successMsg.innerHTML = `
-                <div class="success-content">
-                    <h3>Application Received</h3>
-                    <p>Redirecting you to secure payment in 3 seconds...</p>
-                    <a href="${stripeUrl}" class="success-fallback">Click here if you aren't redirected automatically &rarr;</a>
-                </div>
-            `;
-            successMsg.classList.add('show');
-            successMsg.classList.remove('hidden');
-        }
+    function showSuccess(paymentUrl) {
+        if (!successMsg) return;
+
+        // Sanitize paymentUrl — only allow https:// Razorpay URLs
+        const safeUrl = /^https:\/\/rzp\.io\//.test(paymentUrl)
+            ? paymentUrl
+            : '#';
+
+        successMsg.innerHTML = `
+            <div class="success-content">
+                <h3>Application Received</h3>
+                <p>Redirecting you to secure payment in 3 seconds...</p>
+                <a href="${safeUrl}" class="success-fallback">Click here if you aren't redirected automatically &rarr;</a>
+            </div>
+        `;
+        successMsg.classList.add('show');
+        successMsg.classList.remove('hidden');
     }
 
     function showError(message) {
         if (errorMsg) {
+            // Sanitize message — do not render HTML from external sources
             errorMsg.textContent = message;
             errorMsg.classList.add('show');
         }

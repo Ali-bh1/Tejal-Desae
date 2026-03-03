@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What to Expect — Tejal Desae</title>
+
+    <!-- Prevent search engine indexing -->
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--espresso);
+            color: var(--champagne);
+            font-family: var(--sans);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ---- Header ---- */
+        .vp-header {
+            width: 100%;
+            padding: 28px 40px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .vp-logo {
+            font-family: var(--serif);
+            font-size: 1.2rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--champagne);
+            text-decoration: none;
+        }
+
+        /* ---- Main Content ---- */
+        .vp-main {
+            width: 100%;
+            max-width: 860px;
+            padding: 80px 40px 60px;
+            text-align: center;
+        }
+
+        .vp-eyebrow {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .vp-heading {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--white);
+            line-height: 1.25;
+            margin-bottom: 24px;
+        }
+
+        .vp-subtext {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--champagne);
+            opacity: 0.75;
+            max-width: 600px;
+            margin: 0 auto 56px;
+        }
+
+        /* ---- Gold divider ---- */
+        .vp-line {
+            width: 48px;
+            height: 1px;
+            background: var(--gold);
+            margin: 0 auto 56px;
+            opacity: 0.5;
+        }
+
+        /* ---- Video Player ---- */
+        .vp-video-wrap {
+            position: relative;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: #0d0704;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 56px;
+            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6);
+        }
+
+        .vp-video-wrap video {
+            width: 100%;
+            display: block;
+            max-height: 540px;
+            background: #0d0704;
+        }
+
+        /* Placeholder shown when no video file is present */
+        .vp-video-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 420px;
+            gap: 16px;
+            color: rgba(255, 255, 255, 0.25);
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .vp-video-placeholder svg {
+            opacity: 0.15;
+        }
+
+        /* ---- CTA ---- */
+        .vp-cta-section {
+            text-align: center;
+        }
+
+        .vp-cta-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--champagne);
+            opacity: 0.5;
+            margin-bottom: 20px;
+        }
+
+        .vp-btn {
+            display: inline-block;
+            padding: 18px 52px;
+            background: var(--gold);
+            color: var(--espresso);
+            font-family: var(--sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.3s, transform 0.2s;
+        }
+
+        .vp-btn:hover {
+            opacity: 0.88;
+            transform: translateY(-1px);
+        }
+
+        .vp-note {
+            margin-top: 16px;
+            font-size: 0.75rem;
+            color: var(--champagne);
+            opacity: 0.35;
+        }
+
+        /* ---- Footer ---- */
+        .vp-footer {
+            width: 100%;
+            padding: 32px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            margin-top: auto;
+        }
+
+        .vp-footer p {
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: var(--champagne);
+            opacity: 0.3;
+        }
+
+        @media (max-width: 600px) {
+            .vp-main {
+                padding: 56px 20px 40px;
+            }
+
+            .vp-header {
+                padding: 20px 20px;
+            }
+
+            .vp-video-placeholder {
+                height: 240px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="vp-header">
+        <a href="/" class="vp-logo">Tejal Desae</a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="vp-main">
+        <p class="vp-eyebrow">You're almost there</p>
+        <h1 class="vp-heading">Before you proceed —<br>watch this first.</h1>
+        <p class="vp-subtext">This short video will walk you through exactly what to expect inside Money Energetics,
+            including the investment and what the experience looks like. Please watch before completing your
+            enrollment.</p>
+        <div class="vp-line"></div>
+
+        <!-- Video Player -->
+        <div class="vp-video-wrap" id="videoWrap">
+            <!--
+                INSTRUCTIONS FOR TEJAL:
+                1. Place your MP4 video file in the folder: assets/videos/
+                2. Name the file: money-energetics-intro.mp4
+                3. The video will appear here automatically.
+                4. If you'd like to use a different filename, update the src attribute below.
+            -->
+            <video id="introVideo" controls preload="metadata" poster="">
+                <source src="assets/videos/money-energetics-intro.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <!-- Fallback placeholder shown when video file is missing during development -->
+            <div class="vp-video-placeholder" id="videoPlaceholder" style="display:none;">
+                <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                    <circle cx="32" cy="32" r="31" stroke="white" stroke-width="1.5" />
+                    <path d="M26 22L46 32L26 42V22Z" fill="white" />
+                </svg>
+                <span>Video will appear here</span>
+                <span style="font-size:0.6rem;opacity:0.5;">Place your MP4 in
+                    assets/videos/money-energetics-intro.mp4</span>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="vp-cta-section">
+            <p class="vp-cta-label">Ready to begin?</p>
+            <!--
+                The button below is dynamically updated by the script at the bottom of this page.
+                It routes to the application form FIRST, then to the correct Stripe checkout after submission.
+                DO NOT change this href manually — edit the STRIPE constants in form.js instead.
+            -->
+            <a href="index.html#apply" class="vp-btn" id="proceedBtn">
+                Continue to Application &rarr;
+            </a>
+            <p class="vp-note">You'll fill a short application, then proceed to secure Stripe checkout.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="vp-footer">
+        <p>&copy; 2026 Tejal Desae. This page is private and not publicly accessible.</p>
+    </footer>
+
+    <script>
+        // ============================================================
+        //  VIDEO GATE — Program-Aware Session Routing
+        // ============================================================
+        (function () {
+            // 1. Read and validate the program param from the URL
+            const params = new URLSearchParams(window.location.search);
+            const program = params.get('program');
+            const ALLOWED_PROGRAMS = ['money-energetics'];
+
+            if (program && ALLOWED_PROGRAMS.includes(program)) {
+                // 2. Persist to sessionStorage so form.js can read it after navigation
+                sessionStorage.setItem('tejal_program', program);
+            }
+
+            // 3. Route the proceed button to the dedicated apply page
+            const proceedBtn = document.getElementById('proceedBtn');
+            if (proceedBtn) {
+                proceedBtn.href = 'apply-money-energetics.html';
+            }
+        })();
+
+        // Show placeholder if video file fails to load
+        const video = document.getElementById('introVideo');
+        const placeholder = document.getElementById('videoPlaceholder');
+
+        if (video) {
+            video.addEventListener('error', () => {
+                video.style.display = 'none';
+                placeholder.style.display = 'flex';
+            });
+
+            // If video has not loaded metadata after 3s, show placeholder
+            setTimeout(() => {
+                if (video.readyState === 0 && video.networkState === 3) {
+                    video.style.display = 'none';
+                    placeholder.style.display = 'flex';
+                }
+            }, 3000);
+        }
+    </script>
+
+</body>
+
+</html>

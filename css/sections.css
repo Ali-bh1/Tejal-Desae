@@ -294,7 +294,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(var(--blush-rgb), 0.62);
+    background: rgba(var(--blush-rgb), 0.48);
     pointer-events: none;
     z-index: 0;
 }
@@ -538,8 +538,204 @@
 }
 
 /* ===================
-   OFFER / MENTORSHIP
+   PROGRAMS — 2-TIER REDESIGN
    =================== */
+
+/* Tier header labels */
+.programs-tier-header {
+    margin-top: 56px;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(var(--gold-rgb), 0.2);
+}
+
+.programs-tier-label {
+    font-size: 0.7rem;
+    font-weight: var(--font-bold);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+}
+
+/* Tier grids */
+.programs-tier-grid {
+    display: grid;
+    gap: 0;
+}
+
+.programs-tier-2col {
+    grid-template-columns: 1fr 1fr;
+}
+
+.programs-tier-3col {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* Course cards (tier 1) */
+.program-card--course {
+    border-right: 1px solid rgba(var(--gold-rgb), 0.15);
+    padding: 56px 48px;
+}
+
+.program-card--course:last-child {
+    border-right: none;
+}
+
+/* Invitation cards (tier 2) */
+.program-card--invitation {
+    border-right: 1px solid rgba(var(--gold-rgb), 0.12);
+    padding: 56px 40px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.program-card--invitation:last-child {
+    border-right: none;
+}
+
+/* Waitlist card (Inner Sanctum) */
+.program-card--waitlist {
+    padding: 56px 40px;
+    background: rgba(var(--gold-rgb), 0.04);
+    border: 1px solid rgba(var(--gold-rgb), 0.15);
+    border-top: none;
+}
+
+/* Shared card elements */
+.program-number {
+    font-family: var(--serif);
+    font-size: 3rem;
+    font-weight: var(--font-light);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.program-title {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: var(--font-medium);
+    color: var(--white);
+    margin-bottom: 8px;
+    font-style: italic;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.program-tagline {
+    font-size: 0.75rem;
+    color: var(--champagne);
+    opacity: 0.55;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+    font-family: var(--serif);
+    font-style: italic;
+}
+
+.program-body {
+    font-size: 0.88rem;
+    color: var(--champagne);
+    opacity: 0.8;
+    line-height: 1.85;
+    flex: 1;
+}
+
+.program-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 28px;
+    margin-bottom: 0;
+    flex-wrap: wrap;
+}
+
+.program-price {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: var(--font-medium);
+    color: var(--gold);
+}
+
+.program-duration {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--champagne);
+    opacity: 0.5;
+}
+
+.program-badge-invitation {
+    font-size: 0.6rem;
+    font-weight: var(--font-bold);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--espresso);
+    background: var(--champagne);
+    padding: 5px 14px;
+    border-radius: 2px;
+}
+
+.program-badge-waitlist {
+    font-size: 0.6rem;
+    font-weight: var(--font-bold);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(var(--gold-rgb), 0.5);
+    padding: 5px 14px;
+    border-radius: 2px;
+}
+
+.program-coming-badge {
+    font-size: 0.6rem;
+    font-weight: var(--font-bold);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(var(--gold-rgb), 0.4);
+    display: inline-block;
+    padding: 5px 14px;
+    margin-bottom: 16px;
+    border-radius: 2px;
+}
+
+/* Sovereign Journey Path */
+.sovereign-journey-path {
+    margin-top: 64px;
+    padding: 40px;
+    text-align: center;
+    border: 1px solid rgba(var(--gold-rgb), 0.1);
+    background: rgba(var(--gold-rgb), 0.03);
+}
+
+.journey-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--champagne);
+    opacity: 0.4;
+    margin-bottom: 24px;
+}
+
+.journey-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--champagne);
+    opacity: 0.7;
+}
+
+.journey-arrow {
+    color: var(--gold);
+    opacity: 0.5;
+    font-style: normal;
+}
+
+
 .offer-section {
     position: relative;
     overflow: hidden;
@@ -701,85 +897,143 @@
     text-align: center;
     max-width: 900px;
     margin: 0 auto;
-    padding: 40px 0;
+    padding: 60px 0;
+    position: relative;
+}
+
+.editorial-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140%;
+    height: 140%;
+    background: radial-gradient(circle, rgba(var(--gold-rgb), 0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
 }
 
 .testimonial-quote-mark {
     font-family: var(--serif);
-    font-size: 12rem;
+    font-size: 10rem;
     color: var(--gold);
-    opacity: 0.25;
+    opacity: 0.15;
     line-height: 0.5;
-    margin-bottom: -20px;
+    margin-bottom: -10px;
 }
 
 .testimonial-big-quote {
     font-family: var(--serif);
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
     font-weight: var(--font-light);
     font-style: italic;
     color: var(--white);
-    line-height: 1.4;
+    line-height: 1.5;
     margin-bottom: 48px;
-    text-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.6),
-        0 0 40px rgba(38, 19, 11, 0.4);
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .testimonial-author-editorial {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
     align-items: center;
 }
 
 .testimonial-author {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: var(--font-bold);
-    letter-spacing: 0.3em;
+    letter-spacing: 0.35em;
     text-transform: uppercase;
     color: var(--gold);
 }
 
 .testimonial-role {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--champagne);
-    opacity: 0.5;
+    opacity: 0.6;
+    font-family: var(--serif);
+    font-style: italic;
 }
 
-/* Supporting Mini-Quotes */
-.testimonial-others {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    margin-top: 80px;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+/* Dynamic Marquee */
+.testimonial-marquee-wrap {
+    width: 100%;
+    overflow: hidden;
+    margin-top: 100px;
+    padding: 40px 0;
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 }
 
-.testimonial-mini {
-    padding: 48px;
-    background: rgba(255, 255, 255, 0.04);
+.testimonial-marquee-track {
+    display: flex;
+    gap: 32px;
+    width: max-content;
+    animation: marquee-scroll 60s linear infinite;
+}
+
+.testimonial-marquee-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.marquee-card {
+    width: 420px;
+    flex-shrink: 0;
+    padding: 48px 40px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(var(--gold-rgb), 0.1);
+    border-radius: 4px;
+    transition: all 0.4s var(--ease-default);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.testimonial-mini p {
+.marquee-card:hover {
+    background: rgba(var(--gold-rgb), 0.08);
+    border-color: rgba(var(--gold-rgb), 0.3);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.marquee-card p {
     font-family: var(--serif);
     font-size: 1.05rem;
     font-style: italic;
     color: var(--champagne);
-    line-height: 1.7;
-    margin-bottom: 20px;
+    line-height: 1.75;
+    margin-bottom: 24px;
 }
 
-.testimonial-mini span {
+.marquee-card span {
     font-size: 0.7rem;
     font-weight: var(--font-bold);
-    letter-spacing: 0.2em;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--gold);
-    opacity: 0.7;
+    opacity: 0.8;
+}
+
+/* Remove old supporting styles */
+.testimonial-others,
+.testimonial-mini {
+    display: none !important;
+}
+
+.testimonial-marquee-wrap .testimonial-mini {
+    display: flex !important;
 }
 
 
