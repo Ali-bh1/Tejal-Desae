@@ -362,22 +362,22 @@ body {
     opacity: 0.9;
 }
 
-/* Blush-bg sections — subheadings must be Espresso (coffee) for readability */
+/* Blush-bg sections — subheadings use dark amber for visibility */
 .program-for-you .program-section-title,
 .program-outcomes .program-section-title,
 .program-includes .program-section-title,
 .program-intro .program-section-title {
-    color: var(--cognac);
+    color: var(--amber);
 }
 
-/* Champagne-bg sections — subheadings must be near-black for maximum contrast */
+/* Champagne-bg sections — subheadings must be black for maximum contrast */
 .program-thread .program-section-title {
     color: #000000;
 }
 
 .program-thread .program-thread-sub {
     color: #1a0f0a;
-    opacity: 0.75;
+    opacity: 0.85;
 }
 
 .program-for-you .program-list li,
@@ -389,7 +389,7 @@ body {
     font-family: var(--serif);
     font-style: italic;
     color: var(--espresso);
-    opacity: 0.85;
+    opacity: 1;
     line-height: 1.75;
     margin-bottom: 32px;
     font-size: 0.95rem;
