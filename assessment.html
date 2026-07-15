@@ -251,25 +251,62 @@
     else { show('s-intro'); }
   }
 
-  function captureAndReveal() {
-    const nm = document.getElementById('nm').value.trim();
-    const em = document.getElementById('em').value.trim();
+  async function captureAndReveal() {
+    const nm  = document.getElementById('nm').value.trim();
+    const em  = document.getElementById('em').value.trim();
+    const ph  = document.getElementById('ph').value.trim();
     const err = document.getElementById('capErr');
     if(!nm){ err.textContent='Please add your first name.'; return; }
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){ err.textContent='Please pop in a valid email.'; return; }
-    err.textContent='';
-    // Store lead data for passing to payment flow
-    sessionStorage.setItem('tejal_lead_name', nm);
+    err.textContent='Saving your results…';
+
+    // Normalise answers
+    const normAnswers = state.answers.map(a => a ? String(a).toUpperCase() : 'A');
+    const prog = sessionStorage.getItem('tejal_program') || 'money-energetics';
+
+    // Store locally for fallback
+    sessionStorage.setItem('tejal_lead_name',  nm);
     sessionStorage.setItem('tejal_lead_email', em);
-    sessionStorage.setItem('tejal_lead_phone', document.getElementById('ph').value.trim());
+    sessionStorage.setItem('tejal_lead_phone', ph);
+
+    try {
+      // Try to submit to backend API
+      const res = await fetch('/api/assessment/submit', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ name:nm, email:em, phone:ph, program:prog, answers:normAnswers }),
+      });
+      if(res.ok) {
+        const json = await res.json();
+        // Use server-computed scores
+        sessionStorage.setItem('tejal_scores',   JSON.stringify(json.categoryScores));
+        sessionStorage.setItem('tejal_top_type', json.topArchetype);
+        err.textContent='';
+        computeResult(nm, json.topArchetype, json.categoryScores);
+        return;
+      }
+    } catch(_) {
+      // API not available (static deployment) — fall through to client scoring
+    }
+
+    // Fallback: client-side scoring (used when backend not running)
+    err.textContent='';
     computeResult(nm);
   }
 
-  function computeResult(name) {
-    const s={A:0,B:0,C:0,D:0,E:0};
-    state.answers.forEach(c=>{ if(c) s[c]++; });
-    const sorted = CATS.slice().sort((a,b)=>s[b]-s[a]);
-    const top = sorted[0];
+  function computeResult(name, serverTopType, serverScores) {
+    // Use server scores if provided, else compute client-side (fallback)
+    let s, top;
+    if(serverTopType && serverScores) {
+      s   = serverScores;
+      top = serverTopType;
+    } else {
+      s = {A:0,B:0,C:0,D:0,E:0};
+      state.answers.forEach(c=>{ if(c) s[c]++; });
+      const sorted = CATS.slice().sort((a,b)=>s[b]-s[a]);
+      top = sorted[0];
+    }
     const a = ARCHETYPES[top];
 
     document.getElementById('rName').textContent = a.name;
