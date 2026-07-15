@@ -270,18 +270,26 @@
     sessionStorage.setItem('tejal_lead_phone', ph);
 
     try {
+      // Fetch CSRF token first
+      let csrfToken = '';
+      try {
+        const csrfRes = await fetch('/api/csrf-token', { credentials:'include' });
+        if(csrfRes.ok) { const j = await csrfRes.json(); csrfToken = j.token; }
+      } catch(_) {}
+
       // Try to submit to backend API
       const res = await fetch('/api/assessment/submit', {
         method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'x-csrf-token': csrfToken },
         credentials: 'include',
         body: JSON.stringify({ name:nm, email:em, phone:ph, program:prog, answers:normAnswers }),
       });
       if(res.ok) {
         const json = await res.json();
         // Use server-computed scores
-        sessionStorage.setItem('tejal_scores',   JSON.stringify(json.categoryScores));
-        sessionStorage.setItem('tejal_top_type', json.topArchetype);
+        sessionStorage.setItem('tejal_scores',      JSON.stringify(json.categoryScores));
+        sessionStorage.setItem('tejal_top_type',    json.topArchetype);
+        sessionStorage.setItem('tejal_submission_id', json.submissionId);
         err.textContent='';
         computeResult(nm, json.topArchetype, json.categoryScores);
         return;
@@ -333,8 +341,11 @@
     sessionStorage.setItem('tejal_scores', JSON.stringify(s));
     sessionStorage.setItem('tejal_top_type', top);
 
-    // CTA goes to full report page
-    document.getElementById('ctaBtn').href = 'report.html';
+    // CTA goes to full report page — include submissionId if available
+    const sid = sessionStorage.getItem('tejal_submission_id');
+    document.getElementById('ctaBtn').href = sid
+      ? 'report.html?id=' + encodeURIComponent(sid)
+      : 'report.html';
 
     show('s-result');
   }

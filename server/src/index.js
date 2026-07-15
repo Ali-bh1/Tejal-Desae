@@ -9,6 +9,7 @@ import cookieParser   from 'cookie-parser';
 import morgan         from 'morgan';
 import path           from 'path';
 import { fileURLToPath } from 'url';
+import { doubleCsrf } from 'csrf-csrf';
 
 import assessmentRouter from './routes/assessment.js';
 import authRouter       from './routes/auth.js';
@@ -64,6 +65,28 @@ if (process.env.NODE_ENV !== 'test') {
 
 // ── Trust proxy (for correct req.ip behind Nginx/Railway/Render) ─
 app.set('trust proxy', 1);
+
+// ── CSRF protection ───────────────────────────────────────────────
+const { generateToken, doubleCsrfProtection } = doubleCsrf({
+  getSecret:    () => process.env.CSRF_SECRET || 'dev-csrf-secret-change-me',
+  cookieName:   '__Host-psifi.x-csrf-token',
+  cookieOptions: {
+    sameSite: 'strict',
+    secure:   process.env.NODE_ENV === 'production',
+    httpOnly: true,
+  },
+  size:         64,
+  ignoredMethods: ['GET', 'HEAD', 'OPTIONS'],
+});
+
+// Expose CSRF token endpoint (fetch before any state-changing request)
+app.get('/api/csrf-token', (req, res) => {
+  res.json({ token: generateToken(req, res) });
+});
+
+// Apply CSRF protection to all state-changing API routes
+// (exempts GET/HEAD/OPTIONS automatically)
+app.use('/api', doubleCsrfProtection);
 
 // ── API routes ────────────────────────────────────────────────────
 app.use('/api/assessment', assessmentRouter);

@@ -229,74 +229,124 @@ const PROG_LINKS = {
 };
 
 function loadReport() {
-  // Try sessionStorage first (coming from assessment)
-  const scores = JSON.parse(sessionStorage.getItem('tejal_scores')||'null');
+  // Check URL for submissionId first (bookmarkable reports from backend)
+  const urlId = new URLSearchParams(location.search).get('id');
+
+  if (urlId) {
+    loadReportFromAPI(urlId);
+    return;
+  }
+
+  // Fallback: sessionStorage (used when backend not running)
+  loadReportFromSession();
+}
+
+async function loadReportFromAPI(submissionId) {
+  try {
+    const res = await fetch('/api/assessment/result/' + encodeURIComponent(submissionId), {
+      credentials: 'include',
+    });
+    if (!res.ok) throw new Error('Report not found.');
+    const data = await res.json();
+
+    // Build synthetic scores for display (from categoryScores)
+    const scores = data.categoryScores || {};
+    const name   = data.name || 'Your';
+    const prog   = data.program || sessionStorage.getItem('tejal_program') || 'money-energetics';
+
+    // Store in sessionStorage so display helpers work
+    sessionStorage.setItem('tejal_scores',   JSON.stringify(scores));
+    sessionStorage.setItem('tejal_top_type', data.topArchetype);
+    sessionStorage.setItem('tejal_program',  prog);
+
+    renderReport(name, data.topArchetype, scores, prog);
+  } catch (err) {
+    // Graceful fallback to sessionStorage
+    loadReportFromSession();
+  }
+}
+
+function loadReportFromSession() {
+  const scores  = JSON.parse(sessionStorage.getItem('tejal_scores') || 'null');
   const topType = sessionStorage.getItem('tejal_top_type');
-  const name = sessionStorage.getItem('tejal_lead_name') || 'Your';
-  const prog = sessionStorage.getItem('tejal_program') || 'money-energetics';
+  const name    = sessionStorage.getItem('tejal_lead_name') || 'Your';
+  const prog    = sessionStorage.getItem('tejal_program')   || 'money-energetics';
 
-  if(!topType){ window.location.href='assessment.html'; return; }
+  if (!topType) { window.location.href = 'assessment.html'; return; }
+  renderReport(name, topType, scores, prog);
+}
 
+function renderReport(name, topType, scores, prog) {
   const a = ARCHETYPES[topType];
-  const totalAnswers = Object.values(scores).reduce((s,v)=>s+v,0);
-  const maxScore = Math.max(...Object.values(scores));
+  if (!a) { window.location.href = 'assessment.html'; return; }
+
+  // Ensure scores object is valid
+  if (!scores || typeof scores !== 'object') {
+    scores = {A:0,B:0,C:0,D:0,E:0};
+    scores[topType] = 5; // at least show the dominant category
+  }
+
+  const totalAnswers   = Object.values(scores).reduce((s,v)=>s+v,0);
+  const maxScore       = Math.max(...Object.values(scores));
   const expansionScore = Math.round((maxScore / Math.max(totalAnswers,1)) * 100);
 
   // Eyebrow / title
-  document.getElementById('rEyebrow').textContent = name+"'s Wealth Expansion Profile";
-  document.getElementById('rName').textContent = a.name;
-  document.getElementById('rTag').textContent = a.tag;
+  document.getElementById('rEyebrow').textContent = name + "'s Wealth Expansion Profile";
+  document.getElementById('rName').textContent    = a.name;
+  document.getElementById('rTag').textContent     = a.tag;
 
-  // Ring
+  // Score ring
   const circumference = 502;
-  const offset = circumference - (expansionScore/100)*circumference;
-  setTimeout(()=>{
+  const offset = circumference - (expansionScore / 100) * circumference;
+  setTimeout(() => {
     const ring = document.getElementById('ringFill');
-    ring.style.transition='stroke-dashoffset 1.2s cubic-bezier(.2,.7,.2,1)';
-    ring.style.strokeDashoffset = offset;
-  },200);
-  document.getElementById('scoreNum').textContent = expansionScore;
+    if (ring) {
+      ring.style.transition = 'stroke-dashoffset 1.2s cubic-bezier(.2,.7,.2,1)';
+      ring.style.strokeDashoffset = offset;
+    }
+  }, 200);
+  document.getElementById('scoreNum').textContent    = expansionScore;
   document.getElementById('profileType').textContent = a.name;
-  document.getElementById('profileTag').textContent = a.tag;
+  document.getElementById('profileTag').textContent  = a.tag;
 
   // Category bars
-  const sorted = Object.entries(scores).sort((x,y)=>y[1]-x[1]);
-  const max = Math.max(...Object.values(scores),1);
-  let barsHtml='';
-  sorted.forEach(([cat,val])=>{
-    const pct = Math.round(val/max*100);
-    const hint = cat===topType ? 'Primary pattern' : '';
-    barsHtml+=`<div class="cat-item">
+  const sorted = Object.entries(scores).sort((x, y) => y[1] - x[1]);
+  const max    = Math.max(...Object.values(scores), 1);
+  let barsHtml = '';
+  sorted.forEach(([cat, val]) => {
+    const pct  = Math.round(val / max * 100);
+    const hint = cat === topType ? 'Primary pattern' : '';
+    barsHtml += `<div class="cat-item">
       <div class="cat-top"><span class="cat-name">${CAT_LABELS[cat]}</span><span class="cat-val">${pct}%</span></div>
       <div class="cat-track"><div class="cat-fill" style="width:0%" data-pct="${pct}%"></div></div>
-      ${hint?`<div class="cat-hint">${hint}</div>`:''}
+      ${hint ? `<div class="cat-hint">${hint}</div>` : ''}
     </div>`;
   });
   document.getElementById('catBars').innerHTML = barsHtml;
-  setTimeout(()=>{
-    document.querySelectorAll('.cat-fill').forEach(el=>{
-      el.style.transition='width .9s cubic-bezier(.2,.7,.2,1)';
-      el.style.width=el.dataset.pct;
+  setTimeout(() => {
+    document.querySelectorAll('.cat-fill').forEach(el => {
+      el.style.transition = 'width .9s cubic-bezier(.2,.7,.2,1)';
+      el.style.width = el.dataset.pct;
     });
-  },300);
+  }, 300);
 
-  // Insight
-  document.getElementById('insightTitle').textContent = 'You are '+a.name;
-  document.getElementById('insightBody').innerHTML = a.body.map(p=>'<p>'+p+'</p>').join('');
-  document.getElementById('insightGift').textContent = a.gift;
-  document.getElementById('insightNext').textContent = a.next;
+  // Insights
+  document.getElementById('insightTitle').textContent = 'You are ' + a.name;
+  document.getElementById('insightBody').innerHTML    = a.body.map(p => '<p>' + p + '</p>').join('');
+  document.getElementById('insightGift').textContent  = a.gift;
+  document.getElementById('insightNext').textContent  = a.next;
 
-  // Archetype + edge
+  // Archetype + edge cards
   document.getElementById('archPill').textContent = 'Your Archetype';
   document.getElementById('archName').textContent = a.name;
-  document.getElementById('archDesc').innerHTML = a.tag;
+  document.getElementById('archDesc').innerHTML   = a.tag;
   document.getElementById('edgeName').textContent = a.edge.name;
-  document.getElementById('edgeDesc').innerHTML = a.edge.desc;
+  document.getElementById('edgeDesc').innerHTML   = a.edge.desc;
 
-  // CTA
-  document.getElementById('ctaTitle').textContent = 'Ready to dissolve the '+a.name+' pattern — permanently?';
-  document.getElementById('ctaBody').textContent = a.next;
-  document.getElementById('ctaBtn').href = PROG_LINKS[prog] || 'apply-money-energetics.html';
+  // CTA — routes to correct program's apply/enrol flow
+  document.getElementById('ctaTitle').textContent = 'Ready to dissolve the ' + a.name + ' pattern — permanently?';
+  document.getElementById('ctaBody').textContent  = a.next;
+  document.getElementById('ctaBtn').href          = PROG_LINKS[prog] || 'apply-money-energetics.html';
 }
 
 loadReport();
