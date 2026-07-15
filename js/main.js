@@ -1,24 +1,13 @@
 /**
- * Main Entry Point
- * Initializes all modules when the DOM is ready
+ * main.js — App entry point (Revamped 2026)
+ * Imports and initialises all modules on DOMContentLoaded.
  */
+import { initNavigation } from './navigation.js';
+import { initAnimations } from './animations.js';
+import { initForm }       from './form.js';
 
-import Navigation from './navigation.js';
-import Animations from './animations.js';
-import ContactForm from './form.js';
-
-/**
- * Initialize the entire application
- */
-function init() {
-    Navigation.init();
-    Animations.init();
-    ContactForm.init();
-}
-
-// Run when DOM is parsed
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-} else {
-    init();
-}
+document.addEventListener('DOMContentLoaded', () => {
+  initNavigation();
+  initAnimations();
+  initForm();
+});

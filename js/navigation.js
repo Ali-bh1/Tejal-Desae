@@ -1,150 +1,75 @@
 /**
- * Navigation Module
- * Handles: mobile menu toggle, smooth scroll, active link tracking, nav scroll state
+ * navigation.js — Nav scroll state, hamburger, smooth scroll (Revamped 2026)
  */
+export function initNavigation() {
+  const nav    = document.querySelector('.nav');
+  const toggle = document.querySelector('.nav-toggle');
+  const menu   = document.querySelector('.mobile-menu');
+  if (!nav) return;
 
-const Navigation = (() => {
-    // DOM references
-    let nav, toggle, mobileMenu, navLinks, sections;
+  // ── Scroll: transparent → solid ──────────────────────────────
+  const onScroll = () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // run once on load
 
-    /**
-     * Initialize navigation
-     */
-    function init() {
-        nav = document.querySelector('.nav');
-        toggle = document.querySelector('.nav-toggle');
-        mobileMenu = document.querySelector('.mobile-menu');
-        navLinks = document.querySelectorAll('.nav-links a, .mobile-menu a');
-        sections = document.querySelectorAll('section[id]');
+  // ── Hamburger toggle ─────────────────────────────────────────
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.classList.toggle('open');
+      menu.classList.toggle('open', isOpen);
+      menu.setAttribute('aria-hidden', String(!isOpen));
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
 
-        if (!nav) return;
-
-        bindEvents();
-        updateNavOnScroll(); // Set initial state
-    }
-
-    /**
-     * Bind all navigation event listeners
-     */
-    function bindEvents() {
-        // Mobile menu toggle
-        if (toggle && mobileMenu) {
-            toggle.addEventListener('click', toggleMobileMenu);
-        }
-
-        // Smooth scroll for all nav links
-        navLinks.forEach(link => {
-            link.addEventListener('click', handleNavClick);
-        });
-
-        // Close mobile menu on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && mobileMenu?.classList.contains('open')) {
-                closeMobileMenu();
-            }
-        });
-
-        // Nav scroll state
-        window.addEventListener('scroll', updateNavOnScroll, { passive: true });
-
-        // Active section tracking
-        window.addEventListener('scroll', updateActiveLink, { passive: true });
-    }
-
-    /**
-     * Toggle mobile menu open/close
-     */
-    function toggleMobileMenu() {
-        const isOpen = mobileMenu.classList.contains('open');
-        if (isOpen) {
-            closeMobileMenu();
-        } else {
-            openMobileMenu();
-        }
-    }
-
-    function openMobileMenu() {
-        mobileMenu.classList.add('open');
-        toggle.classList.add('open');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeMobileMenu() {
-        mobileMenu.classList.remove('open');
+    // Close on link click
+    menu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
         toggle.classList.remove('open');
+        menu.classList.remove('open');
+        menu.setAttribute('aria-hidden', 'true');
+        toggle.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
-    }
+      });
+    });
 
-    /**
-     * Handle click on nav links — smooth scroll + close mobile menu.
-     * IMPORTANT: Only intercept same-page anchor links (href starts with "#").
-     * Cross-page links like "index.html#about" are navigated normally by the browser.
-     */
-    function handleNavClick(e) {
-        const href = e.currentTarget.getAttribute('href');
-        if (!href) return;
+    // Close on Escape
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && menu.classList.contains('open')) {
+        toggle.click();
+      }
+    });
+  }
 
-        // Only smooth-scroll on true same-page anchors (e.g. href="#about")
-        // Let cross-page links like "index.html#about" navigate normally
-        if (!href.startsWith('#')) return;
-
-        const target = document.querySelector(href);
-        if (!target) return;
-
+  // ── Smooth scroll for same-page anchors ──────────────────────
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', e => {
+      const target = document.querySelector(anchor.getAttribute('href'));
+      if (target) {
         e.preventDefault();
-
-        // Close mobile menu if open
-        if (mobileMenu?.classList.contains('open')) {
-            closeMobileMenu();
-        }
-
-        // Smooth scroll with offset for fixed nav
-        const offset = nav.offsetHeight + 20;
+        const offset = nav.offsetHeight + 16;
         const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
 
-        window.scrollTo({
-            top,
-            behavior: 'smooth'
-        });
-    }
-
-    /**
-     * Add/remove scrolled class on nav based on scroll position
-     */
-    function updateNavOnScroll() {
-        if (!nav) return;
-        if (window.scrollY > 60) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
+  // ── Active nav link on scroll ─────────────────────────────────
+  const sections = document.querySelectorAll('section[id], header[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  if (sections.length && navLinks.length) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => {
+            l.classList.toggle('active',
+              l.getAttribute('href') === '#' + entry.target.id);
+          });
         }
-    }
-
-    /**
-     * Highlight the nav link whose section is currently in view
-     */
-    function updateActiveLink() {
-        if (!sections.length) return;
-
-        const scrollPos = window.scrollY + nav.offsetHeight + 100;
-
-        sections.forEach(section => {
-            const top = section.offsetTop;
-            const bottom = top + section.offsetHeight;
-            const id = section.getAttribute('id');
-
-            // Find matching desktop nav links (handles both #id and index.html#id)
-            const desktopLink = document.querySelector(`.nav-links a[href="#${id}"], .nav-links a[href="index.html#${id}"]`);
-
-            if (scrollPos >= top && scrollPos < bottom) {
-                desktopLink?.classList.add('active');
-            } else {
-                desktopLink?.classList.remove('active');
-            }
-        });
-    }
-
-    return { init };
-})();
-
-export default Navigation;
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(s => observer.observe(s));
+  }
+}

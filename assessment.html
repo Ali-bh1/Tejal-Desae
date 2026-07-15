@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wealth Expansion Profile — Tejal Desae</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css"><link rel="stylesheet" href="css/base.css"><link rel="stylesheet" href="css/responsive.css">
+  <style>
+    :root {
+      --paper:#FBFAF5; --forest:#154230; --forest-deep:#0E3122;
+      --champ:#E6D3A3; --champ-lt:#F1E6C9; --gold-deep:#C7AC6D; --gold-text:#A0833B;
+      --ink:#23302A; --ink-soft:rgba(35,48,42,.74); --ink-faint:rgba(35,48,42,.5);
+      --gold-grad:linear-gradient(135deg,#F2E7C6,#E6D3A3 46%,#C7AC6D);
+    }
+    body {
+      font-family:'Jost',sans-serif; color:var(--ink); line-height:1.62;
+      -webkit-font-smoothing:antialiased;
+      background: radial-gradient(720px 460px at 84% -8%,rgba(230,211,163,.4),transparent 60%),
+                  radial-gradient(620px 420px at 6% 106%,rgba(21,66,48,.07),transparent 60%),
+                  var(--paper);
+      background-attachment:fixed; min-height:100vh; display:flex; flex-direction:column;
+    }
+    body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.03;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+    .eyebrow{font-weight:500;font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold-text)}
+    .btn{font-family:'Jost',sans-serif;font-weight:500;font-size:14px;letter-spacing:.05em;background:var(--forest);color:var(--champ-lt);padding:17px 36px;border:none;border-radius:2px;cursor:pointer;transition:transform .3s,background .3s;display:inline-block}
+    .btn:hover{background:var(--forest-deep);transform:translateY(-2px)}
+    .btn.full{width:100%}
+    .btn-champ{background:var(--gold-grad);color:var(--forest);font-weight:600;margin-top:24px}
+    .btn-champ:hover{filter:brightness(1.04);transform:translateY(-2px)}
+    .topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:center;gap:12px;padding:13px 20px;background:rgba(251,250,245,.86);backdrop-filter:blur(12px);border-bottom:1px solid rgba(199,172,109,.3)}
+    .topbar .wm{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:19px;color:var(--forest);letter-spacing:.01em}
+    .shell{flex:1;display:flex;align-items:center;justify-content:center;padding:clamp(30px,5vw,60px) clamp(18px,5vw,40px)}
+    .stage{width:100%;max-width:660px}
+    .screen{display:none;animation:fade .55s cubic-bezier(.2,.7,.2,1)}
+    .screen.active{display:block}
+    @keyframes fade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+    @keyframes swap{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    /* intro */
+    .intro{text-align:center}
+    .intro .eyebrow{margin-top:26px;display:block}
+    .intro h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(36px,6.6vw,66px);line-height:1.04;margin:16px auto 0;color:var(--forest);max-width:14ch}
+    .intro h1 em{font-style:italic;color:var(--gold-text)}
+    .intro p{font-weight:300;font-size:clamp(15px,2.2vw,18.5px);color:var(--ink-soft);max-width:480px;margin:22px auto 0}
+    .meta-row{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:26px;font-size:12.5px;color:var(--forest)}
+    .meta-row span{display:inline-flex;align-items:center;gap:7px}
+    .dot{width:5px;height:5px;border-radius:50%;background:var(--gold-deep)}
+    .btn-wrap{margin-top:30px}
+    /* quiz */
+    .qhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+    .qcount{font-weight:500;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-text)}
+    .back2{background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:13px;color:var(--ink-faint);transition:color .25s}
+    .back2:hover{color:var(--forest)} .back2[hidden]{visibility:hidden}
+    .bar{height:3px;background:rgba(199,172,109,.3);border-radius:3px;overflow:hidden;margin-bottom:30px}
+    .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold-deep),var(--forest));border-radius:3px;transition:width .5s cubic-bezier(.2,.7,.2,1)}
+    .qbox{animation:swap .42s cubic-bezier(.2,.7,.2,1)}
+    .qbox h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(25px,4.1vw,37px);line-height:1.14;margin-bottom:24px;color:var(--forest)}
+    .opt{display:block;width:100%;text-align:left;background:#fff;border:1px solid rgba(199,172,109,.46);border-radius:5px;padding:17px 21px;margin-bottom:11px;cursor:pointer;font-family:'Jost',sans-serif;font-weight:300;font-size:15.5px;color:var(--ink);line-height:1.45;transition:border-color .25s,background .25s,color .25s,transform .25s,box-shadow .25s}
+    .opt:hover{border-color:var(--gold-deep);transform:translateX(3px);box-shadow:0 10px 24px -18px rgba(21,66,48,.4)}
+    .opt.sel{background:var(--forest);border-color:var(--forest);color:var(--champ-lt);font-weight:400}
+    /* capture */
+    .cap{text-align:center}
+    .cap h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(30px,5vw,48px);line-height:1.08;margin:14px 0 0;color:var(--forest)}
+    .cap p{font-weight:300;font-size:15px;color:var(--ink-soft);max-width:420px;margin:16px auto 0}
+    .form{max-width:400px;margin:30px auto 0;text-align:left}
+    .field{margin-bottom:15px}
+    .field label{display:block;font-weight:500;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-text);margin-bottom:7px}
+    .field input{width:100%;font-family:'Jost',sans-serif;font-weight:300;font-size:15px;color:var(--ink);background:#fff;border:1px solid rgba(199,172,109,.5);border-radius:3px;padding:14px 15px;transition:border-color .25s}
+    .field input:focus{outline:none;border-color:var(--forest)}
+    .err{color:#9a3b22;font-size:12.5px;margin-top:8px;min-height:1em}
+    .fineprint{font-size:11.5px;color:var(--ink-faint);margin-top:15px;text-align:center}
+    /* result */
+    .res{text-align:center}
+    .res .label{font-weight:500;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-text)}
+    .res h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(38px,7vw,66px);line-height:1.02;margin:10px 0 0;color:var(--forest)}
+    .res .tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(18px,2.7vw,24px);color:var(--gold-text);margin-top:8px;max-width:24ch;margin-left:auto;margin-right:auto}
+    .res-card{background:#fff;border:1px solid rgba(199,172,109,.46);border-radius:8px;padding:clamp(26px,4vw,42px);margin-top:26px;text-align:left;box-shadow:0 28px 60px -42px rgba(21,66,48,.4)}
+    .res-card p{font-weight:300;font-size:15.5px;line-height:1.76;color:var(--ink-soft);margin-bottom:16px}
+    .res-card p:last-child{margin-bottom:0}
+    .res-card p b{font-weight:500;color:var(--forest)}
+    .gift{margin-top:18px;padding-top:18px;border-top:1px solid rgba(199,172,109,.4)}
+    .gift .lab{font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-text);margin-bottom:8px}
+    .ranks{margin-top:22px;text-align:left}
+    .rank-row{display:grid;grid-template-columns:120px 1fr;align-items:center;gap:14px;margin-bottom:9px}
+    .rank-row .nm{font-size:12.5px;color:var(--ink);opacity:.8}
+    .rank-bar{height:7px;background:rgba(21,66,48,.12);border-radius:4px;overflow:hidden}
+    .rank-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--forest),var(--gold-deep));border-radius:4px;transition:width 1s ease .2s}
+    .cta-band{background:linear-gradient(162deg,var(--forest),var(--forest-deep));border-radius:8px;padding:clamp(32px,4.6vw,48px);margin-top:28px;text-align:center;position:relative;overflow:hidden}
+    .cta-band::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(230,211,163,.2),transparent 62%)}
+    .cta-band .inner{position:relative}
+    .cta-band h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(24px,3.7vw,34px);line-height:1.2;color:var(--champ-lt);max-width:480px;margin:0 auto}
+    .cta-band p{font-weight:300;font-size:14.5px;color:rgba(241,230,201,.85);margin:14px auto 0;max-width:430px}
+    .restart{background:none;border:none;cursor:pointer;font-size:12.5px;color:var(--ink-faint);margin-top:22px;text-decoration:underline;text-underline-offset:3px}
+    .restart:hover{color:var(--forest)}
+    :focus-visible{outline:2px solid var(--forest);outline-offset:3px}
+    @media(prefers-reduced-motion:reduce){.screen,.qbox{animation:none}*{transition-duration:.001ms!important}}
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <span class="wm">Tejal Desae</span>
+  </div>
+  <div class="shell">
+    <div class="stage">
+
+      <!-- ── INTRO ── -->
+      <section class="screen active" id="s-intro">
+        <div class="intro">
+          <span class="eyebrow">Free · 3 minutes · Instant result</span>
+          <h1>Your <em>Wealth<br>Expansion</em> Profile</h1>
+          <p>8 questions that reveal the hidden pattern beneath your money story — and the exact shift that will change it.</p>
+          <div class="meta-row">
+            <span><span class="dot"></span>8 questions</span>
+            <span><span class="dot"></span>Instant result</span>
+            <span><span class="dot"></span>Free result</span>
+          </div>
+          <div class="btn-wrap">
+            <button class="btn full" onclick="show('s-quiz')">Begin Your Profile →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── QUIZ ── -->
+      <section class="screen" id="s-quiz">
+        <div class="qhead">
+          <span class="qcount" id="qcount">Question 1 of 8</span>
+          <button class="back2" id="backBtn" onclick="goBack()" hidden>← Back</button>
+        </div>
+        <div class="bar"><i id="bar" style="width:0%"></i></div>
+        <div id="qmount"></div>
+      </section>
+
+      <!-- ── CAPTURE ── -->
+      <section class="screen" id="s-capture">
+        <div class="cap">
+          <span class="eyebrow">Your result is ready</span>
+          <h2>Where would you like it sent?</h2>
+          <p>Enter your details to reveal your Wealth Expansion Profile.</p>
+          <div class="form">
+            <div class="field"><label for="nm">First name</label><input id="nm" type="text" autocomplete="given-name" placeholder="Your name"></div>
+            <div class="field"><label for="em">Email</label><input id="em" type="email" autocomplete="email" placeholder="you@email.com"></div>
+            <div class="field"><label for="ph">Phone / WhatsApp</label><input id="ph" type="tel" autocomplete="tel" placeholder="+91 98765 43210"></div>
+            <div class="err" id="capErr"></div>
+            <button class="btn full" onclick="captureAndReveal()">Show Me My Profile →</button>
+            <p class="fineprint">Your details stay private. You're one tap from your result.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── RESULT ── -->
+      <section class="screen" id="s-result">
+        <div class="res">
+          <div class="label">Your Wealth Expansion Profile</div>
+          <h2 id="rName">—</h2>
+          <div class="tag" id="rTag">—</div>
+          <div class="res-card" id="rBody"></div>
+          <div class="ranks" id="rRanks"></div>
+          <div class="cta-band">
+            <div class="inner">
+              <h3 id="ctaTitle">Ready to dissolve this pattern — permanently?</h3>
+              <p id="ctaBody">Your profile reveals exactly where we begin. The next step is your Money Energetics enrolment.</p>
+              <a id="ctaBtn" href="report.html" class="btn btn-champ">View Your Full Profile →</a><br>
+              <button class="restart" onclick="restart()">Retake the assessment</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script>
+  const QUESTIONS = [
+    {q:"More money than you expected lands in your account. What's the first thing you feel?",
+     o:[["A little jolt of 'wait, what's the catch?'","A"],["I want to spend it or give it away — fast","D"],["Straight back to work. I can't really enjoy it","E"],["A quiet 'did I actually earn this?'","B"]]},
+    {q:"You think about putting your prices up. What shows up?",
+     o:[["Ugh — people will judge me","C"],["That feels kind of greedy","B"],["Scary. What if it all falls apart?","A"],["Fine, once I've proven I deserve it","E"]]},
+    {q:"Imagine your income doubles. What's the loudest thought?",
+     o:[["Could I even handle that?","A"],["People would treat me differently","C"],["I'd have to work twice as hard to deserve it","E"],["Honestly… that's not really for me","B"]]},
+    {q:"Money that comes easily feels…",
+     o:[["Suspicious. Too easy","E"],["Lovely — but it never sticks around","D"],["Like it belongs to someone more ready than me","B"],["A bit embarrassing to admit I wanted it","C"]]},
+    {q:"Being really seen for your work feels…",
+     o:[["Like I'd rather stay behind the scenes","C"],["A little unsafe, like a target on my back","A"],["Fine, once I've earned the attention","E"],["I play my wins down so I'm not 'too much'","B"]]},
+    {q:"Rest, and letting people help you?",
+     o:[["Hard. I'd much rather give than receive","D"],["I only rest once everything's done (so… never)","E"],["If someone helps me, I feel like I owe them","B"],["Slowing down makes me anxious","A"]]},
+    {q:"The quiet story under your money stuff sounds most like…",
+     o:[["If I have more, something will go wrong","A"],["I have to stay small to be safe","C"],["I'm just not someone money happens to","B"],["If I'm not holding on tight, it disappears","D"]]},
+    {q:"What do you most want on the other side of this?",
+     o:[["To feel safe having more","A"],["To finally feel like I'm allowed","B"],["To be seen without bracing for it","C"],["To receive easily — and keep it","D"],["To stop forcing it and let it feel easy","E"]]}
+  ];
+
+  const ARCHETYPES = {
+    A:{name:"The Guard",tag:"Deep down, more money feels risky — so you keep things safe and small.",
+       body:["Here's the thing: this was never about willpower. Somewhere along the way, a part of you learned that having more wasn't safe. So every time things start to grow, that part quietly pulls you back to what feels familiar.","It's not broken. It's been <b>protecting</b> you. It just doesn't know yet that you're safe now."],
+       gift:"You're steady and loyal in a way most people aren't. The moment your body learns that 'more' is safe, that same steadiness can hold a much bigger life.",
+       cta:"Safety in the body is exactly what Money Energetics installs — permanently."},
+    B:{name:"The Prover",tag:"You quietly feel like you have to earn the right to have it.",
+       body:["You give, you deliver, you go above and beyond — and underneath runs a quiet little line: <b>'I'm not really someone money happens to.'</b> So you keep earning the right to receive, and the finish line keeps moving.","That feeling isn't logical, so you can't think your way out of it. It lives deeper than that."],
+       gift:"Your commitment and integrity are rare. The moment 'I am allowed' lands in your body — not just your head — everything shifts.",
+       cta:"Dissolving the Prover pattern is the core of the Money Energetics container."},
+    C:{name:"The Hider",tag:"Being seen feels risky, so you keep yourself a little small.",
+       body:["You've got a real gift, and part of you knows it. But being truly seen feels risky — like it might invite judgement. So you stay one notch quieter than you are, and the money that lives on the other side of being seen stays just out of reach.","It makes complete sense. At some point, being seen didn't feel safe."],
+       gift:"Your depth and discernment are your greatest asset. When safety in visibility is installed in the body, your presence becomes genuinely magnetic.",
+       cta:"Sovereignty in visibility is woven through every week of the Money Energetics container."},
+    D:{name:"The Giver",tag:"You're amazing at giving. Keeping it for yourself is the hard part.",
+       body:["Earning was never your problem — keeping it is. Money comes in and rushes straight back out: spent, given, reinvested. Rest and help feel the same way. You give them easily; you just can't quite <b>receive</b> them.","Receiving is a skill, not a flaw. If it once felt unsafe, your body simply learned to let things pass right through."],
+       gift:"Your generosity is extraordinary. Receiving is the one skill your body hasn't been taught yet — and it can be learned.",
+       cta:"Receiving without collapse is Week 4 of the Money Energetics arc."},
+    E:{name:"The Gripper",tag:"If you're not holding on tight, it feels like it'll slip away.",
+       body:["You make things happen — and that's exactly the trap. Deep down, only money you <b>forced and out-worked</b> feels real. Easy money feels suspicious, rest feels risky, and letting go feels like losing.","That grip kept you safe and got you here. But there's a ceiling on what force alone can build — and you're feeling it now."],
+       gift:"Your discipline and drive are extraordinary. The moment you can receive without gripping, that same energy becomes unstoppable.",
+       cta:"Releasing the Gripper pattern — somatically — is the foundation of Money Energetics."}
+  };
+
+  const CATS = ['A','B','C','D','E'];
+  let state = { i:0, answers: new Array(QUESTIONS.length).fill(null) };
+
+  function show(id) {
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  function renderQ() {
+    const q = QUESTIONS[state.i];
+    document.getElementById('qcount').textContent = 'Question '+(state.i+1)+' of '+QUESTIONS.length;
+    document.getElementById('bar').style.width = (state.i/QUESTIONS.length*100)+'%';
+    document.getElementById('backBtn').hidden = state.i === 0;
+    let h = '<div class="qbox"><h2>'+q.q+'</h2>';
+    q.o.forEach((o,i)=>{
+      const sel = state.answers[state.i]===o[1]?' sel':'';
+      h+='<button class="opt'+sel+'" onclick="pick('+i+')">'+o[0]+'</button>';
+    });
+    h+='</div>';
+    document.getElementById('qmount').innerHTML = h;
+  }
+
+  function pick(i) {
+    const q = QUESTIONS[state.i];
+    state.answers[state.i] = q.o[i][1];
+    document.querySelectorAll('#qmount .opt').forEach(o=>o.classList.remove('sel'));
+    document.querySelectorAll('#qmount .opt')[i].classList.add('sel');
+    setTimeout(()=>{
+      if(state.i < QUESTIONS.length-1){ state.i++; renderQ(); }
+      else { document.getElementById('bar').style.width='100%'; show('s-capture'); }
+    },420);
+  }
+
+  function goBack() {
+    if(state.i>0){ state.i--; renderQ(); }
+    else { show('s-intro'); }
+  }
+
+  function captureAndReveal() {
+    const nm = document.getElementById('nm').value.trim();
+    const em = document.getElementById('em').value.trim();
+    const err = document.getElementById('capErr');
+    if(!nm){ err.textContent='Please add your first name.'; return; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){ err.textContent='Please pop in a valid email.'; return; }
+    err.textContent='';
+    // Store lead data for passing to payment flow
+    sessionStorage.setItem('tejal_lead_name', nm);
+    sessionStorage.setItem('tejal_lead_email', em);
+    sessionStorage.setItem('tejal_lead_phone', document.getElementById('ph').value.trim());
+    computeResult(nm);
+  }
+
+  function computeResult(name) {
+    const s={A:0,B:0,C:0,D:0,E:0};
+    state.answers.forEach(c=>{ if(c) s[c]++; });
+    const sorted = CATS.slice().sort((a,b)=>s[b]-s[a]);
+    const top = sorted[0];
+    const a = ARCHETYPES[top];
+
+    document.getElementById('rName').textContent = a.name;
+    document.getElementById('rTag').textContent = a.tag;
+    document.getElementById('rBody').innerHTML =
+      a.body.map(p=>'<p>'+p+'</p>').join('')+
+      '<div class="gift"><div class="lab">Your hidden strength</div><p>'+a.gift+'</p></div>';
+
+    // Category bars
+    const labels={A:'Safety',B:'Worthiness',C:'Visibility',D:'Receiving',E:'Ease'};
+    const maxScore = Math.max(...CATS.map(c=>s[c]),1);
+    let ranksHtml = '';
+    sorted.forEach(c=>{
+      const pct = Math.round(s[c]/maxScore*100);
+      ranksHtml+='<div class="rank-row"><span class="nm">'+labels[c]+'</span><div class="rank-bar"><i style="width:'+pct+'%"></i></div></div>';
+    });
+    document.getElementById('rRanks').innerHTML = '<div style="margin-top:22px;"><div style="font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-text);margin-bottom:14px;">Your Expansion Map</div>'+ranksHtml+'</div>';
+
+    // CTA copy
+    document.getElementById('ctaTitle').textContent = 'Ready to dissolve the '+a.name+' pattern — permanently?';
+    document.getElementById('ctaBody').textContent = a.cta;
+
+    // Store scores for report page
+    sessionStorage.setItem('tejal_scores', JSON.stringify(s));
+    sessionStorage.setItem('tejal_top_type', top);
+
+    // CTA goes to full report page
+    document.getElementById('ctaBtn').href = 'report.html';
+
+    show('s-result');
+  }
+
+  function restart() {
+    state = { i:0, answers: new Array(QUESTIONS.length).fill(null) };
+    show('s-intro');
+  }
+
+  // Boot
+  renderQ();
+  // Read program param if coming directly
+  const pp = new URLSearchParams(location.search).get('program');
+  if(pp) sessionStorage.setItem('tejal_program', pp);
+  </script>
+</body></html>

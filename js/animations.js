@@ -1,112 +1,81 @@
 /**
- * Animations Module
- * Handles: scroll-triggered reveals, stat counter animation, loader
+ * animations.js — Loader, scroll-reveal, stat counters (Revamped 2026)
  */
+export function initAnimations() {
+  // ── Page Loader ───────────────────────────────────────────────
+  const loader = document.querySelector('.loader');
+  if (loader) {
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        loader.classList.add('hidden');
+        document.body.classList.remove('loading');
+      }, 1600);
+    });
+  } else {
+    document.body.classList.remove('loading');
+  }
 
-const Animations = (() => {
-    let observer;
-
-    /**
-     * Initialize all animations
-     */
-    function init() {
-        initLoader();
-        initScrollReveal();
-        initStatCounters();
-    }
-
-    /**
-     * Loader — hides after page is ready
-     */
-    function initLoader() {
-        const loader = document.querySelector('.loader');
-        if (!loader) return;
-
-        // Hide loader after content is ready
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                loader.classList.add('hidden');
-                document.body.classList.remove('loading');
-            }, 1800); // Show loader for 1.8s for brand impression
-        });
-    }
-
-    /**
-     * Scroll Reveal — observes .reveal and .reveal-children elements
-     */
-    function initScrollReveal() {
-        const revealElements = document.querySelectorAll('.reveal, .reveal-children');
-        if (!revealElements.length) return;
-
-        observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target); // Only animate once
-                    }
-                });
-            },
-            {
-                threshold: 0.15,
-                rootMargin: '0px 0px -50px 0px'
-            }
-        );
-
-        revealElements.forEach(el => observer.observe(el));
-    }
-
-    /**
-     * Stat Counter — animates numbers when they scroll into view
-     */
-    function initStatCounters() {
-        const stats = document.querySelectorAll('.stat-num[data-target]');
-        if (!stats.length) return;
-
-        const counterObserver = new IntersectionObserver(
-            (entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        animateCounter(entry.target);
-                        counterObserver.unobserve(entry.target);
-                    }
-                });
-            },
-            { threshold: 0.5 }
-        );
-
-        stats.forEach(stat => counterObserver.observe(stat));
-    }
-
-    /**
-     * Animate a single counter from 0 to target
-     */
-    function animateCounter(element) {
-        const target = parseInt(element.dataset.target, 10);
-        const prefix = element.dataset.prefix || '';
-        const suffix = element.dataset.suffix || '';
-        const duration = 2000; // 2 seconds
-        const startTime = performance.now();
-
-        function updateCount(currentTime) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-
-            // Ease out cubic
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const current = Math.floor(eased * target);
-
-            element.textContent = `${prefix}${current.toLocaleString()}${suffix}`;
-
-            if (progress < 1) {
-                requestAnimationFrame(updateCount);
-            }
+  // ── Scroll Reveal (IntersectionObserver) ─────────────────────
+  const revealEls = document.querySelectorAll('.reveal, .reveal-children');
+  if (revealEls.length) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
         }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-        requestAnimationFrame(updateCount);
-    }
+    revealEls.forEach(el => revealObserver.observe(el));
+  }
 
-    return { init };
-})();
+  // ── Stat Counters ─────────────────────────────────────────────
+  const statEls = document.querySelectorAll('.stat-num[data-target]');
+  if (statEls.length) {
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
 
-export default Animations;
+    statEls.forEach(el => counterObserver.observe(el));
+  }
+
+  // ── Authority image lazy-load placeholder ─────────────────────
+  document.querySelectorAll('.authority-img-wrap img').forEach(img => {
+    img.addEventListener('error', () => {
+      const wrap = img.closest('.authority-img-wrap');
+      if (wrap) {
+        const ph = document.createElement('div');
+        ph.className = 'authority-img-placeholder';
+        ph.innerHTML = '<span>Portrait</span>';
+        wrap.replaceChild(ph, img);
+      }
+    });
+  });
+}
+
+function animateCounter(el) {
+  const target   = parseInt(el.dataset.target, 10);
+  const prefix   = el.dataset.prefix  || '';
+  const suffix   = el.dataset.suffix  || '';
+  const duration = 2000;
+  const start    = performance.now();
+
+  function update(now) {
+    const elapsed  = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    // Ease-out cubic
+    const eased    = 1 - Math.pow(1 - progress, 3);
+    const current  = Math.floor(eased * target);
+    el.textContent = prefix + current + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = prefix + target + suffix;
+  }
+
+  requestAnimationFrame(update);
+}

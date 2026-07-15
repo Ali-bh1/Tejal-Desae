@@ -1,515 +1,101 @@
 /* ============================================
-   Responsive — Tablet & Mobile Breakpoints
+   Responsive Breakpoints (Revamped 2026)
    ============================================ */
 
-/* --- Tablet (≤ 1024px) --- */
+/* ── 1024px: tablet ── */
 @media (max-width: 1024px) {
-    .authority-inner {
-        gap: var(--space-xl);
-    }
+  .authority-inner { grid-template-columns: 1fr; }
+  .authority-images-container { position: static; grid-template-columns: 1fr 1fr; max-width: 520px; }
 
-    .offer-card {
-        padding: 60px 48px;
-    }
+  .programs-tier-2col { grid-template-columns: 1fr; }
+  .programs-tier-3col { grid-template-columns: 1fr 1fr; }
+  .program-card--course:last-child { border-right: none; }
 
-    .footer-inner {
-        gap: 48px;
-    }
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 48px; }
+  .footer-inner > div:first-child { grid-column: 1 / -1; }
 
-    .final-cta {
-        padding: 120px var(--space-lg);
-    }
-
-    .testimonial-others {
-        grid-template-columns: 1fr;
-    }
-
-    /* 4-column grids drop to 2-col on tablet */
-    .testimonial-four-col {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .programs-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .program-card {
-        border-right: none;
-        border-bottom: 1px solid rgba(var(--gold-rgb), 0.12);
-    }
-
-    .program-card:last-child {
-        border-bottom: none;
-    }
+  .program-modules-grid { grid-template-columns: 1fr; }
 }
 
-/* --- Mobile Nav Trigger (≤ 900px) --- */
+/* ── 900px: mobile nav ── */
 @media (max-width: 900px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-toggle { display: flex; }
 
-    /* ----- Nav ----- */
-    .nav {
-        padding: 20px 20px;
-    }
+  .hero h1 { font-size: clamp(2.8rem, 8vw, 4.5rem); }
 
-    .nav.scrolled {
-        padding: 14px 20px;
-    }
+  .programs-tier-3col { grid-template-columns: 1fr; }
+  .program-card--invitation { border-right: none; }
 
-    .nav-logo {
-        font-size: 1.1rem;
-        letter-spacing: 0.2em;
-    }
+  .pillars-grid { grid-template-columns: 1fr; }
+  .pillar-card { border-right: none; border-bottom: 1px solid rgba(var(--gold-rgb),.12); }
+  .pillar-card:last-child { border-bottom: none; }
 
-    .nav-links {
-        display: none;
-    }
+  .offer-card { padding: 40px 28px; }
+  .offer-card::after { display: none; }
 
-    .nav-cta {
-        display: none;
-    }
+  .footer-inner { grid-template-columns: 1fr; gap: 36px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
 
-    .nav-toggle {
-        display: flex;
-    }
+  .program-hero-meta { flex-direction: column; }
+  .hero-meta-divider { width: auto; height: 1px; margin: 0 18px; }
+  .hero-meta-item { padding: 18px 22px; }
 
-    /* ----- Global Section Spacing ----- */
-    section {
-        padding: 56px 20px;
-    }
-
-    /* Prevent background tiling on mobile — override percentage-based desktop sizes */
-    .intro-strip,
-    .authority,
-    .pillars,
-    .offer-section,
-    .testimonials,
-    .featured,
-    .final-cta,
-    .contact-section {
-        background-size: cover;
-    }
-
-    /* ----- Hero ----- */
-    .hero {
-        min-height: 85vh;
-        padding: 100px 20px 60px;
-    }
-
-    .hero h1 {
-        font-size: clamp(2.4rem, 10vw, 3.5rem);
-    }
-
-    /* ----- Intro Strip ----- */
-    .intro-strip {
-        padding: 56px 20px;
-    }
-
-    .intro-lead {
-        font-size: 0.9rem;
-        margin-bottom: 28px;
-        line-height: 1.7;
-    }
-
-    .intro-headline {
-        font-size: clamp(1.8rem, 7vw, 2.6rem);
-        margin-bottom: 36px;
-    }
-
-    .intro-btns {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
-    }
-
-    .intro-btns .btn-primary,
-    .intro-btns .btn-ghost {
-        text-align: center;
-        padding: 18px 32px;
-    }
-
-    /* ----- Authority / Meet Tejal ----- */
-    .authority-inner {
-        grid-template-columns: 1fr;
-        gap: 36px;
-    }
-
-    .authority-images-container {
-        grid-template-columns: 1fr;
-        position: static;
-        gap: 16px;
-        max-width: 320px;
-        margin: 0 auto;
-    }
-
-    .authority-img-wrap {
-        margin: 0 auto;
-    }
-
-    .authority-content p {
-        font-size: 0.95rem;
-        line-height: 1.7;
-        margin-bottom: 16px;
-    }
-
-    .authority-stats {
-        margin: 40px 0;
-        padding-top: 36px;
-        gap: 12px;
-    }
-
-    .stat-num {
-        font-size: 2.4rem;
-    }
-
-    /* ----- Pillar Cards ----- */
-    .pillars {
-        padding: 48px 20px;
-    }
-
-    .pillars .section-title {
-        font-size: clamp(1.8rem, 6vw, 2.4rem);
-    }
-
-    .pillars-subtitle {
-        font-size: 0.9rem;
-        margin-bottom: 32px;
-    }
-
-    .pillars-grid {
-        grid-template-columns: 1fr;
-        margin-top: 24px;
-    }
-
-    /* Programs & expanded testimonials: 1-col on mobile */
-    .programs-grid,
-    .testimonial-four-col {
-        grid-template-columns: 1fr;
-    }
-
-    .pillar-card {
-        padding: 32px 24px;
-        border-right: none;
-        border-bottom: 1px solid rgba(var(--gold-rgb), 0.12);
-    }
-
-    .pillar-card:last-child {
-        border-bottom: none;
-    }
-
-    .pillar-number {
-        font-size: 2.8rem;
-        margin-bottom: 12px;
-    }
-
-    .pillar-title {
-        font-size: 1.25rem;
-        margin-bottom: 8px;
-    }
-
-    .pillar-body {
-        font-size: 0.85rem;
-        line-height: 1.7;
-    }
-
-    .pillar-cta {
-        margin-top: 20px;
-    }
-
-    /* ----- Programs Tier Grid (mobile) ----- */
-    .programs-tier-2col,
-    .programs-tier-3col {
-        grid-template-columns: 1fr;
-    }
-
-    .program-card--course,
-    .program-card--invitation,
-    .program-card--waitlist {
-        border-right: none !important;
-        border-bottom: 1px solid rgba(var(--gold-rgb), 0.12);
-        padding: 36px 24px;
-    }
-
-    .program-card--course:last-child {
-        border-bottom: none;
-    }
-
-    .sovereign-journey-path {
-        padding: 24px 16px;
-        margin-top: 40px;
-    }
-
-    .journey-steps {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .journey-arrow {
-        transform: none;
-    }
-
-    /* ----- Offer / Mentorship ----- */
-    .offer-section {
-        padding: 48px 16px;
-    }
-
-    .offer-section .section-title {
-        font-size: clamp(1.8rem, 6vw, 2.4rem);
-    }
-
-    .offer-card {
-        padding: 32px 20px;
-        margin-top: 24px;
-    }
-
-    .offer-card::after {
-        display: none;
-    }
-
-    .offer-badge {
-        font-size: 0.6rem;
-        padding: 8px 16px;
-        margin-bottom: 24px;
-    }
-
-    .offer-title {
-        font-size: clamp(1.6rem, 5vw, 2rem);
-        margin-bottom: 16px;
-    }
-
-    .offer-desc {
-        font-size: 0.9rem;
-        line-height: 1.7;
-        margin-bottom: 28px;
-    }
-
-    .offer-includes {
-        gap: 12px;
-        margin-bottom: 32px;
-        padding-bottom: 32px;
-    }
-
-    .offer-include-item {
-        font-size: 0.85rem;
-    }
-
-    .offer-actions {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-    }
-
-    .offer-actions .btn-primary,
-    .offer-actions .btn-ghost {
-        text-align: center;
-        padding: 16px 24px;
-    }
-
-    /* ----- Testimonials ----- */
-    .testimonials {
-        padding: 48px 20px;
-    }
-
-    .testimonial-editorial {
-        padding: 20px 0;
-    }
-
-    .testimonial-quote-mark {
-        font-size: 6rem;
-        margin-bottom: -10px;
-    }
-
-    .testimonial-big-quote {
-        font-size: clamp(1.2rem, 5vw, 1.8rem);
-        margin-bottom: 32px;
-    }
-
-    .testimonial-marquee-wrap {
-        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-        margin-top: 60px;
-    }
-
-    .testimonial-marquee-track {
-        gap: 20px;
-    }
-
-    .marquee-card {
-        width: 320px;
-        padding: 32px 24px;
-    }
-
-    .marquee-card p {
-        font-size: 0.95rem;
-        line-height: 1.6;
-    }
-
-    /* ----- Featured / Logos ----- */
-    .featured {
-        padding: 40px 20px;
-    }
-
-    .featured-label {
-        margin-bottom: 28px;
-        font-size: 0.6rem;
-    }
-
-    .featured-logos {
-        gap: 24px;
-    }
-
-    .featured-logo {
-        font-size: 0.9rem;
-    }
-
-    /* ----- Final CTA ----- */
-    .final-cta {
-        padding: 80px 20px;
-    }
-
-    .cta-line {
-        height: 36px;
-        margin-bottom: 24px;
-    }
-
-    .final-cta-quote {
-        font-size: clamp(1.4rem, 5vw, 2rem);
-        margin-bottom: 36px;
-    }
-
-    .final-cta .hero-btns {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
-    }
-
-    .final-cta .hero-btns .btn-primary,
-    .final-cta .hero-btns .btn-ghost {
-        text-align: center;
-        padding: 18px 32px;
-    }
-
-    /* ----- Application Form ----- */
-    .contact-section {
-        padding: 48px 16px;
-        background-size: cover !important;
-    }
-
-    .contact-inner {
-        max-width: 100%;
-    }
-
-    .form-progress {
-        margin: 32px 0 28px;
-        gap: 0;
-    }
-
-    .progress-circle {
-        width: 32px;
-        height: 32px;
-        font-size: 0.85rem;
-    }
-
-    .progress-label {
-        font-size: 0.45rem;
-        letter-spacing: 0.08em;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-
-    /* ----- Footer ----- */
-    footer {
-        padding: 56px 20px 36px;
-    }
-
-    .footer-inner {
-        grid-template-columns: 1fr;
-        gap: 32px;
-        margin-bottom: 40px;
-    }
-
-    .footer-logo {
-        font-size: 1.2rem;
-        margin-bottom: 12px;
-    }
-
-    .footer-tagline {
-        font-size: 0.8rem;
-    }
-
-    .footer-col h4 {
-        margin-bottom: 16px;
-    }
-
-    .footer-col ul {
-        gap: 10px;
-    }
-
-    .footer-col a {
-        font-size: 0.8rem;
-    }
-
-    .footer-bottom {
-        flex-direction: column;
-        gap: 8px;
-        text-align: center;
-        padding-top: 24px;
-    }
+  .authority-inner { padding: var(--space-2xl) clamp(20px,5vw,40px); }
 }
 
-/* --- Small Mobile (≤ 480px) --- */
+/* ── 768px ── */
+@media (max-width: 768px) {
+  section { padding: var(--space-2xl) 0; }
+
+  .section-title { font-size: clamp(2.2rem, 7vw, 3rem); }
+
+  .intro-strip { padding: 100px 0; }
+
+  .featured-logos { gap: 36px; }
+  .featured-logo { font-size: .95rem; }
+
+  .authority-stats { grid-template-columns: repeat(3,1fr); gap: var(--space-sm); }
+  .stat-num { font-size: 2.4rem; }
+
+  .testimonial-marquee-track .marquee-card { width: 320px; }
+
+  .program-hero { padding-top: calc(var(--nav-height) + 48px); }
+  .program-hero-top { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .program-hero-title { font-size: clamp(2.4rem, 8vw, 4rem); }
+}
+
+/* ── 480px: small mobile ── */
 @media (max-width: 480px) {
-    .hero h1 {
-        font-size: 2.2rem;
-    }
+  :root { --space-3xl: 80px; }
 
-    .intro-headline {
-        font-size: 1.6rem;
-    }
+  .hero h1 { font-size: clamp(2.2rem, 9vw, 3rem); }
 
-    .section-title {
-        font-size: 1.6rem;
-    }
+  .authority-images-container { grid-template-columns: 1fr; max-width: 280px; margin: 0 auto 40px; }
 
-    .authority-stats {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        text-align: center;
-    }
+  .authority-stats { grid-template-columns: 1fr; gap: 24px; }
 
-    .stat-num {
-        font-size: 2rem;
-    }
+  .programs-tier-2col,
+  .programs-tier-3col { grid-template-columns: 1fr; }
 
-    .pillar-card {
-        padding: 28px 20px;
-    }
+  .intro-btns { flex-direction: column; align-items: center; }
 
-    .pillar-number {
-        font-size: 2.2rem;
-        margin-bottom: 8px;
-    }
+  .offer-includes { gap: 10px; }
+  .offer-actions { flex-direction: column; }
 
-    .offer-title {
-        font-size: 1.4rem;
-    }
+  .form-progress { flex-wrap: wrap; gap: 12px; }
+  .progress-connector { display: none; }
 
-    .final-cta-quote {
-        font-size: 1.3rem;
-    }
+  .footer-quote p { font-size: 1rem; }
 
-    .featured-logos {
-        gap: 16px;
-    }
+  .program-modules-grid { grid-template-columns: 1fr; }
+  .marquee-card { width: 280px; }
+}
 
-    .featured-logo {
-        font-size: 0.8rem;
-    }
-
-    /* Tighter button padding on small screens */
-    .btn-primary,
-    .btn-ghost {
-        padding: 16px 28px;
-        font-size: 0.65rem;
-    }
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+  }
 }
