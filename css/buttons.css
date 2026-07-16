@@ -1,0 +1,131 @@
+/* ============================================================
+   Unified Button System — Tejal Desae 2026
+   One consistent style everywhere. No glow, no bloom.
+   Two variants: Primary (dark fill) + Ghost (transparent)
+   Specular rim effect added via JS when [data-specular]
+   ============================================================ */
+
+/* ── Reset ── */
+.btn-primary,
+.btn-ghost,
+.btn-champ,
+.btn,
+[class*="btn-"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 12.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 15px 36px;
+  border-radius: 3px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  position: relative;
+  overflow: visible; /* allow specular canvas bleed */
+  transition: background .22s ease, color .22s ease, border-color .22s ease, transform .18s ease;
+  /* NO box-shadow, NO filter, NO glow */
+  box-shadow: none !important;
+}
+
+/* ── Primary: forest fill, gold text ── */
+.btn-primary,
+.btn {
+  background: var(--forest);
+  color: var(--gold);
+  border-color: var(--forest);
+}
+.btn-primary:hover,
+.btn:hover {
+  background: #1a5240;
+  border-color: #1a5240;
+  color: var(--white);
+  transform: translateY(-1px);
+}
+.btn-primary:active,
+.btn:active {
+  transform: scale(.97);
+}
+
+/* ── Ghost: transparent, gold border, white text ── */
+.btn-ghost {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(230,211,163,.4);
+}
+.btn-ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(230,211,163,.06);
+  transform: translateY(-1px);
+}
+.btn-ghost:active { transform: scale(.97); }
+
+/* ── Ghost on light backgrounds ── */
+.btn-ghost--dark {
+  color: var(--forest);
+  border-color: rgba(21,66,48,.3);
+  background: transparent;
+}
+.btn-ghost--dark:hover {
+  border-color: var(--forest);
+  background: rgba(21,66,48,.06);
+  transform: translateY(-1px);
+}
+
+/* ── Champ / Gold variant (assessment CTA etc.) ── */
+.btn-champ {
+  background: var(--gold);
+  color: var(--forest);
+  border-color: var(--gold);
+  font-weight: 600;
+}
+.btn-champ:hover {
+  background: var(--white);
+  border-color: var(--white);
+  color: var(--forest);
+  transform: translateY(-1px);
+}
+.btn-champ:active { transform: scale(.97); }
+
+/* ── Size variants ── */
+.btn--sm { font-size: 11px; padding: 11px 24px; }
+.btn--lg { font-size: 13.5px; padding: 17px 44px; }
+
+/* ── Full width ── */
+.btn.full,
+.btn-primary.full,
+.btn-ghost.full,
+.btn-champ.full { width: 100%; display: flex; }
+
+/* ── Disabled ── */
+.btn-primary:disabled,
+.btn-ghost:disabled,
+.btn-champ:disabled,
+.btn:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* ── Focus ── */
+.btn-primary:focus-visible,
+.btn-ghost:focus-visible,
+.btn-champ:focus-visible,
+.btn:focus-visible {
+  outline: 2px solid var(--gold-deep);
+  outline-offset: 3px;
+}
+
+/* ── Specular canvas (from specular-button.js) ── */
+[data-specular] {
+  overflow: visible;
+}
+[data-specular] > canvas {
+  pointer-events: none;
+}

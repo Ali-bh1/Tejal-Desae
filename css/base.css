@@ -109,79 +109,11 @@ section { padding: var(--space-3xl) 0; }
   border: none;
 }
 
-/* ─────────────────────────────────────────
-   BUTTONS
-───────────────────────────────────────── */
-.btn,
-.btn-primary,
-.btn-ghost,
-.btn-champ {
-  display: inline-block;
-  font-family: var(--sans);
-  font-weight: 500;
-  font-size: 12.5px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  padding: 16px 36px;
-  border: none;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: transform .3s var(--ease-out), background .3s, box-shadow .3s;
-  text-align: center;
-  white-space: nowrap;
-}
-
-/* Primary: forest fill */
-.btn-primary {
-  background: var(--forest);
-  color: var(--gold);
-  border: 1px solid var(--forest);
-}
-.btn-primary:hover {
-  background: var(--forest-deep);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px -12px rgba(21,66,48,.5);
-}
-
-/* Ghost: transparent border */
-.btn-ghost {
-  background: transparent;
-  color: var(--white);
-  border: 1px solid rgba(255,255,255,.4);
-}
-.btn-ghost:hover {
-  border-color: var(--white);
-  background: rgba(255,255,255,.08);
-  transform: translateY(-2px);
-}
-
-/* Ghost on light bg */
-.btn-ghost--dark {
-  color: var(--forest);
-  border: 1px solid rgba(21,66,48,.3);
-}
-.btn-ghost--dark:hover {
-  border-color: var(--forest);
-  background: var(--forest-08);
-  transform: translateY(-2px);
-}
-
-/* Champagne / gold button */
-.btn-champ {
-  background: var(--gold-grad);
-  color: var(--forest);
-  font-weight: 600;
-}
-.btn-champ:hover {
-  filter: brightness(1.04);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px -12px rgba(199,172,109,.5);
-}
-
-/* Full-width variant */
-.btn.full,
-.btn-primary.full,
-.btn-ghost.full { width: 100%; display: block; }
+/* ── Buttons — see css/buttons.css for the full system ── */
+/* Legacy aliases kept for any inline usage */
+.btn-primary { /* defined in buttons.css */ }
+.btn-ghost   { /* defined in buttons.css */ }
+.btn-champ   { /* defined in buttons.css */ }
 
 /* ─────────────────────────────────────────
    REVEAL ANIMATIONS
@@ -266,14 +198,18 @@ section { padding: var(--space-3xl) 0; }
   font-weight: 500;
   color: var(--forest);
   line-height: 1;
+  /* Ensure visible on light background */
+  text-shadow: none;
+  opacity: 1;
 }
 .stat-label {
   font-size: 0.68rem;
   letter-spacing: .2em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--ink);
+  opacity: .65;
   margin-top: 8px;
-  font-weight: var(--font-bold);
+  font-weight: 600;
 }
 
 /* ─────────────────────────────────────────

@@ -91,7 +91,9 @@
   --duration-normal: 0.3s;
   --duration-slow:   0.6s;
 
-  /* ── Radius ── */
+  /* ── Program card numbers — visible, not blending ── */
+  --program-num-color:   rgba(230, 211, 163, 0.45);
+  --program-num-dark:    rgba(21,  66,  48,  0.20);  /* on light backgrounds */
   --radius-sm: 3px;
   --radius-md: 8px;
   --radius-lg: 16px;

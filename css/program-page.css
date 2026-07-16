@@ -325,3 +325,66 @@
 /* Sanctum overrides */
 .program-hero--sanctum .program-hero-title { font-size: clamp(2.4rem, 5vw, 5rem); }
 .sanctum-join-block { text-align: center; padding: var(--space-3xl) 0; background: var(--forest-deep); }
+
+/* ── Visibility fixes — numbers & text must not blend in ── */
+
+/* Module numbers on white cards */
+.module-num {
+  font-family: var(--serif) !important;
+  font-size: 1.8rem !important;
+  font-weight: 400 !important;
+  color: var(--forest) !important;
+  opacity: .45 !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+  width: 40px !important;
+}
+.module-title {
+  color: var(--forest) !important;
+  font-weight: 500 !important;
+}
+.module-body {
+  color: var(--ink) !important;
+  opacity: .75 !important;
+}
+
+/* Program card numbers on dark background */
+.program-number {
+  color: rgba(230,211,163,.48) !important;
+}
+
+/* Program section titles */
+.program-section-title {
+  color: var(--forest) !important;
+  font-weight: 500 !important;
+}
+.program-thread .program-section-title,
+.program-modules .program-section-title,
+.program-outcomes .program-section-title {
+  color: var(--forest) !important;
+}
+
+/* Thread text */
+.program-thread p,
+.program-for-you p,
+.program-intro p,
+.program-outcomes li,
+.program-includes .includes-list li {
+  color: var(--ink) !important;
+  opacity: .8 !important;
+}
+
+/* Includes star */
+.includes-star { color: var(--forest) !important; }
+
+/* Outcomes arrow */
+.outcomes-list li::before { color: var(--forest) !important; font-weight: 700 !important; }
+
+/* Program hero numbers */
+.hero-meta-value { color: var(--white) !important; font-weight: 500 !important; }
+.hero-meta-label { color: rgba(230,211,163,.6) !important; }
+
+/* Program body text on dark */
+.program-body, .pillar-body { color: rgba(230,211,163,.78) !important; }
+.program-title, .pillar-title { color: var(--white) !important; }
+.program-tagline { color: rgba(230,211,163,.55) !important; }
