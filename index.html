@@ -26,10 +26,10 @@
   <link rel="stylesheet" href="css/responsive.css">
 
   <style>
-    /* ── Hero: leaf botanical image bg ── */
+    /* ── Hero: centered, no image, accent design ── */
     .hero {
       min-height: 100vh;
-      background: url('images/leaf-hero-bg.png') center center / cover no-repeat;
+      background: var(--forest-deep);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -37,39 +37,31 @@
       overflow: hidden;
       text-align: center;
     }
-    /* Dark overlay so white/gold text stays legible */
+    /* Radial accent glow */
     .hero::before {
       content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(10,38,25,.68);
-      pointer-events: none;
-      z-index: 1;
-    }
-    /* Radial accent glow */
-    .hero-glow {
       position: absolute;
       top: -20%;
       left: 50%;
       transform: translateX(-50%);
       width: 900px;
       height: 900px;
-      background: radial-gradient(ellipse at center, rgba(230,211,163,.10) 0%, transparent 68%);
+      background: radial-gradient(ellipse at center, rgba(230,211,163,.12) 0%, transparent 68%);
       pointer-events: none;
-      z-index: 2;
+      z-index: 1;
     }
-    /* Decorative corner frame */
+    /* Decorative corner accents */
     .hero::after {
       content: '';
       position: absolute;
       inset: 40px;
       border: 1px solid rgba(230,211,163,.08);
       pointer-events: none;
-      z-index: 2;
+      z-index: 1;
     }
     .hero-content {
       position: relative;
-      z-index: 3;
+      z-index: 2;
       max-width: 860px;
       padding: 0 clamp(24px,5vw,64px);
       width: 100%;
@@ -128,7 +120,7 @@
       bottom: 36px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 5;
+      z-index: 4;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -175,17 +167,33 @@
     <div class="loader-line"></div>
   </div>
 
-  
-  
+  <!-- Navigation -->
+  <nav class="nav" aria-label="Main navigation">
+    <a href="#" class="nav-logo">Tejal Desae</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">The Work</a></li>
+      <li><a href="#testimonials">Results</a></li>
+      <li><a href="assessment.html">Free Profile</a></li>
+    </ul>
+    <a href="#work" class="nav-cta">Explore Programs</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-  
-  
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" aria-hidden="true">
+    <a href="#about">About</a>
+    <a href="#work">The Work</a>
+    <a href="assessment.html">Free Profile</a>
+    <a href="#testimonials">Results</a>
+  </div>
 
   <!-- ═══════════════════════════════════
        HERO — centered, no image
   ════════════════════════════════════ -->
   <section class="hero" id="hero">
-    <div class="hero-glow" aria-hidden="true"></div>
     <div class="hero-content">
       <span class="hero-eyebrow">Identity &amp; Wealth Manifestation Mentor</span>
       <h1>The place where<br><em>wealth</em> becomes<br>your <em>identity.</em></h1>

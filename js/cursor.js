@@ -1,57 +1,59 @@
 /**
- * cursor.js — mix-blend-mode: difference cursor
- * Based on codepen.io/victorhripko/pen/rqOJBG
- * White circle that inverts underlying colours — always visible.
+ * cursor.js — Custom cursor (outer ring + inner dot)
  */
 export function initCursor() {
-  // Skip touch devices
+  // Don't run on touch devices
   if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
 
-  // Create the cursor element (or reuse if already exists)
-  let cursor = document.querySelector('.custom-cursor');
-  if (!cursor) {
-    cursor = document.createElement('div');
-    cursor.className = 'custom-cursor';
-    document.body.appendChild(cursor);
+  const outer = document.createElement('div');
+  const inner = document.createElement('div');
+  outer.className = 'cursor-outer';
+  inner.className = 'cursor-inner';
+  document.body.append(outer, inner);
+
+  let mx = -100, my = -100;  // off-screen until first move
+  let ox = -100, oy = -100;  // outer lags slightly
+
+  // Outer follows with a slight lag via lerp in rAF
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function tick() {
+    ox = lerp(ox, mx, 0.18);
+    oy = lerp(oy, my, 0.18);
+    outer.style.transform = `translate(${ox - 18}px,${oy - 18}px)`;
+    inner.style.transform = `translate(${mx - 2.5}px,${my - 2.5}px)`;
+    requestAnimationFrame(tick);
   }
+  requestAnimationFrame(tick);
 
-  let isCursorInited = false;
-
-  const initCursorState = () => {
-    cursor.classList.add('custom-cursor--init');
-    isCursorInited = true;
-  };
-
-  const destroyCursorState = () => {
-    cursor.classList.remove('custom-cursor--init');
-    isCursorInited = false;
-  };
-
-  // Track all interactive elements — including dynamically added ones
-  function bindLinks() {
-    const SELECTOR = 'a, button, [role="button"], input, select, textarea, label, .opt, .btn, .btn-primary, .btn-ghost, .btn-champ, .nav-cta, .pillar-cta, [data-specular]';
-    document.querySelectorAll(SELECTOR).forEach(el => {
-      if (el._cursorBound) return;
-      el._cursorBound = true;
-      el.addEventListener('mouseover', () => cursor.classList.add('custom-cursor--link'));
-      el.addEventListener('mouseout',  () => cursor.classList.remove('custom-cursor--link'));
-    });
-  }
-  bindLinks();
-
-  // Rebind on any DOM changes (for dynamically rendered quiz options etc.)
-  const mo = new MutationObserver(() => bindLinks());
-  mo.observe(document.body, { childList: true, subtree: true });
-
-  // Move cursor
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top  = e.clientY + 'px';
-    if (!isCursorInited) initCursorState();
+  document.addEventListener('pointermove', e => {
+    mx = e.clientX;
+    my = e.clientY;
+    document.body.classList.remove('cursor-out');
   }, { passive: true });
 
-  document.addEventListener('mouseleave', destroyCursorState);
-  document.addEventListener('mouseenter', () => {
-    if (!isCursorInited) initCursorState();
+  document.addEventListener('pointerleave', () => {
+    document.body.classList.add('cursor-out');
   });
+
+  // Hover state on interactive elements
+  const INTERACTIVE = 'a, button, [role="button"], input, select, textarea, label, [data-specular], .opt, .nav-item';
+  document.addEventListener('pointerover', e => {
+    if (e.target.closest(INTERACTIVE)) {
+      document.body.classList.add('cursor-hover');
+    }
+  }, { passive: true });
+  document.addEventListener('pointerout', e => {
+    if (e.target.closest(INTERACTIVE)) {
+      document.body.classList.remove('cursor-hover');
+    }
+  }, { passive: true });
+
+  // Click flash
+  document.addEventListener('pointerdown', () => {
+    document.body.classList.add('cursor-click');
+  }, { passive: true });
+  document.addEventListener('pointerup', () => {
+    document.body.classList.remove('cursor-click');
+  }, { passive: true });
 }

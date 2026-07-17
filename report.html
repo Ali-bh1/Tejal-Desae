@@ -9,11 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/variables.css"><link rel="stylesheet" href="css/base.css"><link rel="stylesheet" href="css/responsive.css">
   <style>
-    /* Kill grain texture from base.css on this page */
-    body { background-color: #FBFAF5 !important; background-image: none !important; }
-    body::after { display: none !important; }
-  </style>
-  <style>
     :root{
       --forest:#154230;--forest-deep:#0E3122;
       --champ:#E6D3A3;--champ-lt:#F1E6C9;--gold-deep:#C7AC6D;--gold-text:#9C7F39;
@@ -24,11 +19,14 @@
       --gold-grad:linear-gradient(135deg,#F2E7C6,#E6D3A3 46%,#C7AC6D);
     }
     *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      font-family:var(--sans);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;
-      min-height:100vh;
-    }
-    .wrap{max-width:980px;margin:0 auto;padding:clamp(24px,4vw,48px) clamp(18px,4vw,40px) 80px;padding-top:calc(96px + clamp(24px,4vw,48px))}
+    body{font-family:var(--sans);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;
+      background:radial-gradient(720px 460px at 88% -8%,rgba(230,211,163,.34),transparent 60%),var(--paper);
+      min-height:100vh}
+    .topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px clamp(18px,4vw,40px);background:rgba(251,250,245,.88);backdrop-filter:blur(12px);border-bottom:1px solid rgba(199,172,109,.28)}
+    .topbar .wm{font-family:var(--serif);font-style:italic;font-weight:600;font-size:19px;color:var(--forest);letter-spacing:.01em}
+    .topbar .back-link{font-size:.68rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);transition:color .3s}
+    .topbar .back-link:hover{color:var(--forest)}
+    .wrap{max-width:980px;margin:0 auto;padding:clamp(24px,4vw,48px) clamp(18px,4vw,40px) 80px}
     .eyebrow{font-weight:500;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-text)}
 
     /* header */
@@ -95,14 +93,16 @@
     .btn-champ{background:var(--gold-grad);color:var(--forest);font-weight:600}
     .btn-champ:hover{filter:brightness(1.05);transform:translateY(-2px)}
     .note{font-size:11.5px;color:var(--ink-faint);text-align:center;margin-top:24px;line-height:1.6}
-  </style>
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/buttons.css">
   <link rel="stylesheet" href="css/cursor.css">
+  </style>
 </head>
 <body>
+
+<div class="topbar">
+  <span class="wm">Tejal Desae</span>
+  <a href="assessment.html" class="back-link">← Retake Assessment</a>
+</div>
 
 <div class="wrap">
 
@@ -354,5 +354,4 @@ function renderReport(name, topType, scores, prog) {
 
 loadReport();
 </script>
-  <script type="module" src="js/main.js"></script>
 </body></html>

@@ -8,13 +8,7 @@ export function initNavigation() {
   if (!nav) return;
 
   // ── Scroll: transparent → solid ──────────────────────────────
-  const isHome = location.pathname.endsWith('index.html') || location.pathname === '/' || location.pathname.endsWith('/');
   const onScroll = () => {
-    // On non-home pages always stay in scrolled (solid) state
-    if (!isHome) {
-      nav.classList.add('scrolled');
-      return;
-    }
     nav.classList.toggle('scrolled', window.scrollY > 60);
   };
   window.addEventListener('scroll', onScroll, { passive: true });
