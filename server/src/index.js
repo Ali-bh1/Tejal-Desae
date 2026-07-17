@@ -96,6 +96,10 @@ app.use('/api/admin',      adminRouter);
 // ── General rate limit for everything else ────────────────────────
 app.use('/api', apiLimiter);
 
+// ── Serve main website (static files from project root) ─────────
+const siteRoot = path.join(__dirname, '..', '..'); // project root (one level above /server)
+app.use(express.static(siteRoot, { index: 'index.html' }));
+
 // ── Serve admin dashboard SPA ────────────────────────────────────
 // The admin dashboard lives at /admin (HTML file served from server/public/admin)
 const publicDir = path.join(__dirname, '..', 'public');

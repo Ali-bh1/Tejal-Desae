@@ -79,6 +79,7 @@
   .programs-tier-3col { grid-template-columns: 1fr; }
 
   .intro-btns { flex-direction: column; align-items: center; }
+  .hero-btns  { flex-direction: column; align-items: center; }
 
   .offer-includes { gap: 10px; }
   .offer-actions { flex-direction: column; }
@@ -90,6 +91,22 @@
 
   .program-modules-grid { grid-template-columns: 1fr; }
   .marquee-card { width: 280px; }
+
+  /* Prevent buttons overflowing their containers on narrow phones */
+  .btn-primary,
+  .btn-ghost,
+  .btn-champ,
+  .btn,
+  [class*="btn-"] {
+    white-space: normal;
+    max-width: 100%;
+    word-break: break-word;
+  }
+
+  /* CTA button groups that stack on mobile */
+  .cta-band,
+  .cta-section,
+  .cta-inner { padding-left: 20px; padding-right: 20px; }
 }
 
 /* ── Reduced motion ── */

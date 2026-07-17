@@ -11,6 +11,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--paper); /* prevents white background when zoomed out beyond viewport */
 }
 
 body {
@@ -75,11 +76,11 @@ section { padding: var(--space-3xl) 0; }
 
 /* ── Eyebrow ── */
 .section-eyebrow {
-  font-family: var(--sans);
-  font-weight: 500;
-  font-size: 11px;
-  letter-spacing: .34em;
-  text-transform: uppercase;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: .18em;
   color: var(--gold-text);
   display: block;
   margin-bottom: var(--space-md);
@@ -203,13 +204,14 @@ section { padding: var(--space-3xl) 0; }
   opacity: 1;
 }
 .stat-label {
-  font-size: 0.68rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.88rem;
+  letter-spacing: .06em;
   color: var(--ink);
   opacity: .65;
   margin-top: 8px;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 /* ─────────────────────────────────────────
