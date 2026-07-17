@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,24 +10,23 @@
   <link rel="stylesheet" href="css/buttons.css">
   <link rel="stylesheet" href="css/cursor.css"><link rel="stylesheet" href="css/base.css"><link rel="stylesheet" href="css/responsive.css">
   <style>
-    body{background:var(--forest-deep);color:var(--gold);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;font-family:'Jost',sans-serif;text-align:center;}
+    body{background:var(--forest-deep);color:var(--gold);min-height:100vh;display:flex;flex-direction:column;padding-top:80px;font-family:'Jost',sans-serif;text-align:center;}
     .wm{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:1.5rem;color:var(--gold);letter-spacing:.05em;margin-bottom:32px;display:block;}
     h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3rem);font-weight:400;color:var(--white);line-height:1.1;margin-bottom:16px;}
     h1 em{font-style:italic;color:var(--gold);}
     p{font-size:.95rem;color:rgba(var(--gold-rgb),.65);max-width:420px;line-height:1.8;margin:0 auto 36px;}
     .loader-bar{width:200px;height:2px;background:rgba(var(--gold-rgb),.2);border-radius:2px;overflow:hidden;margin:0 auto;}
     .loader-bar-fill{height:100%;background:linear-gradient(90deg,#C7AC6D,#E6D3A3);border-radius:2px;animation:fill 1.2s ease forwards;}
-    @keyframes fill{from{width:0}to{width:100%}}
+    @keyframes fill{from{width:0}to{width:100%}}`n    .apply-content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;}
   </style>
 </head>
-<body>
-  <span class="wm">Tejal Desae</span>
+<body>`n  <div class="apply-content">`n    <span class="wm">Tejal Desae</span>
   <h1>Wealth Oracle</h1>
   <p>The 10-Week Quantum Transmission — Discover your Wealth Expansion Profile before you begin.</p>
-  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
-  <script>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>`n  </div>`n  <script>
     sessionStorage.setItem('tejal_program','wealth-oracle');
     setTimeout(()=>{ location.href='assessment.html?program=wealth-oracle'; },1300);
   </script>
+  <script type="module" src="js/main.js"></script>
 </body></html>
 

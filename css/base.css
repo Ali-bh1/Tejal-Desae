@@ -247,3 +247,130 @@ section { padding: var(--space-3xl) 0; }
   color: var(--forest);
   letter-spacing: .01em;
 }
+
+/* ─────────────────────────────────────────
+   TYPOGRAPHY NORMALISATION
+   Fix varied font sizes + grey visibility
+───────────────────────────────────────── */
+
+/* Body text baseline */
+p, li, td {
+  font-size: 1rem;
+  line-height: 1.82;
+}
+
+/* Eyebrow labels — uniform */
+.section-eyebrow,
+.eyebrow,
+.program-cta-label,
+.programs-tier-label,
+.journey-label {
+  font-size: 11px !important;
+  letter-spacing: .32em !important;
+  font-weight: 600 !important;
+}
+
+/* Section titles — tighter scale */
+.section-title {
+  font-size: clamp(2.4rem, 5vw, 4rem) !important;
+  line-height: 1.04 !important;
+}
+
+/* Grey text must always be readable — min contrast */
+/* On dark backgrounds */
+.program-body,
+.pillar-body,
+.pillar-subtitle,
+.programs-subtitle,
+.program-tagline {
+  color: rgba(230,211,163,.78) !important;
+  font-size: .94rem !important;
+  line-height: 1.85 !important;
+}
+
+/* On light / white backgrounds */
+.authority-content p,
+.offer-desc,
+.footer-tagline,
+.module-body,
+.includes-list li,
+.outcomes-list li {
+  color: rgba(26,46,36,.74) !important;
+  font-size: .97rem !important;
+  line-height: 1.85 !important;
+}
+
+/* Gold text must be the deeper gold, not the light champ */
+.stat-label,
+.hero-meta-label,
+.progress-label {
+  color: rgba(26,46,36,.62) !important;
+}
+
+/* Program meta on dark hero */
+.program-hero .hero-meta-label {
+  color: rgba(230,211,163,.55) !important;
+}
+
+/* Footer text */
+.footer-col a {
+  font-size: .88rem !important;
+  color: rgba(230,211,163,.58) !important;
+}
+.footer-col h4 {
+  font-size: .65rem !important;
+  letter-spacing: .32em !important;
+  color: var(--gold-deep) !important;
+}
+.footer-tagline {
+  font-size: .9rem !important;
+  color: rgba(230,211,163,.52) !important;
+}
+
+/* Nav link size consistent */
+.nav-links a {
+  font-size: .72rem !important;
+  letter-spacing: .2em !important;
+}
+.nav-cta {
+  font-size: .7rem !important;
+  letter-spacing: .18em !important;
+}
+
+/* Testimonials */
+.testimonial-big-quote {
+  font-size: clamp(1.5rem, 3vw, 2.2rem) !important;
+  line-height: 1.58 !important;
+}
+.marquee-card p {
+  font-size: .97rem !important;
+  line-height: 1.78 !important;
+  color: rgba(230,211,163,.78) !important;
+}
+
+/* Offer card */
+.offer-title {
+  font-size: clamp(2rem, 4vw, 3.2rem) !important;
+}
+.offer-include-item {
+  font-size: .95rem !important;
+  color: rgba(230,211,163,.8) !important;
+}
+
+/* Journey path */
+.journey-steps {
+  font-size: .92rem !important;
+  color: rgba(230,211,163,.68) !important;
+}
+
+/* Program hero tagline */
+.program-hero-tagline {
+  font-size: clamp(1rem, 1.8vw, 1.3rem) !important;
+  color: rgba(230,211,163,.68) !important;
+}
+
+/* Ensure no text is pure 0.6 grey on white — minimum legibility */
+[style*="opacity: 0.6"],
+[style*="opacity:.6"] {
+  opacity: .72 !important;
+}

@@ -1,70 +1,45 @@
 /* ============================================================
-   Custom Cursor — Tejal Desae 2026
-   Outer ring: thin gold circle that follows mouse
-   Inner dot: tiny forest dot
-   Scales up on interactive elements
+   Custom Cursor — site palette version of mix-blend-mode cursor
+   Uses the gold/cream colour (#e6d3a3) which inverts on the
+   dark forest background → looks white/cream on dark,
+   and inverts to forest green on light backgrounds.
+   Small (22px default, 44px on hover).
    ============================================================ */
 
-/* Hide default cursor site-wide */
 *, *::before, *::after { cursor: none !important; }
 
-.cursor-outer {
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(230,211,163,.55);
-  border-radius: 50%;
+.custom-cursor {
   position: fixed;
-  top: 0; left: 0;
-  pointer-events: none;
-  z-index: 99999;
-  transform: translate(-50%,-50%);
-  transition:
-    width .25s cubic-bezier(.2,.7,.2,1),
-    height .25s cubic-bezier(.2,.7,.2,1),
-    border-color .25s,
-    opacity .3s;
-  will-change: transform;
-}
-
-.cursor-inner {
-  width: 5px;
-  height: 5px;
-  background: var(--gold, #e6d3a3);
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  position: fixed;
-  top: 0; left: 0;
+  background-color: #e6d3a3;   /* site gold/cream — inverts to forest on light bg */
+  mix-blend-mode: difference;
   pointer-events: none;
-  z-index: 99999;
-  transform: translate(-50%,-50%);
-  transition: transform .08s linear, background .2s, opacity .3s;
-  will-change: transform;
-}
-
-/* Hover over links / buttons: outer expands, inner hides */
-body.cursor-hover .cursor-outer {
-  width: 54px;
-  height: 54px;
-  border-color: rgba(230,211,163,.85);
-}
-body.cursor-hover .cursor-inner {
+  z-index: 999999;
   opacity: 0;
-  transform: translate(-50%,-50%) scale(0);
+  transform: translate(-50%, -50%) scale(0.4);
+  transition:
+    width  .22s cubic-bezier(.2,.7,.2,1),
+    height .22s cubic-bezier(.2,.7,.2,1),
+    transform .15s cubic-bezier(.2,.7,.2,1),
+    opacity .3s ease;
+  will-change: transform, left, top;
 }
 
-/* Click: outer shrinks briefly */
-body.cursor-click .cursor-outer {
-  width: 26px;
-  height: 26px;
-  border-color: var(--gold, #e6d3a3);
-  transition-duration: .08s;
+.custom-cursor--init {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
 }
 
-/* Hide cursors when pointer leaves window */
-body.cursor-out .cursor-outer,
-body.cursor-out .cursor-inner { opacity: 0; }
+.custom-cursor--link {
+  width: 44px;
+  height: 44px;
+}
 
-/* On touch devices keep native cursor */
 @media (hover: none) and (pointer: coarse) {
   *, *::before, *::after { cursor: auto !important; }
-  .cursor-outer, .cursor-inner { display: none; }
+  .custom-cursor { display: none !important; }
 }
