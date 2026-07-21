@@ -179,25 +179,24 @@
     if (!book) return;
 
     var slug = book.getAttribute('data-program');
+    var PAID_KEY = 'tejal_paid_' + slug;
+    var PENDING_KEY = 'tejal_pending_' + slug;
     var quizDone = localStorage.getItem('tejal_eq_done') === '1';
-    var paid = localStorage.getItem('tejal_paid_' + slug) === '1';
-
-    var params = new URLSearchParams(location.search);
-    if (params.get('paid') === '1') {
-      paid = true;
-      localStorage.setItem('tejal_paid_' + slug, '1');
-      history.replaceState(null, '', location.pathname + location.hash);
-    }
 
     var unlock = book.querySelector('.unlock');
     var unlockBtn = book.querySelector('[data-unlock-btn]');
     var unlockTitle = book.querySelector('[data-unlock-title]');
     var unlockText = book.querySelector('[data-unlock-text]');
+    var payBtn = book.querySelector('#payBtn');
 
-    function showUnlock() {
-      book.classList.add('paid');
+    // ── state: 'idle' | 'pending' | 'paid' ──────────────────────
+    function setState(s) {
+      book.classList.toggle('pending', s === 'pending');
+      book.classList.toggle('paid', s === 'paid');
+    }
+
+    function fillUnlock() {
       if (unlock) unlock.classList.add('on');
-      if (unlockTitle) unlockTitle.textContent = 'Your call is reserved.';
       if (quizDone) {
         if (unlockText) unlockText.textContent = 'You’ve already found your Expansion Quotient. Revisit it any time before we speak.';
         if (unlockBtn) {
@@ -214,17 +213,76 @@
       }
     }
 
-    if (paid) showUnlock();
+    // mark paid, persist, and reveal the confirmed panel
+    function confirmPaid(scroll) {
+      try {
+        localStorage.setItem(PAID_KEY, '1');
+        sessionStorage.removeItem(PENDING_KEY);
+      } catch (e) {}
+      fillUnlock();
+      setState('paid');
+      if (scroll && unlock) unlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 
-    var manual = book.querySelector('[data-paid-manual]');
-    if (manual) {
-      manual.addEventListener('click', function (e) {
-        e.preventDefault();
-        localStorage.setItem('tejal_paid_' + slug, '1');
-        showUnlock();
-        if (unlock) unlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // brief "confirming…" beat, then paid — feels like verification
+    function verifyThenPaid(btn) {
+      if (btn) { btn.setAttribute('aria-busy', 'true'); btn.textContent = 'Confirming…'; }
+      setTimeout(function () { confirmPaid(true); }, 850);
+    }
+
+    // ── entry: already paid, or returning from Razorpay redirect ──
+    var params = new URLSearchParams(location.search);
+    if (params.get('paid') === '1') {
+      history.replaceState(null, '', location.pathname + location.hash);
+      confirmPaid(false);
+    } else if (localStorage.getItem(PAID_KEY) === '1') {
+      confirmPaid(false);
+    } else if (sessionStorage.getItem(PENDING_KEY) === '1') {
+      setState('pending'); // survived a refresh mid-payment
+    }
+
+    // ── clicking "Book my call" opens Razorpay + shows in-progress ──
+    if (payBtn) {
+      payBtn.addEventListener('click', function () {
+        // don't preventDefault — the link still opens the checkout tab
+        try { sessionStorage.setItem(PENDING_KEY, '1'); } catch (e) {}
+        setState('pending');
+        setTimeout(function () {
+          book.querySelector('.paywait').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 60);
       });
     }
+
+    // ── in-progress panel controls ──
+    var confirmBtn = book.querySelector('[data-paid-confirm]');
+    if (confirmBtn) confirmBtn.addEventListener('click', function () { verifyThenPaid(confirmBtn); });
+
+    var reopen = book.querySelector('[data-pay-reopen]');
+    if (reopen && payBtn) reopen.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.open(payBtn.href, '_blank', 'noopener');
+    });
+
+    var cancel = book.querySelector('[data-pay-cancel]');
+    if (cancel) cancel.addEventListener('click', function () {
+      try { sessionStorage.removeItem(PENDING_KEY); } catch (e) {}
+      setState('idle');
+    });
+
+    // idle-card fallback ("Already completed payment?")
+    var manual = book.querySelector('[data-paid-manual]');
+    if (manual) manual.addEventListener('click', function (e) {
+      e.preventDefault();
+      confirmPaid(true);
+    });
+
+    // ── cross-tab sync: Razorpay redirect lands in the OTHER tab,
+    //    which sets PAID_KEY; this tab hears it and confirms itself ──
+    window.addEventListener('storage', function (e) {
+      if (e.key === PAID_KEY && e.newValue === '1' && !book.classList.contains('paid')) {
+        confirmPaid(true);
+      }
+    });
   }
 
   function boot() {
