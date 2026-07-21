@@ -180,52 +180,30 @@
 
     var slug = book.getAttribute('data-program');
     var quizDone = localStorage.getItem('tejal_eq_done') === '1';
-    var paid = localStorage.getItem('tejal_paid_' + slug) === '1';
 
-    // Razorpay success redirect brings them back with ?paid=1
+    // The quiz is free and public, so this is a courtesy thank-you — NOT a
+    // paywall. It shows only when Razorpay itself redirects back with
+    // ?paid=1 after a real checkout. (A static page cannot verify payment;
+    // Razorpay is the source of truth for the booking.)
     var params = new URLSearchParams(location.search);
-    if (params.get('paid') === '1') {
-      paid = true;
-      localStorage.setItem('tejal_paid_' + slug, '1');
-      history.replaceState(null, '', location.pathname + location.hash);
-    }
+    if (params.get('paid') !== '1') return;
+    history.replaceState(null, '', location.pathname + location.hash);
 
     var unlock = book.querySelector('.unlock');
     var unlockBtn = book.querySelector('[data-unlock-btn]');
-    var unlockTitle = book.querySelector('[data-unlock-title]');
     var unlockText = book.querySelector('[data-unlock-text]');
 
-    function showUnlock() {
-      book.classList.add('paid');
-      if (unlock) unlock.classList.add('on');
-      if (unlockTitle) unlockTitle.textContent = 'Your call is reserved.';
-      if (quizDone) {
-        if (unlockText) unlockText.textContent = 'You’ve already found your Expansion Quotient. Revisit it any time before we speak.';
-        if (unlockBtn) {
-          unlockBtn.textContent = 'See your results →';
-          var id = localStorage.getItem('tejal_submission_id');
-          unlockBtn.href = id ? ('report.html?id=' + encodeURIComponent(id)) : 'report.html';
-        }
-      } else {
-        if (unlockText) unlockText.textContent = 'Now the fun part — and it’s free. Find your Expansion Quotient so our conversation starts miles ahead.';
-        if (unlockBtn) {
-          unlockBtn.textContent = 'Find your Expansion Quotient →';
-          unlockBtn.href = 'assessment.html?program=' + encodeURIComponent(slug);
-        }
+    book.classList.add('paid');
+    if (unlock) unlock.classList.add('on');
+    if (quizDone) {
+      if (unlockText) unlockText.textContent = 'I’ll be in touch to schedule it. You’ve already found your Expansion Quotient — revisit it any time before we speak.';
+      if (unlockBtn) {
+        unlockBtn.textContent = 'See your results →';
+        var id = localStorage.getItem('tejal_submission_id');
+        unlockBtn.href = id ? ('report.html?id=' + encodeURIComponent(id)) : 'report.html';
       }
-    }
-
-    if (paid) showUnlock();
-
-    // Fallback: "weren't redirected back after paying? click here"
-    var manual = book.querySelector('[data-paid-manual]');
-    if (manual) {
-      manual.addEventListener('click', function (e) {
-        e.preventDefault();
-        localStorage.setItem('tejal_paid_' + slug, '1');
-        showUnlock();
-        if (unlock) unlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      });
+    } else if (unlockBtn) {
+      unlockBtn.href = 'assessment.html?program=' + encodeURIComponent(slug);
     }
   }
 
