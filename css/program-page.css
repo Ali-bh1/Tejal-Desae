@@ -41,10 +41,11 @@
 }
 .program-back:hover { color: var(--gold); }
 .program-tier-badge {
-  font-size: .6rem;
-  font-weight: 600;
-  letter-spacing: .28em;
-  text-transform: uppercase;
+  font-family: var(--serif);
+  font-size: .88rem;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: .04em;
   color: var(--forest-deep);
   background: var(--gold-grad);
   padding: 7px 18px;
@@ -98,11 +99,12 @@
   flex: 1;
 }
 .hero-meta-label {
-  font-size: .6rem;
-  font-weight: 600;
-  letter-spacing: .28em;
-  text-transform: uppercase;
-  color: rgba(var(--gold-rgb),.45);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: .85rem;
+  font-weight: 400;
+  letter-spacing: .04em;
+  color: rgba(var(--gold-rgb),.5);
 }
 .hero-meta-value {
   font-family: var(--serif);
@@ -297,11 +299,12 @@
 }
 .program-cta-block .program-container { position: relative; z-index: 1; }
 .program-cta-label {
-  font-size: .65rem;
-  font-weight: 600;
-  letter-spacing: .35em;
-  text-transform: uppercase;
-  color: rgba(var(--gold-rgb),.5);
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: .04em;
+  color: rgba(var(--gold-rgb),.55);
   margin-bottom: 18px;
   display: block;
 }

@@ -67,6 +67,11 @@ if (process.env.NODE_ENV !== 'test') {
 app.set('trust proxy', 1);
 
 // ── CSRF protection ───────────────────────────────────────────────
+// Fail loudly rather than silently shipping a publicly-known secret.
+if (process.env.NODE_ENV === 'production' && !process.env.CSRF_SECRET) {
+  throw new Error('CSRF_SECRET must be set in production.');
+}
+
 const { generateToken, doubleCsrfProtection } = doubleCsrf({
   getSecret:    () => process.env.CSRF_SECRET || 'dev-csrf-secret-change-me',
   cookieName:   '__Host-psifi.x-csrf-token',
@@ -88,17 +93,30 @@ app.get('/api/csrf-token', (req, res) => {
 // (exempts GET/HEAD/OPTIONS automatically)
 app.use('/api', doubleCsrfProtection);
 
+// ── General rate limit ────────────────────────────────────────────
+// MUST be registered BEFORE the routers. Express runs middleware in
+// order; mounted after, the routers answer first and this never runs.
+app.use('/api', apiLimiter);
+
 // ── API routes ────────────────────────────────────────────────────
 app.use('/api/assessment', assessmentRouter);
 app.use('/api/auth',       authRouter);
 app.use('/api/admin',      adminRouter);
 
-// ── General rate limit for everything else ────────────────────────
-app.use('/api', apiLimiter);
+// ── Never serve server internals, VCS data or dependencies ───────
+// The static root below is the whole project, which contains /server.
+// Without this guard, /server/src/db/pool.js (and friends) are public.
+const BLOCKED_PATHS = /^\/(server|\.git|\.vercel|node_modules|design-system|docs|text)(\/|$)/i;
+app.use((req, res, next) => {
+  if (BLOCKED_PATHS.test(req.path)) {
+    return res.status(404).json({ error: 'Not found' });
+  }
+  next();
+});
 
 // ── Serve main website (static files from project root) ─────────
 const siteRoot = path.join(__dirname, '..', '..'); // project root (one level above /server)
-app.use(express.static(siteRoot, { index: 'index.html' }));
+app.use(express.static(siteRoot, { index: 'index.html', dotfiles: 'deny' }));
 
 // ── Serve admin dashboard SPA ────────────────────────────────────
 // The admin dashboard lives at /admin (HTML file served from server/public/admin)

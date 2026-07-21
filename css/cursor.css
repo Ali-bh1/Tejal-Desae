@@ -1,70 +1,50 @@
 /* ============================================================
    Custom Cursor — Tejal Desae 2026
-   Outer ring: thin gold circle that follows mouse
-   Inner dot: tiny forest dot
-   Scales up on interactive elements
+   Standard arrow shape, forest green fill, gold border
+   Applied via CSS cursor: url() — no JS required
    ============================================================ */
 
-/* Hide default cursor site-wide */
-*, *::before, *::after { cursor: none !important; }
-
-.cursor-outer {
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(230,211,163,.55);
-  border-radius: 50%;
-  position: fixed;
-  top: 0; left: 0;
-  pointer-events: none;
-  z-index: 99999;
-  transform: translate(-50%,-50%);
-  transition:
-    width .25s cubic-bezier(.2,.7,.2,1),
-    height .25s cubic-bezier(.2,.7,.2,1),
-    border-color .25s,
-    opacity .3s;
-  will-change: transform;
+/* SVG arrow cursor: forest green (#154230) fill, gold (#C7AC6D) stroke */
+:root {
+  --cursor-default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M4 2 L4 18 L8.5 13.5 L12 20 L14 19 L10.5 12.5 L17 12.5 Z' fill='%23154230' stroke='%23C7AC6D' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2, auto;
+  --cursor-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M8 2 C8 2 8 12 8 13 L5.5 10.5 C5 10 4 10.2 3.7 10.8 C3.4 11.4 3.5 12 4 12.5 L9 18.5 C9.8 19.5 11 20 12.5 20 L15 20 C17.2 20 19 18.2 19 16 L19 11 C19 10.4 18.6 10 18 10 C17.7 10 17.4 10.1 17.2 10.3 L17 10 C17 9.4 16.6 9 16 9 C15.7 9 15.4 9.1 15.2 9.3 C15 8.6 14.4 8 13.5 8 C13.2 8 13 8.1 12.8 8.2 L12.8 2.8 C12.8 2.3 12.4 2 12 2 C11.5 2 11.2 2.3 11.2 2.8 L11.2 2 Z' fill='%23154230' stroke='%23C7AC6D' stroke-width='1.1' stroke-linejoin='round'/%3E%3C/svg%3E") 8 2, pointer;
 }
 
-.cursor-inner {
-  width: 5px;
-  height: 5px;
-  background: var(--gold, #e6d3a3);
-  border-radius: 50%;
-  position: fixed;
-  top: 0; left: 0;
-  pointer-events: none;
-  z-index: 99999;
-  transform: translate(-50%,-50%);
-  transition: transform .08s linear, background .2s, opacity .3s;
-  will-change: transform;
+/* Apply to everything */
+*, *::before, *::after {
+  cursor: var(--cursor-default) !important;
 }
 
-/* Hover over links / buttons: outer expands, inner hides */
-body.cursor-hover .cursor-outer {
-  width: 54px;
-  height: 54px;
-  border-color: rgba(230,211,163,.85);
-}
-body.cursor-hover .cursor-inner {
-  opacity: 0;
-  transform: translate(-50%,-50%) scale(0);
+/* Pointer cursor on interactive elements */
+a,
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+input[type="checkbox"],
+input[type="radio"],
+select,
+label,
+.opt,
+.pillar-cta,
+.nav-cta,
+[data-specular] {
+  cursor: var(--cursor-pointer) !important;
 }
 
-/* Click: outer shrinks briefly */
-body.cursor-click .cursor-outer {
-  width: 26px;
-  height: 26px;
-  border-color: var(--gold, #e6d3a3);
-  transition-duration: .08s;
+/* Text inputs keep default text cursor */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="search"],
+textarea {
+  cursor: text !important;
 }
 
-/* Hide cursors when pointer leaves window */
-body.cursor-out .cursor-outer,
-body.cursor-out .cursor-inner { opacity: 0; }
-
-/* On touch devices keep native cursor */
+/* On touch devices restore native */
 @media (hover: none) and (pointer: coarse) {
   *, *::before, *::after { cursor: auto !important; }
-  .cursor-outer, .cursor-inner { display: none; }
+  a, button, [role="button"], select, label { cursor: pointer !important; }
 }

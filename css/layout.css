@@ -194,10 +194,11 @@ footer {
 }
 
 .footer-col h4 {
-  font-size: .65rem;
-  font-weight: 600;
-  letter-spacing: .35em;
-  text-transform: uppercase;
+  font-family: var(--serif);
+  font-size: .95rem;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: .06em;
   color: var(--gold-deep);
   margin-bottom: 28px;
 }
@@ -230,12 +231,13 @@ footer {
   margin-bottom: 14px;
 }
 .footer-hashtags {
-  font-size: .65rem;
-  font-weight: 600;
-  letter-spacing: .25em;
+  font-family: var(--serif);
+  font-size: .82rem;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: .08em;
   color: var(--gold-deep);
-  opacity: .4;
-  text-transform: uppercase;
+  opacity: .5;
 }
 
 /* Footer bottom bar */

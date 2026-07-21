@@ -8,11 +8,19 @@ export function initNavigation() {
   if (!nav) return;
 
   // ── Scroll: transparent → solid ──────────────────────────────
+  const isHome = location.pathname.endsWith('index.html') ||
+                 location.pathname === '/' ||
+                 location.pathname.endsWith('/');
+
   const onScroll = () => {
+    if (!isHome) {
+      nav.classList.add('scrolled');
+      return;
+    }
     nav.classList.toggle('scrolled', window.scrollY > 60);
   };
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll(); // run once on load
+  onScroll();
 
   // ── Hamburger toggle ─────────────────────────────────────────
   if (toggle && menu) {
@@ -24,7 +32,6 @@ export function initNavigation() {
       document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
-    // Close on link click
     menu.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => {
         toggle.classList.remove('open');
@@ -35,7 +42,6 @@ export function initNavigation() {
       });
     });
 
-    // Close on Escape
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && menu.classList.contains('open')) {
         toggle.click();

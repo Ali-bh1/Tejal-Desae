@@ -8,7 +8,7 @@
 import { Router } from 'express';
 import { query }  from '../db/pool.js';
 import { scoreAssessment, validateAnswers } from '../services/scoring.js';
-import { assessmentLimiter } from '../middleware/rateLimiter.js';
+import { assessmentLimiter, apiLimiter } from '../middleware/rateLimiter.js';
 import { assessmentRules, handleValidation } from '../middleware/validate.js';
 
 const router = Router();
@@ -100,7 +100,7 @@ router.post(
  * Returns the client-visible report for a given submission.
  * No auth required — submissionId is the "secret" (UUID v4 = 5.3×10^36 possibilities).
  */
-router.get('/result/:submissionId', async (req, res) => {
+router.get('/result/:submissionId', apiLimiter, async (req, res) => {
   const { submissionId } = req.params;
 
   // Basic UUID format check
@@ -139,11 +139,7 @@ router.get('/result/:submissionId', async (req, res) => {
       [submissionId, req.ip]
     ).catch(() => {}); // non-critical
 
-    // Re-score to get archetype display data (from scoring service)
-    const { scoreAssessment: _, ARCHETYPES } = await import('../services/scoring.js');
-    const { default: archetypesImport } = { default: null };
-
-    // Get archetype display data
+    // Archetype display data (client-safe copy only)
     const archetypeMap = {
       A: { name:'The Guard',   tag:'Deep down, more money feels risky — so you keep things safe and small.', theme:'Safety & Security' },
       B: { name:'The Prover',  tag:'You quietly feel like you have to earn the right to have it.', theme:'Worthiness' },

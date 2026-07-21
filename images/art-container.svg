@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 800" width="1000" height="800" role="img" aria-label="A golden core widening through concentric rings — the wealth container">
+  <defs>
+    <linearGradient id="cBg" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#0B2419"/>
+      <stop offset=".55" stop-color="#123526"/>
+      <stop offset="1" stop-color="#0D2C1F"/>
+    </linearGradient>
+    <radialGradient id="cGlow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#E6D3A3" stop-opacity=".55"/>
+      <stop offset=".4" stop-color="#E6D3A3" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#E6D3A3" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cCore" cx=".42" cy=".38" r=".7">
+      <stop offset="0" stop-color="#FFF6DE"/>
+      <stop offset=".55" stop-color="#EFDCAB"/>
+      <stop offset="1" stop-color="#C7AC6D"/>
+    </radialGradient>
+    <linearGradient id="cLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#E6D3A3" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#E6D3A3" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#E6D3A3" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="800" fill="url(#cBg)"/>
+  <circle cx="500" cy="410" r="400" fill="url(#cGlow)"/>
+
+  <!-- the container, widening -->
+  <g fill="none" stroke="#E6D3A3">
+    <circle cx="500" cy="410" r="96"  stroke-width="1.4" opacity=".9"/>
+    <circle cx="500" cy="410" r="152" stroke-width="1.2" opacity=".6"/>
+    <circle cx="500" cy="410" r="216" stroke-width="1.1" opacity=".4"/>
+    <circle cx="500" cy="410" r="288" stroke-width="1" opacity=".26"/>
+    <circle cx="500" cy="410" r="368" stroke-width="1" opacity=".15"/>
+  </g>
+
+  <!-- dashed arcs: the edge that keeps moving out -->
+  <g fill="none" stroke="#E6D3A3" stroke-linecap="round" stroke-dasharray="3 12" opacity=".45">
+    <circle cx="500" cy="410" r="184"/>
+    <circle cx="500" cy="410" r="250"/>
+    <circle cx="500" cy="410" r="326"/>
+  </g>
+
+  <!-- the level line -->
+  <path d="M60 410 H940" stroke="url(#cLine)" stroke-width="1.2"/>
+
+  <!-- the core -->
+  <circle cx="500" cy="410" r="52" fill="url(#cCore)"/>
+  <circle cx="500" cy="410" r="52" fill="none" stroke="#FFF8E6" stroke-width="1" opacity=".55"/>
+</svg>

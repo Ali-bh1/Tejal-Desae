@@ -3,564 +3,360 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tejal Desae | Identity &amp; Wealth Manifestation Mentor</title>
-  <meta name="description" content="For high-achieving women who have done everything right and still feel the ceiling. Stage 3 manifestation. The work that actually moves money — at the level where the problem actually lives.">
-  <meta name="keywords" content="money energetics, wealth manifestation, identity embodiment, nervous system wealth, Tejal Desae, Stage 3 manifestation, quantum field">
+  <title>Tejal Desae — Wealth &amp; Identity Mentor</title>
+  <meta name="description" content="The era of quiet excellence is over. Find out why you go quiet when it's time to ask — free 2-minute Expansion Quotient.">
+  <meta name="keywords" content="wealth mentor, identity mentor, the ask, pricing, nervous system, Tejal Desae, Expansion Quotient">
   <link rel="canonical" href="https://tejaldesae.com">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Tejal Desae | Identity &amp; Wealth Manifestation Mentor">
-  <meta property="og:description" content="For high-achieving women who have done everything right and still feel the ceiling.">
+  <meta property="og:title" content="Tejal Desae — Wealth &amp; Identity Mentor">
+  <meta property="og:description" content="The era of quiet excellence is over. Find your Expansion Quotient — free.">
   <meta property="og:url" content="https://tejaldesae.com">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/buttons.css">
-  <link rel="stylesheet" href="css/cursor.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/sections.css">
-  <link rel="stylesheet" href="css/responsive.css">
-
-  <style>
-    /* ── Hero: centered, no image, accent design ── */
-    .hero {
-      min-height: 100vh;
-      background: var(--forest-deep);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      text-align: center;
-    }
-    /* Radial accent glow */
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -20%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 900px;
-      height: 900px;
-      background: radial-gradient(ellipse at center, rgba(230,211,163,.12) 0%, transparent 68%);
-      pointer-events: none;
-      z-index: 1;
-    }
-    /* Decorative corner accents */
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 40px;
-      border: 1px solid rgba(230,211,163,.08);
-      pointer-events: none;
-      z-index: 1;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 860px;
-      padding: 0 clamp(24px,5vw,64px);
-      width: 100%;
-    }
-    .hero-eyebrow {
-      font-size: .68rem;
-      font-weight: 600;
-      letter-spacing: .5em;
-      text-transform: uppercase;
-      color: var(--gold-deep);
-      opacity: 0;
-      display: block;
-      margin-bottom: 32px;
-      animation: heroUp .9s 0.3s cubic-bezier(.2,.7,.2,1) forwards;
-    }
-    .hero h1 {
-      font-family: var(--serif);
-      font-size: clamp(3.2rem, 8vw, 7rem);
-      font-weight: 400;
-      line-height: .97;
-      letter-spacing: -.02em;
-      color: var(--white);
-      margin-bottom: 8px;
-      opacity: 0;
-      animation: heroUp 1.1s 0.5s cubic-bezier(.2,.7,.2,1) forwards;
-    }
-    .hero h1 em { font-style: italic; color: var(--gold); }
-    .hero-divider {
-      width: 60px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold-deep), transparent);
-      margin: 32px auto;
-      opacity: 0;
-      animation: heroUp .8s 0.9s forwards;
-    }
-    .hero-sub {
-      font-size: clamp(.95rem, 1.6vw, 1.15rem);
-      font-weight: 300;
-      color: rgba(230,211,163,.72);
-      line-height: 1.85;
-      max-width: 540px;
-      margin: 0 auto 44px;
-      opacity: 0;
-      animation: heroUp .9s 1.1s cubic-bezier(.2,.7,.2,1) forwards;
-    }
-    .hero-btns {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      justify-content: center;
-      opacity: 0;
-      animation: heroUp .9s 1.3s cubic-bezier(.2,.7,.2,1) forwards;
-    }
-    .hero-scroll {
-      position: absolute;
-      bottom: 36px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 4;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      opacity: 0;
-      animation: heroUp .7s 1.8s forwards;
-    }
-    .hero-scroll span {
-      font-size: .58rem;
-      letter-spacing: .4em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-    .hero-scroll-line {
-      width: 1px;
-      height: 44px;
-      background: linear-gradient(to bottom, var(--gold-deep), transparent);
-      animation: scrollPulse 2s ease-in-out infinite;
-    }
-    @keyframes scrollPulse { 0%,100%{opacity:.35} 50%{opacity:.85} }
-    @keyframes heroUp {
-      from { opacity:0; transform:translateY(22px); }
-      to   { opacity:1; transform:translateY(0); }
-    }
-
-    /* Authority img */
-    .authority-img-wrap img {
-      width: 100%;
-      aspect-ratio: 3/4;
-      object-fit: cover;
-      border-radius: 2px;
-    }
-
-    @media (max-width: 768px) {
-      .hero h1 { font-size: clamp(2.8rem, 9vw, 4rem); }
-    }
-  </style>
+  <link rel="stylesheet" href="css/home-2026.css">
+  <script>document.documentElement.className += ' js';</script>
 </head>
-<body class="loading">
+<body class="h26">
 
-  <!-- Loader -->
-  <div class="loader" aria-hidden="true">
-    <div class="loader-brand">Tejal Desae</div>
-    <div class="loader-line"></div>
-  </div>
+  <!-- scroll progress -->
+  <div class="sprog" aria-hidden="true"><i></i></div>
 
-  <!-- Navigation -->
-  <nav class="nav" aria-label="Main navigation">
-    <a href="#" class="nav-logo">Tejal Desae</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#work">The Work</a></li>
-      <li><a href="#testimonials">Results</a></li>
-      <li><a href="assessment.html">Free Profile</a></li>
-    </ul>
-    <a href="#work" class="nav-cta">Explore Programs</a>
-    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+  <!-- ═══════════ NAV ═══════════ -->
+  <nav id="nav">
+    <div class="wrap nin">
+      <a class="brand" href="index.html" aria-label="Tejal Desae — home">
+        <img class="lg" src="images/ref-logo.png" alt="Tejal Desae monogram">
+        <span>Tejal Desae</span>
+      </a>
+      <div class="nl">
+        <a href="#moment">The Moment</a>
+        <a href="#method">The Method</a>
+        <a href="#programs">Programs</a>
+        <a href="#about">About</a>
+        <a class="ncta" href="assessment.html">Expansion Quotient</a>
+      </div>
+      <button class="nav-burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-nav" hidden>
+      <a href="#moment">The Moment</a>
+      <a href="#method">The Method</a>
+      <a href="#programs">Programs</a>
+      <a href="#about">About</a>
+      <a href="assessment.html">Expansion Quotient</a>
+    </div>
   </nav>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" aria-hidden="true">
-    <a href="#about">About</a>
-    <a href="#work">The Work</a>
-    <a href="assessment.html">Free Profile</a>
-    <a href="#testimonials">Results</a>
-  </div>
-
-  <!-- ═══════════════════════════════════
-       HERO — centered, no image
-  ════════════════════════════════════ -->
-  <section class="hero" id="hero">
-    <div class="hero-content">
-      <span class="hero-eyebrow">Identity &amp; Wealth Manifestation Mentor</span>
-      <h1>The place where<br><em>wealth</em> becomes<br>your <em>identity.</em></h1>
-      <div class="hero-divider"></div>
-      <p class="hero-sub">For the woman who has done everything right — and still feels the ceiling. The work that actually moves money lives deeper than strategy.</p>
-      <div class="hero-btns">
-        <a href="#work" class="btn-primary">Explore the Work</a>
-        <a href="assessment.html" class="btn-ghost">Take the Free Assessment →</a>
-      </div>
+  <!-- ═══════════ HERO ═══════════ -->
+  <header class="hero">
+    <div class="vein" aria-hidden="true">
+      <svg viewBox="0 0 1200 700" preserveAspectRatio="none">
+        <path d="M-40,110 C280,40 520,250 880,140 C1040,95 1170,170 1250,130" fill="none" stroke="#E6D3A3" stroke-width="1.1" opacity=".5"/>
+        <path d="M-40,600 C240,680 600,470 950,590 C1090,635 1190,570 1250,610" fill="none" stroke="#E6D3A3" stroke-width="1.1" opacity=".38"/>
+        <path d="M-40,360 C300,300 560,420 900,350" fill="none" stroke="#E6D3A3" stroke-width="1" opacity=".2"/>
+      </svg>
     </div>
-    <div class="hero-scroll" aria-hidden="true">
-      <span>Scroll</span>
-      <div class="hero-scroll-line"></div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       INTRO STRIP
-  ════════════════════════════════════════ -->
-  <section class="intro-strip">
-    <div class="container">
-      <span class="intro-overline reveal">For the woman who has done everything right.</span>
-      <div class="intro-manifesto reveal">
-        <p class="intro-list">The degrees. The career. The inner work. The programmes.<br>The vision boards. The affirmations. The retreats.</p>
-        <p class="intro-pause">And still — something underneath refuses to move.</p>
-        <p class="intro-diagnosis">That is not a mindset problem.<br>That is not a strategy problem.</p>
-        <p class="intro-truth"><em>That is a frequency problem.</em><span>And it lives deeper than any surface work has ever gone.</span></p>
-      </div>
-      <span class="intro-eyebrow reveal">Identity &amp; Wealth Manifestation Mentor</span>
-      <h2 class="intro-headline reveal"><em>Stage 3.</em> Beyond The Secret.<br>Beyond affirmations. Into the body.<br>Into the ancestral field — into the frequency<br>that actually moves money.</h2>
-      <div class="intro-btns reveal">
-        <a href="https://tidycal.com/tejjalsdeesai1/money-energetics-reading-a-personal-human-design-diagnostic-with-tejal-desae" class="btn-primary" target="_blank" rel="noopener noreferrer">Find Your Money Frequency — Book a Human Design Reading</a>
-        <a href="#work" class="btn-ghost">Explore the Work</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       ABOUT / LETTER FROM TEJAL
-  ════════════════════════════════════════ -->
-  <section class="authority" id="about">
-    <div class="authority-inner">
-      <div class="authority-images-container">
-        <div class="authority-img-wrap reveal">
-          <img src="images/tejal-letter-1.jpg" alt="Tejal Desae — Identity &amp; Wealth Manifestation Mentor" loading="lazy">
-        </div>
-        <div class="authority-img-wrap reveal">
-          <img src="images/tejal-letter-2.jpg" alt="Tejal Desae — Nervous System &amp; Wealth Mentor" loading="lazy">
-        </div>
-      </div>
-      <div class="authority-content">
-        <span class="section-eyebrow reveal">Nervous system safe wealth mentor, devoted to your becoming.</span>
-        <h2 class="section-title reveal">A Letter from<br><em>Tejal</em></h2>
-        <p class="reveal">I spent 25 years inside some of the world's most demanding global organisations. Consulting. Senior leadership. The rooms where decisions with nine zeros attached were made.</p>
-        <p class="reveal">I was called when everything needed holding together. Reliable. Capable. The woman who delivered.</p>
-        <p class="reveal">And in the silence between boardroom decisions and 4am sadhana — I was also a Das Mahavidya initiate. A Shiv sadhak. A woman who had sat with the darkest goddesses in the Hindu pantheon and come back changed.</p>
-        <p class="reveal">Two marriages. Carrying cycles of someone else's debt. A son I raised entirely alone through five years of fever and fear. A spiritual practice that held me when nothing else could.</p>
-        <p class="reveal">I did not come to this work theoretically. I came to it through everything.</p>
-        <p class="reveal">What eventually became clear is this: no amount of mindset work, strategy, or spiritual reframing could soften what was happening beneath the surface. Because it wasn't a thought problem — it was a safety pattern.</p>
-        <p class="reveal">My body didn't know how to receive without staying vigilant, high-functioning, and hyper focused. Rest felt conditional. Support felt unfamiliar. Ease felt like something that had to be justified.</p>
-        <p class="reveal">Once I stopped trying to fix myself and started listening instead, everything changed — gently, steadily, without force. I learned that these patterns weren't flaws. They were intelligent adaptations.</p>
-        <p class="reveal">Today I work at Stage 3 of manifestation. Not vision boards. Not positive thinking. Stage 3 is where the body becomes the instrument. Where the ancestral field is cleared — not just understood. Where the quantum field receives a completely different signal.</p>
-        <p class="reveal">If something in you just exhaled — that is the whale frequency. That is recognition. You are already home.</p>
-        <p class="reveal"><em>With love and gratitude</em><br><strong>Tejal Desae</strong></p>
-        <div class="authority-stats reveal-children">
-          <div>
-            <div class="stat-num" data-target="200" data-suffix="+">0</div>
-            <div class="stat-label">Women Mentored</div>
-          </div>
-          <div>
-            <div class="stat-num" data-target="1" data-prefix="$" data-suffix="M+">0</div>
-            <div class="stat-label">Client Revenue Created</div>
-          </div>
-          <div>
-            <div class="stat-num" data-target="7" data-suffix="+">0</div>
-            <div class="stat-label">Years of Practice</div>
-          </div>
-        </div>
-        <a href="#work" class="btn-ghost--dark btn reveal" style="display:inline-block;padding:14px 32px;border-radius:3px;">Explore the Work</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       MARQUEE SASH
-  ════════════════════════════════════════ -->
-  <div class="marquee-strip" aria-hidden="true">
-    <div class="marquee-track">
-      <span>Identity Embodiment</span><span class="marquee-dot">·</span>
-      <span>Stage 3 Manifestation</span><span class="marquee-dot">·</span>
-      <span>Praxis &amp; Embodiment</span><span class="marquee-dot">·</span>
-      <span>Talk With The Whales</span><span class="marquee-dot">·</span>
-      <span>Sovereign Rising 2026</span><span class="marquee-dot">·</span>
-      <span>Quantum Field Activation</span><span class="marquee-dot">·</span>
-      <span>Ancestral Unbinding</span><span class="marquee-dot">·</span>
-      <span>Identity Embodiment</span><span class="marquee-dot">·</span>
-      <span>Stage 3 Manifestation</span><span class="marquee-dot">·</span>
-      <span>Praxis &amp; Embodiment</span><span class="marquee-dot">·</span>
-      <span>Talk With The Whales</span><span class="marquee-dot">·</span>
-      <span>Sovereign Rising 2026</span><span class="marquee-dot">·</span>
-      <span>Quantum Field Activation</span><span class="marquee-dot">·</span>
-      <span>Ancestral Unbinding</span><span class="marquee-dot">·</span>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════
-       PROGRAMS
-  ════════════════════════════════════════ -->
-  <section class="pillars programs-section" id="work">
-    <div class="container">
-      <span class="section-eyebrow reveal" style="text-align:center;display:block;">Each is its own complete journey.</span>
-      <h2 class="section-title reveal" style="text-align:center;max-width:660px;margin:0 auto 14px;">The<br><em>Programs</em></h2>
-      <p class="pillars-subtitle reveal">The sovereign journey. Every step designed to lead to the next.</p>
-
-      <div class="programs-tier-header reveal"><span class="programs-tier-label">Courses — Open Enrolment</span></div>
-      <div class="programs-tier-grid programs-tier-2col reveal-children">
-        <div class="pillar-card program-card program-card--course">
-          <div class="program-number">01</div>
-          <h3 class="pillar-title program-title">Money Energetics</h3>
-          <p class="program-tagline">The 6-Week Body-Based Wealth Reset</p>
-          <p class="pillar-body program-body">Your body has been holding a money story that your mind has been trying to fix. This is Stage 3 manifestation — beyond affirmations, into the body as the instrument of your transformation.</p>
-          <div class="program-meta">
-            <span class="program-price">€555</span>
-            <span class="program-duration">6 Weeks · Open Enrolment</span>
-          </div>
-          <a href="money-energetics.html" class="pillar-cta">Learn More →</a>
-        </div>
-        <div class="pillar-card program-card program-card--course">
-          <div class="program-number">02</div>
-          <h3 class="pillar-title program-title">Wealth Oracle</h3>
-          <p class="program-tagline">The 10-Week Quantum Transmission</p>
-          <p class="pillar-body program-body">The Secret taught you to want it. Affirmations taught you to say it. This teaches your body to be it. Stage 3 manifestation in its fullest quantum expression.</p>
-          <div class="program-meta">
-            <span class="program-price">€1,555</span>
-            <span class="program-duration">10 Weeks · Open Enrolment</span>
-          </div>
-          <a href="wealth-oracle.html" class="pillar-cta">Learn More →</a>
-        </div>
-      </div>
-
-      <div class="programs-tier-header reveal" style="margin-top:64px;"><span class="programs-tier-label">Signature Programs — By Invitation</span></div>
-      <div class="programs-tier-grid programs-tier-3col reveal-children">
-        <div class="pillar-card program-card program-card--invitation">
-          <div class="program-number">03</div>
-          <h3 class="pillar-title program-title">Divine Wealth</h3>
-          <p class="program-tagline">The 6-Month Full Spectrum Recalibration</p>
-          <p class="pillar-body program-body">She has done the inner work. Her outer life is almost reflecting it. Almost is no longer enough. Every dimension of life — recalibrated to match the sovereign woman you have already become.</p>
-          <div class="program-meta">
-            <span class="program-badge-invitation">By Invitation</span>
-            <span class="program-duration">6 Months</span>
-          </div>
-          <a href="divine-wealth.html" class="pillar-cta">Learn More →</a>
-        </div>
-        <div class="pillar-card program-card program-card--invitation">
-          <div class="program-number">04</div>
-          <h3 class="pillar-title program-title">Sovereign Mentor</h3>
-          <p class="program-tagline">The 6-Month Business Initiation</p>
-          <p class="pillar-body program-body">She is not here to build a business. She is here to become the woman whose presence naturally creates one. Psychosomatic identity embodiment meets sovereign business architecture.</p>
-          <div class="program-meta">
-            <span class="program-badge-invitation">By Invitation</span>
-            <span class="program-duration">6 Months</span>
-          </div>
-          <a href="sovereign-mentor.html" class="pillar-cta">Learn More →</a>
-        </div>
-        <div class="pillar-card program-card program-card--waitlist">
-          <div class="program-number">05</div>
-          <span class="program-coming-badge">Waitlist Only</span>
-          <h3 class="pillar-title program-title">Inner Sanctum</h3>
-          <p class="program-tagline">The Deepest Container</p>
-          <p class="pillar-body program-body">This is not described. It is felt. The most intimate, most exclusive, and most deeply held container Tejal offers. Strictly limited · By invitation only.</p>
-          <div class="program-meta">
-            <span class="program-badge-waitlist">Waitlist Now Open</span>
-          </div>
-          <a href="inner-sanctum.html" class="pillar-cta">Join Waitlist →</a>
-        </div>
-      </div>
-
-      <div class="sovereign-journey-path reveal">
-        <span class="journey-label">The Sovereign Journey — each step leads to the next</span>
-        <div class="journey-steps">
-          <span>Money Energetics</span>
-          <span class="journey-arrow">↓</span>
-          <span>Wealth Oracle</span>
-          <span class="journey-arrow">↓</span>
-          <span>Divine Wealth</span>
-          <span class="journey-arrow">↓</span>
-          <span>Sovereign Mentor</span>
-          <span class="journey-arrow">↓</span>
-          <span>Inner Sanctum</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       MENTORSHIP OFFER
-  ════════════════════════════════════════ -->
-  <section class="offer-section" id="apply">
-    <div class="container">
-      <span class="section-eyebrow reveal" style="text-align:center;display:block;">Signature Private Mentorship</span>
-      <h2 class="section-title reveal" style="text-align:center;margin:0 auto 16px;max-width:580px;">For women ready to<br><em>become the one percent</em></h2>
-      <div class="gold-line reveal" style="margin:0 auto"></div>
-      <div class="offer-card reveal">
-        <div class="offer-badge">By Application Only</div>
-        <h3 class="offer-title">The Limitless Ascension<br><em>Legacy Experience</em></h3>
-        <p class="offer-desc">Six months of sacred, private mentorship for the woman who is done playing small. You already know this is your next level — your nervous system just needs to catch up to what your soul already knows.</p>
-        <div class="offer-includes">
-          <div class="offer-include-item">Bi-weekly 1:1 private sessions with Tejal</div>
-          <div class="offer-include-item">Full nervous system rewiring &amp; identity recalibration protocol</div>
-          <div class="offer-include-item">Wealth consciousness &amp; money frequency activation</div>
-          <div class="offer-include-item">Voxer support for real-time energetic integration</div>
-          <div class="offer-include-item">Personalised quantum embodiment practices</div>
-          <div class="offer-include-item">Access to all signature programs and portals</div>
-        </div>
-        <div class="offer-actions">
-          <a href="#contact" class="btn-primary">Apply for Your Spot</a>
-          <a href="https://tidycal.com/tejjalsdeesai1/money-energetics-reading-a-personal-human-design-diagnostic-with-tejal-desae" class="btn-ghost" target="_blank" rel="noopener noreferrer">Book a Discovery Call</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       CLIENT STORIES
-  ════════════════════════════════════════ -->
-  <section class="testimonials" id="testimonials">
-    <div class="container container--wide">
-      <span class="section-eyebrow reveal" style="text-align:center;display:block;margin-bottom:10px;">Real women. Real results.</span>
-      <h2 class="section-title reveal" style="text-align:center;color:var(--white);margin:0 auto 56px;max-width:500px;">Client<br><em>Stories</em></h2>
-
-      <div class="testimonial-editorial reveal">
-        <div class="testimonial-quote-mark">"</div>
-        <blockquote class="testimonial-big-quote">Working with Tejal changed the relationship beneath the numbers.<br>For the first time, money feels neutral.<br>It lands without tightening my chest.<br><br>My income has continued to grow — but that's not even the biggest shift.<br>The biggest shift is this: I no longer feel like I have to hold everything alone.<br>Wealth feels sustainable now.</blockquote>
-        <div class="testimonial-author-editorial">
-          <span class="testimonial-author">Kay</span>
-          <span class="testimonial-role">Homepreneur · Private Client</span>
-        </div>
-      </div>
-
-      <div class="testimonial-marquee-wrap reveal">
-        <div class="testimonial-marquee-track">
-          <div class="marquee-card">
-            <p>"I came in feeling like money was a constant battle — earning well but always anxious about the next dip, overgiving in relationships to feel secure. Tejal's Money Energetics helped me recalibrate my nervous system; now, wealth feels neutral and steady."</p>
-            <span>— A.R., Corporate Executive</span>
-          </div>
-          <div class="marquee-card">
-            <p>"Before Divine Wealth, I was chasing success but feeling hollow — business growing, yet my body screamed for rest. Tejal guided me to embody my true identity; now, wealth feels like an extension of my sovereignty."</p>
-            <span>— Sarah, Entrepreneur</span>
-          </div>
-          <div class="marquee-card">
-            <p>"I started Sovereign Mentor doubting my voice — manifesting ideas but not clients. Tejal's blend of identity work and practical energetics shifted everything; now, my business reflects my soul."</p>
-            <span>— Leah, Coach</span>
-          </div>
-          <div class="marquee-card">
-            <p>"Money used to trigger anxiety for me — good months followed by fear of loss. In Money Energetics, Tejal helped me anchor safety in my body; now, abundance is steady and my creativity flows freely."</p>
-            <span>— Jay Patel, Freelancer</span>
-          </div>
-          <!-- Cloned for seamless loop -->
-          <div class="marquee-card" aria-hidden="true">
-            <p>"I came in feeling like money was a constant battle — earning well but always anxious about the next dip. Tejal's Money Energetics helped me recalibrate my nervous system; now, wealth feels neutral and steady."</p>
-            <span>— A.R., Corporate Executive</span>
-          </div>
-          <div class="marquee-card" aria-hidden="true">
-            <p>"Before Divine Wealth, I was chasing success but feeling hollow. Tejal guided me to embody my true identity; now, wealth feels like an extension of my sovereignty."</p>
-            <span>— Sarah, Entrepreneur</span>
-          </div>
-          <div class="marquee-card" aria-hidden="true">
-            <p>"I started Sovereign Mentor doubting my voice. Tejal's blend of identity work and practical energetics shifted everything; now, my business reflects my soul."</p>
-            <span>— Leah, Coach</span>
-          </div>
-          <div class="marquee-card" aria-hidden="true">
-            <p>"Money used to trigger anxiety. In Money Energetics, Tejal helped me anchor safety in my body; now, abundance is steady and my creativity flows freely."</p>
-            <span>— Jay Patel, Freelancer</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       AS SEEN IN
-  ════════════════════════════════════════ -->
-  <div class="featured reveal">
-    <span class="featured-label">As Seen In &amp; Community Of</span>
-    <div class="featured-logos">
-      <span class="featured-logo">Podchaser</span>
-      <span class="featured-logo">Insight Timer</span>
-      <span class="featured-logo">Forbes India</span>
-      <span class="featured-logo">Soulful Business Summit</span>
-      <span class="featured-logo">Femina</span>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════
-       FINAL CTA
-  ════════════════════════════════════════ -->
-  <section class="final-cta">
-    <div class="container">
-      <div class="cta-line"></div>
-      <span class="section-eyebrow reveal">Your next level is already decided</span>
-      <p class="final-cta-quote reveal">"The woman you're becoming is not waiting for permission. She is waiting for you to claim her."</p>
-      <div class="hero-btns reveal">
-        <a href="#contact" class="btn-champ">Apply for Private Mentorship</a>
-        <a href="https://tidycal.com/tejjalsdeesai1/money-energetics-reading-a-personal-human-design-diagnostic-with-tejal-desae" class="btn-ghost" target="_blank" rel="noopener noreferrer">Book a Discovery Call</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       ASSESSMENT CTA (replaces old form)
-  ════════════════════════════════════════ -->
-  <section class="contact-section" id="contact" style="text-align:center;">
-    <div class="container">
-      <div style="max-width:640px;margin:0 auto;">
-        <span class="section-eyebrow reveal" style="color:rgba(230,211,163,.6);">Discover Your Pattern</span>
-        <h2 class="section-title reveal" style="color:var(--white);margin:0 auto 16px;max-width:580px;">
-          Your <em>Wealth Expansion</em><br>Profile is waiting.
-        </h2>
-        <div class="gold-line reveal" style="margin:0 auto 28px;"></div>
-        <p class="reveal" style="font-size:1rem;color:rgba(230,211,163,.72);line-height:1.85;margin-bottom:44px;max-width:480px;margin-left:auto;margin-right:auto;">
-          8 questions. 3 minutes. Instant result. Discover the exact pattern beneath your money story — and the somatic shift that will dissolve it.
-        </p>
-        <div class="reveal" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-          <a href="assessment.html" class="btn-primary">Take the Free Assessment →</a>
-          <a href="https://tidycal.com/tejjalsdeesai1/money-energetics-reading-a-personal-human-design-diagnostic-with-tejal-desae" class="btn-ghost" target="_blank" rel="noopener noreferrer">Book a Discovery Call</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       FOOTER
-  ════════════════════════════════════════ -->
-  <footer>
-    <div class="footer-inner">
+    <div class="wrap g">
       <div>
-        <div class="footer-logo">Tejal Desae</div>
-        <p class="footer-tagline">Identity &amp; Wealth Manifestation Mentor. Guiding women to embody the frequency of their next level — permanently.</p>
+        <h1 data-split>The era of quiet excellence is <b>over</b>.</h1>
+        <div class="rule reveal reveal-d1"></div>
+        <p class="sub reveal reveal-d1">We'll show you exactly <b>why you go quiet</b> when it's time to ask, <b>what it's costing you</b>, and <b>how to ask for what you're worth</b> — in 90 days.</p>
+        <div class="acts reveal reveal-d2">
+          <div class="freewink">
+            <a class="btn btn-em" href="assessment.html">Find out your Expansion Quotient</a>
+            <span class="tip"><span class="heart">♥</span> 2 minutes · and your result is <span class="free-word">always free</span></span>
+          </div>
+        </div>
       </div>
-      <div class="footer-col">
-        <h4>Navigate</h4>
-        <ul>
-          <li><a href="#about">About Tejal</a></li>
-          <li><a href="#work">The Work</a></li>
-          <li><a href="#testimonials">Client Stories</a></li>
-          <li><a href="assessment.html">Free Assessment</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Connect</h4>
-        <ul>
-          <li><a href="https://www.instagram.com/tejaldesae/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-          <li><a href="https://www.youtube.com/@TejalDesae" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-          <li><a href="privacy-policy.html">Privacy Policy</a></li>
-        </ul>
+      <div class="ph reveal reveal-d2">
+        <div class="arch2">
+          <div class="im"><img src="images/tejal-hero.jpg" alt="Tejal Desae, Wealth &amp; Identity Mentor" width="900" height="1125" fetchpriority="high"></div>
+        </div>
       </div>
     </div>
-    <div class="footer-quote">
-      <p>"She stopped asking the world to make room for her.<br>She realised she was the room."</p>
-      <span class="footer-hashtags">#SovereignRising · #TalkWithTheWhales · #WomenOf2026</span>
+    <div class="cue" aria-hidden="true"><span>Scroll</span><span class="cue-line"></span></div>
+  </header>
+
+  <!-- ═══════════ 5 PILLARS ═══════════ -->
+  <section class="pill">
+    <div class="wrap">
+      <div class="cap reveal"><span class="eyebrow lt">The 5 Pillars</span><h2>How we get you to the ask</h2></div>
+      <div class="row">
+        <div class="p reveal"><svg viewBox="0 0 48 48" fill="none" stroke="#E6D3A3" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="15"/><path d="M24 15c-4 4-6 7-6 10a6 6 0 0 0 12 0c0-3-2-6-6-10z"/></svg><h3>Safe Body</h3><p>Regulate before you ask.</p></div>
+        <div class="p reveal reveal-d1"><svg viewBox="0 0 48 48" fill="none" stroke="#E6D3A3" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14h14a5 5 0 0 1 5 5v17H17a5 5 0 0 1-5-5z"/><path d="M36 14v22M31 19h9"/></svg><h3>The Story</h3><p>See what's been running.</p></div>
+        <div class="p reveal reveal-d2"><svg viewBox="0 0 48 48" fill="none" stroke="#E6D3A3" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M14 32h20"/><path d="M18 32V20a6 6 0 0 1 12 0v12"/><path d="M24 12v-4M17 15l-3-3M31 15l3-3"/></svg><h3>Lay It Down</h3><p>Release the weight.</p></div>
+        <div class="p reveal reveal-d3"><svg viewBox="0 0 48 48" fill="none" stroke="#E6D3A3" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="14"/><path d="M24 30v-7M24 17v.5"/><path d="M31 12l4-4M35 8h-4M35 8v4"/></svg><h3>The Ask</h3><p>Say the number, unsoftened.</p></div>
+        <div class="p reveal reveal-d4"><svg viewBox="0 0 48 48" fill="none" stroke="#E6D3A3" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="15" r="4"/><path d="M24 19v14M17 24h14M19 40l5-7 5 7"/></svg><h3>Embody</h3><p>Make it your default.</p></div>
+      </div>
     </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Tejal Desae. All Rights Reserved.</span>
-      <span>Designed for the woman who has already decided.</span>
+  </section>
+
+  <!-- ═══════════ THE MOMENT ═══════════ -->
+  <section class="mom" id="moment">
+    <div class="nar reveal">
+      <span class="eyebrow">You know the moment</span>
+      <div class="l">The number is in your mouth.<br><i>You hear yourself soften it.</i><br>You add a discount nobody asked for.<br><i>You say "but no pressure."</i></div>
+      <p class="after">And later, in the car, you know exactly what it just cost you.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ BRILLIANT &amp; UNDERPAID ═══════════ -->
+  <section class="say sand">
+    <div class="wrap">
+      <h2 class="reveal">The era of being brilliant and <b>underpaid</b> is over.</h2>
+      <p class="p reveal reveal-d1">It's one moment. It just wears different clothes.</p>
+      <div class="cos reveal reveal-d1">
+        <div><b>The founder</b><p>Hasn't raised prices in two years. <em>Keeps meaning to.</em></p></div>
+        <div><b>The leader</b><p>Carried the team through three reorgs. <em>Never asked for the raise.</em></p></div>
+        <div><b>The practitioner</b><p>Your clients get better. <em>Your rate hasn't moved since 2019.</em></p></div>
+        <div><b>The transitioner</b><p>Ready to go out on your own. <em>Can't say a fee out loud.</em></p></div>
+      </div>
+      <p class="reveal" style="margin-top:34px;font-family:var(--serif);font-size:clamp(21px,2.8vw,29px)">Different rooms. <em>Same moment.</em></p>
+    </div>
+  </section>
+
+  <!-- ═══════════ ANOTHER STRATEGY ═══════════ -->
+  <section class="say dark">
+    <div class="nar reveal">
+      <span class="eyebrow lt">And every time you asked why</span>
+      <h2 style="margin-top:14px">You were handed <b>another strategy</b>.</h2>
+      <div class="lines"><i>Post more.</i><br>Raise your prices.<br><i>Build the funnel.</i><br>Fix your money mindset.</div>
+      <p class="p" style="margin-top:30px">You did all of it. The ceiling didn't move. None of it goes anywhere near the moment you go quiet.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ THE METHOD ═══════════ -->
+  <section class="split cream" id="method">
+    <div class="t reveal">
+      <span class="eyebrow">Why it happens</span>
+      <h2 style="margin-top:14px">It isn't confidence. It's your <b>body</b>.</h2>
+      <p>In the second before you ask, your body decides whether it's safe. It learned that answer long before your career — and it still runs it.</p>
+      <p>That's why no strategy has touched this. <em>Strategy talks to your mind. The ask happens in your body.</em></p>
+      <p>I spent 25 years running global businesses inside Fortune 500 companies, hitting every target — and I still couldn't ask. So I went looking underneath. What I found became <b>The Wealth Container</b>: the method that grows what you're able to hold.</p>
+      <div style="margin-top:26px"><a class="lnk" href="#programs">See the programs →</a></div>
+    </div>
+    <div class="im fig">
+      <div class="fig-inner" data-plx="0.16"><img src="images/art-container.svg" alt="The Wealth Container — a golden core widening through concentric rings"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ATMOSPHERE BAND ═══════════ -->
+  <section class="band" aria-label="Wealth is what you can hold">
+    <div class="fig-inner" data-plx="0.24"><img src="images/art-wealth-code.svg" alt=""></div>
+    <div class="band-quote">
+      <p>Wealth was never only what you make. It's what you're able to <b>hold</b>.</p>
+      <span class="who">The Wealth Container</span>
+    </div>
+  </section>
+
+  <!-- ═══════════ THE FIGURES ═══════════ -->
+  <section class="figures">
+    <div class="wrap">
+      <div class="fg-cap reveal"><span class="eyebrow lt">The shape of the work</span><h2>Two decades of rooms — and one moment we finally fix.</h2></div>
+      <div class="fg-grid">
+        <div class="reveal">
+          <div class="fg-n" data-count="25" data-suffix="">0</div>
+          <div class="fg-rule"></div>
+          <div class="fg-l">Years Leading Inside<br>Fortune 500</div>
+        </div>
+        <div class="reveal reveal-d1">
+          <div class="fg-n" data-count="200" data-suffix="+">0</div>
+          <div class="fg-rule"></div>
+          <div class="fg-l">Women<br>Mentored</div>
+        </div>
+        <div class="reveal reveal-d2">
+          <div class="fg-n" data-count="90" data-suffix="">0</div>
+          <div class="fg-rule"></div>
+          <div class="fg-l">Days To The Ask<br>You've Been Avoiding</div>
+        </div>
+        <div class="reveal reveal-d3">
+          <div class="fg-n" data-count="5" data-suffix="">0</div>
+          <div class="fg-rule"></div>
+          <div class="fg-l">Patterns Beneath<br>Every Softened Ask</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ GUARANTEE ═══════════ -->
+  <section class="gua dark">
+    <div class="nar reveal">
+      <span class="eyebrow lt">The guarantee</span>
+      <h2>In 90 days, you'll make the ask you've been avoiding.</h2>
+      <div class="rule"></div>
+      <p><em>Raise the price. Ask for the raise. Send the invoice. Say the number — without shrinking.</em></p>
+      <p style="margin-top:14px;color:var(--ch)"><b>If you don't, we keep working with you until you do.</b></p>
+      <p class="fine">Provided you show up and do the work. That's the only condition.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ RIBBON ═══════════ -->
+  <div class="ribbon" aria-hidden="true">
+    <div class="ribbon-track">
+      <span>Safe Body</span><b>·</b><span>The Story</span><b>·</b><span>Lay It Down</span><b>·</b><span>The Ask</span><b>·</b><span>Embody</span><b>·</b><span>The Wealth Container</span><b>·</b>
+      <span>Safe Body</span><b>·</b><span>The Story</span><b>·</b><span>Lay It Down</span><b>·</b><span>The Ask</span><b>·</b><span>Embody</span><b>·</b><span>The Wealth Container</span><b>·</b>
+    </div>
+  </div>
+
+  <!-- ═══════════ PROGRAMS ═══════════ -->
+  <section class="say sand" id="programs">
+    <div class="wrap">
+      <span class="eyebrow reveal">The programs</span>
+      <h2 class="reveal" style="margin-top:14px">Where the work goes deep</h2>
+      <p class="p reveal reveal-d1">Two paths. Book the call for the one that's calling you.</p>
+      <div class="progs">
+        <div class="prog dk reveal reveal-d1">
+          <div class="art fig"><div class="fig-inner" data-plx="0.14"><img src="images/art-wealth-code.svg" alt="A golden sun rising over still water"></div></div>
+          <div class="bd">
+            <h3>Wealth Expansion Code</h3><div class="pr">The 5 Pillars · 90 days</div>
+            <p>From softening every ask to saying your number — and keeping what comes.</p>
+            <ul class="pl"><li>Safe Body — regulate before you ask</li><li>The Story — see what's been running</li><li>Lay It Down — release the weight</li><li>The Ask — say the number, unsoftened</li><li>Embody — make it your default</li></ul>
+            <div class="cta"><a class="btn btn-ch" href="wealth-expansion-code.html">Explore &amp; book your call →</a></div>
+          </div>
+        </div>
+        <div class="prog lt reveal reveal-d2">
+          <div class="art fig"><div class="fig-inner" data-plx="0.14"><img src="images/art-business-code.svg" alt="A colonnade of pale arches receding toward a lit opening"></div></div>
+          <div class="bd">
+            <h3>Business Expansion Code</h3><div class="pr">The 8 Pillars</div>
+            <p>For founders scaling — the ceiling that shows up when you stop being the bottleneck.</p>
+            <ul class="pl"><li>Safe to Lead</li><li>The Founder Ceiling</li><li>Let It Go — delegation</li><li>The Ask at Scale — pricing</li><li>Be Seen — visibility as a brand</li><li>Hold the Team</li><li>Decide — under pressure</li><li>Embody the Operator</li></ul>
+            <div class="cta"><a class="btn btn-em" href="business-expansion-code.html">Explore &amp; book your call →</a></div>
+          </div>
+        </div>
+      </div>
+      <p class="reveal" style="margin-top:30px;font-size:14.5px;font-weight:300;opacity:.75;max-width:52ch;margin-left:auto;margin-right:auto">Not sure which is yours? The call is with me — one conversation to find the program most aligned with your goals and your expansion journey. <em>Let's talk it through.</em></p>
+    </div>
+  </section>
+
+  <!-- ═══════════ ABOUT ═══════════ -->
+  <section class="about2" id="about">
+    <div class="wrap">
+      <div class="g">
+        <div class="portrait reveal">
+          <div class="fig"><div class="fig-inner" data-plx="0.10"><img src="images/tejal-about.jpg" alt="Tejal Desae" width="900" height="1125" loading="lazy"></div></div>
+        </div>
+        <div class="t reveal reveal-d1">
+          <span class="eyebrow">About Tejal</span>
+          <h2 style="margin-top:14px">They found manifestation. <b>I ran P&amp;Ls.</b></h2>
+          <p>Twenty-five years leading inside global Fortune 500 companies taught me how success actually gets built — and what it costs the people who can deliver anything <em>except an ask</em>.</p>
+          <p>Then I trained where most leaders never look: hypnotherapy, NLP, EFT, regression, nervous-system regulation.</p>
+          <p>I work at the place your strategy meets your safety. <em>That's where the ceiling actually lives.</em></p>
+          <div style="margin-top:26px"><a class="lnk" href="assessment.html">Find your pattern →</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ RIPPLE FIELD ═══════════ -->
+  <section class="ripple" aria-label="The ceiling was never your ambition">
+    <div class="ripple-field" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+    <div class="ripple-copy reveal">
+      <p>The ceiling was never your ambition.<br>It was your <b>safety</b>.</p>
+      <span class="who">Tejal Desae</span>
+    </div>
+  </section>
+
+  <!-- ═══════════ STORIES ═══════════ -->
+  <section class="say dark" id="stories">
+    <div class="wrap">
+      <span class="eyebrow lt reveal">Client stories</span>
+      <h2 class="reveal" style="margin:14px auto 0">The era of doing great work and <b>never asking for it</b> is over.</h2>
+      <div class="stg">
+        <div class="story reveal reveal-d1"><div class="ph">Sample · replace</div><p>"I said the number and didn't add a discount. First time in nine years."</p><div class="by">Founder · London</div></div>
+        <div class="story reveal reveal-d2"><div class="ph">Sample · replace</div><p>"I asked for the raise I'd been owed since 2021. I got it."</p><div class="by">VP · New York</div></div>
+        <div class="story reveal reveal-d3"><div class="ph">Sample · replace</div><p>"More money came in and my body stayed calm. That had never happened."</p><div class="by">Therapist · Dubai</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FAQ ═══════════ -->
+  <section class="say" id="faq">
+    <div class="nar reveal">
+      <span class="eyebrow">Questions?</span>
+      <h2 style="margin-top:14px">Read these first</h2>
+      <p class="p">I may have already answered your question. If not, the form below comes straight to me.</p>
+      <div class="fq">
+        <details><summary>Who is this for?</summary><p>Founders, corporate leaders, therapists and coaches — 35 to 55 — who are excellent at what they do and go quiet when it's time to ask. If you can deliver anything <em>except</em> an ask, you're in the right place.</p></details>
+        <details><summary>What's the difference between the two programs?</summary><p><b>Wealth Expansion Code</b> is where almost everyone starts: 90 days, the 5 Pillars, and one outcome — you make the ask you've been avoiding. <b>Business Expansion Code</b> is for founders scaling, running the 8 Pillars: delegation, pricing at scale, visibility, team, decisions. Not sure which? That's exactly what the Program Clarity Call is for.</p></details>
+        <details><summary>Is this therapy?</summary><p>No. This is mentoring and coaching. It's not a replacement for medical or psychological care, and if you're working with a therapist, please keep going — this sits alongside that work, never instead of it.</p></details>
+        <details><summary>I've tried everything. Why would this be different?</summary><p>Because everything you've tried talked to your mind. The ask happens in your body — in the second before you speak, your body decides whether it's safe. We work there first. That's why the strategy finally sticks.</p></details>
+        <details><summary>How much time does it take?</summary><p>The work is built for people with real jobs and real businesses. Self-paced modules you can watch anywhere, a live group connect each week, and a daily check-in that takes about two minutes.</p></details>
+        <details><summary>What's the guarantee?</summary><p>In 90 days you'll make the ask you've been avoiding — or we keep working with you until you do. The one condition: you show up and do the work. Programs are non-refundable; instead of refunds, you get our continued commitment until you get there.</p></details>
+        <details><summary>How do I start?</summary><p>Find out your Expansion Quotient — it's free and takes two minutes. From there, book a call and we'll map your way forward.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CONTACT ═══════════ -->
+  <section class="say sand" id="contact">
+    <div class="nar reveal">
+      <span class="eyebrow">Talk it through with me</span>
+      <h2 style="margin-top:14px">Book a Program Clarity Call</h2>
+      <p class="p">This is one conversation with me — to discover which program is most aligned with your goals and your expansion journey.</p>
+      <p class="p" style="margin-top:14px;font-size:14.5px;opacity:.72">Wondering whether a program is right for you? Fill out the form — I read every one myself. <b>You'll hear back within 24–48 hours, Mon–Fri.</b> If you submit on Sat or Sun, expect to hear back by Monday.</p>
+      <form class="cform" id="contactForm" novalidate>
+        <div class="fr2">
+          <div class="field"><label for="cn">First name</label><input id="cn" name="firstName" type="text" placeholder="Your name" autocomplete="given-name"></div>
+          <div class="field"><label for="cl">Last name</label><input id="cl" name="lastName" type="text" placeholder="Your surname" autocomplete="family-name"></div>
+        </div>
+        <div class="fr2">
+          <div class="field"><label for="cm">Email</label><input id="cm" name="email" type="email" placeholder="you@email.com" autocomplete="email"></div>
+          <div class="field"><label for="cp">Phone / WhatsApp</label><input id="cp" name="phone" type="tel" placeholder="+ country code" autocomplete="tel"></div>
+        </div>
+        <div class="field"><label for="cg">Which program are you curious about?</label>
+          <select id="cg" name="program"><option>Not sure yet — help me choose</option><option>Wealth Expansion Code</option><option>Business Expansion Code</option><option>Something else</option></select></div>
+        <div class="field"><label for="cx">What's going on for you right now?</label><textarea id="cx" name="message" rows="4" placeholder="A few lines is plenty."></textarea></div>
+        <label class="chk"><input type="checkbox" id="cc"><span>I agree to receive emails and, optionally, SMS from tejaldesae.com | Reign Legacy.</span></label>
+        <div class="err" id="cerr"></div>
+        <button class="btn btn-em" type="submit" style="width:100%;margin-top:6px">Send it →</button>
+        <p class="fp" style="margin-top:14px">Prefer to skip ahead? <a class="lnk" style="border:none;text-transform:none;letter-spacing:0;font-size:13px" href="assessment.html">Find out your Expansion Quotient — free</a></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ═══════════ EXPANSION QUOTIENT CTA ═══════════ -->
+  <section class="say cream" id="quotient">
+    <div class="nar reveal">
+      <span class="eyebrow">Start here — free</span>
+      <h2 style="margin-top:14px;max-width:17ch">Find out your <b>Expansion Quotient</b>.</h2>
+      <p class="p">Most people spend years fixing the symptom. Your Expansion Quotient finds the actual pattern — the one running under every ask you've ever softened.</p>
+      <div class="pats"><span>The Guard</span><span>The Prover</span><span>The Hider</span><span>The Giver</span><span>The Gripper</span></div>
+      <div style="margin-top:36px" class="freewink">
+        <a class="btn btn-em" href="assessment.html">Find out your Expansion Quotient</a>
+        <span class="tip"><span class="heart">♥</span> 8 questions · 2 minutes · and it's <span class="free-word">yours, free</span> — no card, ever</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer>
+    <div class="wrap">
+      <div class="fg">
+        <div>
+          <div class="brand"><img class="lg" src="images/ref-logo.png" alt="Tejal Desae monogram"><span>Tejal Desae</span></div>
+          <p class="tag">Wealth &amp; Identity Mentor.<br>The era of quiet excellence is over.</p>
+          <div class="soc">
+            <a href="https://instagram.com/tejaldesae" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><span>@tejaldesae</span></a>
+            <a href="https://youtube.com/@tejaldesae" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg><span>@tejaldesae</span></a>
+            <a href="https://linkedin.com/in/tejaldesae" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 10v7M7 7v.5M11.5 17v-4a2.5 2.5 0 0 1 5 0v4"/></svg><span>Tejal Desae</span></a>
+          </div>
+        </div>
+        <div><h4>Explore</h4><a href="#moment">The Moment</a><a href="#method">The Method</a><a href="#programs">Programs</a><a href="#about">About</a><a href="#faq">FAQs</a></div>
+        <div><h4>Start</h4><a href="assessment.html">Expansion Quotient</a><a href="#contact">Program Clarity Call</a><a href="privacy-policy.html">Privacy Policy</a><a href="privacy-policy.html">Terms &amp; Conditions</a></div>
+        <div><h4>Contact</h4>
+          <p class="ft">Bangalore, India</p>
+          <p class="ft"><a href="mailto:hello@tejaldesae.com" style="display:inline">hello@tejaldesae.com</a></p>
+          <p class="ft">10:00 AM – 08:00 PM IST<br>Weekdays</p>
+        </div>
+      </div>
+      <div class="cp">© 2026 Tejal Desae · Reign Legacy · tejaldesae.com</div>
     </div>
   </footer>
 
-  <script type="module" src="js/main.js"></script>
+  <script src="js/home.js"></script>
 </body>
 </html>

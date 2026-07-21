@@ -29,7 +29,6 @@
   position: relative;
   overflow: visible; /* allow specular canvas bleed */
   transition: background .22s ease, color .22s ease, border-color .22s ease, transform .18s ease;
-  /* NO box-shadow, NO filter, NO glow */
   box-shadow: none !important;
 }
 

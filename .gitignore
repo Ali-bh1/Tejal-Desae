@@ -1,7 +1,40 @@
-.agent/
-.gemini/
-*.pyc
-__pycache__/
+# Dependencies
 node_modules/
+
+# Environment secrets
 .env
+server/.env
+
+# Python scripts (dev utilities, not part of the site)
+*.py
+__pycache__/
+*.pyc
+
+# Dev/editor files & local agent tooling (not part of the website)
+.agent/
+.agents/
+.claude/
+.gemini/
+.vscode/
+
+# Temporary screenshot capture harness (never committed)
+_cap.html
+_diag.html
+
+# Old unused assets
 assets/videos/
+
+# Mockup / draft files (not the live site)
+tejal-homepage-mockup.html
+
+# Design system docs (internal reference only)
+design-system/
+docs/
+
+# Video page (not linked from main site)
+video.html
+
+# Standalone quiz files outside project folder
+../Wealth\ Expansion\ Code\ Quiz.html
+../wealth-expansion-capacity-report.html
+.vercel

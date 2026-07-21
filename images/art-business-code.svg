@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img" aria-label="A colonnade of pale arches receding toward a lit opening">
+  <defs>
+    <linearGradient id="bFloor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#C4B18C"/>
+      <stop offset="1" stop-color="#A8946E"/>
+    </linearGradient>
+    <radialGradient id="bEnd" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#FFFDF4" stop-opacity="1"/>
+      <stop offset=".5" stop-color="#FBF3DF" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#FBF3DF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bVeil" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8E7B57" stop-opacity=".34"/>
+      <stop offset=".45" stop-color="#8E7B57" stop-opacity="0"/>
+      <stop offset="1" stop-color="#8E7B57" stop-opacity=".22"/>
+    </linearGradient>
+    <linearGradient id="bRefl" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFBEE" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#FFFBEE" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="750" fill="#B8A480"/>
+
+  <!-- receding arches, dark outside → luminous inside -->
+  <g stroke="#9E8B66" stroke-width="1.4">
+    <path d="M70 690  V520 A530 530 0 0 1 1130 520 V690 Z" fill="#C6B491"/>
+    <path d="M128 690 V538 A472 472 0 0 1 1072 538 V690 Z" fill="#D1C1A1"/>
+    <path d="M186 690 V556 A414 414 0 0 1 1014 556 V690 Z" fill="#DACDB1"/>
+    <path d="M244 690 V574 A356 356 0 0 1 956 574 V690 Z" fill="#E3D8C1"/>
+    <path d="M302 690 V592 A298 298 0 0 1 898 592 V690 Z" fill="#EBE2D0"/>
+    <path d="M360 690 V610 A240 240 0 0 1 840 610 V690 Z" fill="#F2EBDC"/>
+    <path d="M418 690 V628 A182 182 0 0 1 782 628 V690 Z" fill="#F8F3E8"/>
+    <path d="M476 690 V646 A124 124 0 0 1 724 646 V690 Z" fill="#FFFDF6"/>
+  </g>
+
+  <!-- light pouring from the far opening -->
+  <ellipse cx="600" cy="660" rx="250" ry="150" fill="url(#bEnd)"/>
+
+  <!-- floor -->
+  <rect y="690" width="1200" height="60" fill="url(#bFloor)"/>
+  <path d="M0 690 H1200" stroke="#95815C" stroke-width="1.2" opacity=".85"/>
+  <path d="M476 690 H724 L790 750 H410 Z" fill="url(#bRefl)"/>
+
+  <rect width="1200" height="750" fill="url(#bVeil)"/>
+</svg>

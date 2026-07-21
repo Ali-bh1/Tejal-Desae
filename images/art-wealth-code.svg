@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="A golden sun rising over still water inside concentric rings">
+  <defs>
+    <linearGradient id="wSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0E2B20"/>
+      <stop offset=".34" stop-color="#3B5138"/>
+      <stop offset=".60" stop-color="#A8874F"/>
+      <stop offset=".82" stop-color="#E4C287"/>
+      <stop offset="1" stop-color="#F3DCAB"/>
+    </linearGradient>
+    <linearGradient id="wWater" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#D9B677"/>
+      <stop offset=".18" stop-color="#96814F"/>
+      <stop offset=".55" stop-color="#3C5340"/>
+      <stop offset="1" stop-color="#102D21"/>
+    </linearGradient>
+    <radialGradient id="wGlow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#FFF8E7" stop-opacity=".95"/>
+      <stop offset=".3" stop-color="#F7DEA8" stop-opacity=".55"/>
+      <stop offset=".65" stop-color="#E6D3A3" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#E6D3A3" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="wBeam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E6D3A3" stop-opacity="0"/>
+      <stop offset=".46" stop-color="#FFF3D6" stop-opacity=".5"/>
+      <stop offset=".58" stop-color="#FFF3D6" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#E6D3A3" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="470" fill="url(#wSky)"/>
+  <rect y="470" width="1200" height="330" fill="url(#wWater)"/>
+
+  <!-- ambient glow around the sun -->
+  <circle cx="600" cy="470" r="360" fill="url(#wGlow)"/>
+
+  <!-- vertical light beam -->
+  <rect x="596" y="0" width="8" height="800" fill="url(#wBeam)"/>
+
+  <!-- sacred geometry: concentric rings on the horizon point -->
+  <g fill="none" stroke="#F2E0AF">
+    <circle cx="600" cy="470" r="72"  stroke-width="1.3" opacity=".95"/>
+    <circle cx="600" cy="470" r="134" stroke-width="1.2" opacity=".68"/>
+    <circle cx="600" cy="470" r="206" stroke-width="1.1" opacity=".48"/>
+    <circle cx="600" cy="470" r="288" stroke-width="1" opacity=".32"/>
+    <circle cx="600" cy="470" r="380" stroke-width="1" opacity=".2"/>
+    <circle cx="600" cy="470" r="482" stroke-width="1" opacity=".12"/>
+  </g>
+
+  <!-- distant range -->
+  <path d="M0 470 L140 400 L248 446 L358 368 L470 460 L558 428 L642 428 L732 464 L842 386 L952 450 L1062 408 L1200 468 Z" fill="#123325" opacity=".9"/>
+  <path d="M0 470 L118 438 L262 468 L402 424 L522 468 L662 446 L802 470 L942 436 L1082 466 L1200 452 Z" fill="#0B2219" opacity=".78"/>
+
+  <!-- the sun -->
+  <circle cx="600" cy="470" r="48" fill="#FFF6DE" opacity=".96"/>
+  <circle cx="600" cy="470" r="48" fill="none" stroke="#FFFDF4" stroke-width="1.5" opacity=".8"/>
+
+  <!-- horizon -->
+  <path d="M0 470 H1200" stroke="#F6E8C3" stroke-width="1" opacity=".5"/>
+
+  <!-- reflection on the water -->
+  <g stroke="#FFF2D2" stroke-linecap="round" fill="none">
+    <path d="M562 488 H638" stroke-width="3" opacity=".62"/>
+    <path d="M546 504 H654" stroke-width="2.5" opacity=".5"/>
+    <path d="M572 521 H628" stroke-width="3" opacity=".55"/>
+    <path d="M532 540 H668" stroke-width="2.5" opacity=".42"/>
+    <path d="M566 562 H634" stroke-width="2.5" opacity=".46"/>
+    <path d="M522 588 H678" stroke-width="2" opacity=".34"/>
+    <path d="M558 617 H642" stroke-width="2.5" opacity=".36"/>
+    <path d="M506 650 H694" stroke-width="2" opacity=".26"/>
+    <path d="M552 686 H648" stroke-width="2.5" opacity=".26"/>
+    <path d="M496 726 H704" stroke-width="2" opacity=".18"/>
+    <path d="M546 770 H654" stroke-width="2.5" opacity=".16"/>
+  </g>
+
+  <!-- golden-ratio spiral, whispered in the corner -->
+  <g fill="none" stroke="#F2E0AF" stroke-width="1" opacity=".22" transform="translate(946 556)">
+    <path d="M0 0 A104 104 0 0 1 104 104"/>
+    <path d="M104 104 A64 64 0 0 1 40 168"/>
+    <path d="M40 168 A40 40 0 0 1 0 128"/>
+    <path d="M0 128 A24 24 0 0 1 24 104"/>
+    <rect x="0" y="0" width="104" height="104" opacity=".55"/>
+    <rect x="0" y="104" width="104" height="64" opacity=".4"/>
+  </g>
+</svg>
