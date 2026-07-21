@@ -245,9 +245,7 @@ Already set up for you in `vercel.json`: security headers, HTTPS, image caching,
 
 **Payment button does nothing / broken page.** The Razorpay placeholder isn't replaced yet (§3).
 
-**What does the visitor see after clicking "Book my call"?** The button opens Razorpay in a new tab and the page shows a **"Payment in progress"** screen (with a progress rail: Booking → Payment → Your quiz). When payment completes it turns into a **"Payment confirmed — your call is reserved"** screen with the quiz button. If the two tabs don't sync automatically, they can tap **"I've completed payment"** to continue.
-
-**Paid, but the quiz didn't unlock.** Best fix: set your Razorpay redirect URL to `…?paid=1` (§3, Step 1‑3) — then it unlocks on its own, even across the two tabs. Otherwise the visitor taps **"I've completed payment"** (on the in‑progress screen) or **"Already completed payment?"** (on the booking card).
+**Paid, but the quiz didn't unlock.** Best fix: set your Razorpay redirect URL to `…?paid=1` (§3, Step 1‑3) so it unlocks on its own. Otherwise the visitor taps the small **"Weren't redirected back after paying? Click here to continue"** link on the booking card.
 
 **Is it mobile‑friendly?** Yes — every page is built and tested for phones.
 
