@@ -30,34 +30,69 @@ src="https://www.facebook.com/tr?id=925766013116755&ev=PageView&noscript=1"
   <link rel="stylesheet" href="css/home-2026.css">
   <script>document.documentElement.className += ' js';</script>
   <style>
-    .ty{background:var(--em);color:#fff;min-height:calc(100vh - 66px);display:flex;align-items:center;
-      padding:clamp(52px,8vw,110px) 0;position:relative;overflow:hidden}
-    .ty:before{content:"";position:absolute;left:50%;top:44%;width:1000px;height:1000px;transform:translate(-50%,-50%);
-      background:radial-gradient(circle,rgba(230,211,163,.18),rgba(230,211,163,0) 62%);pointer-events:none}
-    /* soft expanding rings behind the tick */
-    .ty-rings{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(760px,120vw);aspect-ratio:1;pointer-events:none;opacity:.5}
+    /* ── Confirmation header ── */
+    .ty{background:var(--em);color:#fff;
+      padding:clamp(40px,6vw,72px) 0 clamp(36px,5vw,56px);position:relative;overflow:hidden;text-align:center}
+    .ty:before{content:"";position:absolute;left:50%;top:50%;width:900px;height:900px;transform:translate(-50%,-50%);
+      background:radial-gradient(circle,rgba(230,211,163,.16),rgba(230,211,163,0) 60%);pointer-events:none}
+    .ty-rings{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(600px,120vw);aspect-ratio:1;pointer-events:none;opacity:.4}
     .ty-rings span{position:absolute;inset:0;border:1px solid rgba(230,211,163,.3);border-radius:50%;opacity:0;
       transform:scale(.2);animation:tyOut 11s cubic-bezier(.22,.61,.36,1) infinite}
     .ty-rings span:nth-child(2){animation-delay:3.6s}
     .ty-rings span:nth-child(3){animation-delay:7.2s}
     @keyframes tyOut{0%{transform:scale(.2);opacity:0}16%{opacity:.7}100%{transform:scale(1);opacity:0}}
-    .ty .wrap{position:relative;z-index:1;text-align:center}
-    .ty .chk{width:64px;height:64px;border-radius:50%;border:1px solid var(--ch);display:flex;align-items:center;
-      justify-content:center;margin:0 auto 26px;color:var(--ch);animation:tyPop .6s var(--ease-out)}
-    .ty .chk svg{width:30px;height:30px}
+    .ty .wrap{position:relative;z-index:1}
+    .ty .chk{width:56px;height:56px;border-radius:50%;border:1px solid var(--ch);display:flex;align-items:center;
+      justify-content:center;margin:0 auto 20px;color:var(--ch);animation:tyPop .6s var(--ease-out)}
+    .ty .chk svg{width:26px;height:26px}
     @keyframes tyPop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.1)}to{transform:scale(1);opacity:1}}
     .ty .eyebrow{color:var(--ch);opacity:.9}
-    .ty h1{font-family:var(--serif);font-weight:500;font-size:clamp(34px,5.4vw,58px);color:var(--ch);
-      line-height:1.05;margin:14px auto 0;max-width:16ch}
+    .ty h1{font-family:var(--serif);font-weight:500;font-size:clamp(28px,4.8vw,50px);color:var(--ch);
+      line-height:1.08;margin:12px auto 0;max-width:16ch}
     .ty h1 b{font-weight:700}
-    .ty .lead{font-weight:300;font-size:clamp(15px,1.9vw,17.5px);line-height:1.8;color:rgba(255,255,255,.86);
-      max-width:44ch;margin:22px auto 0}
+    .ty .lead{font-weight:300;font-size:clamp(14px,1.6vw,16.5px);line-height:1.8;color:rgba(255,255,255,.82);
+      max-width:48ch;margin:16px auto 0}
     .ty .lead b{font-weight:500;color:#fff}
-    .ty .step{margin-top:clamp(30px,4vw,42px)}
-    .ty .fine{font-size:12.5px;letter-spacing:.02em;color:rgba(230,211,163,.7);margin-top:18px;font-style:italic;font-family:var(--serif)}
-    .ty .sched-note{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;opacity:.45;margin-top:26px}
 
-    /* free-quiz strip */
+    /* ── Full-width calendar section ── */
+    .cal-section{background:var(--em, #154230);padding:0 0 clamp(36px,5vw,56px);position:relative}
+    .cal-section .cal-header{text-align:center;padding:clamp(20px,3vw,32px) 20px clamp(16px,2vw,24px);
+      color:var(--ch, #e6d3a3);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;opacity:.7}
+    .cal-section .cal-container{max-width:1100px;margin:0 auto;padding:0 clamp(12px,2vw,24px)}
+    .cal-section .cal-frame{border-radius:12px;overflow:hidden;
+      background:var(--paper, #FBFAF5);box-shadow:0 20px 60px -20px rgba(0,0,0,.35)}
+    .cal-section iframe{display:block;width:100%;border:none;min-height:700px;border-radius:12px}
+    .cal-section .cal-note{text-align:center;padding:18px 20px 0;font-size:12px;letter-spacing:.08em;
+      color:rgba(230,211,163,.5);font-style:italic;font-family:var(--serif)}
+
+    /* Desktop: 3-column layout */
+    @media(min-width:769px){
+      .cal-section iframe{min-height:660px}
+    }
+    /* Tablet */
+    @media(max-width:768px){
+      .cal-section iframe{min-height:1100px}
+      .cal-section .cal-frame{border-radius:8px}
+      .cal-section iframe{border-radius:8px}
+      .cal-section .cal-container{padding:0 clamp(8px,2vw,16px)}
+    }
+    /* Mobile */
+    @media(max-width:500px){
+      .cal-section iframe{min-height:1200px}
+      .cal-section .cal-frame{border-radius:6px;box-shadow:0 12px 40px -12px rgba(0,0,0,.3)}
+      .cal-section iframe{border-radius:6px}
+      .cal-section .cal-container{padding:0 8px}
+      .cal-section{padding-bottom:clamp(24px,4vw,40px)}
+      .ty{padding:clamp(32px,6vw,52px) 0 clamp(28px,4vw,40px)}
+      .ty h1{font-size:clamp(24px,6.5vw,36px)}
+      .ty .lead{font-size:14px}
+    }
+    @media(max-width:360px){
+      .cal-section iframe{min-height:1250px}
+      .cal-section .cal-container{padding:0 4px}
+    }
+
+    /* ── Free-quiz strip ── */
     .ty-quiz{background:var(--cream);text-align:center;padding:clamp(46px,6vw,78px) 0}
     .ty-quiz .eyebrow{opacity:.55}
     .ty-quiz h2{font-family:var(--serif);font-weight:500;font-size:clamp(26px,3.4vw,40px);color:var(--em);margin:12px auto 0;max-width:18ch}
@@ -101,14 +136,24 @@ src="https://www.facebook.com/tr?id=925766013116755&ev=PageView&noscript=1"
       <div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 6 9 17l-5-5"/></svg></div>
       <span class="eyebrow">Payment confirmed</span>
       <h1>Thank you — your call is <b>reserved</b>.</h1>
-      <p class="lead">Your payment came through and your <b>Clarity Call</b> is booked in. One last step: pick the time that suits you, and it'll drop straight into the calendar.</p>
-      <div class="step">
-        <!-- TidyCal booking link — visitor picks a slot, it books into the calendar -->
-        <a class="btn btn-ch" id="scheduleBtn" href="https://tidycal.com/tejjalsdeesai1" target="_blank" rel="noopener">Choose your time →</a>
-        <p class="fine">A confirmation is on its way to your email.</p>
-      </div>
-      <div class="sched-note">Reign Legacy · Tejal Desae</div>
+      <p class="lead">Your payment came through and your <b>Clarity Call</b> is booked in. Pick a date and time below — it'll drop straight into the calendar.</p>
     </div>
+  </section>
+
+  <!-- ═══════════ BOOKING CALENDAR ═══════════ -->
+  <section class="cal-section">
+    <p class="cal-header">Select your date &amp; time</p>
+    <div class="cal-container">
+      <div class="cal-frame">
+        <iframe
+          src="https://expansioncode.tejaldesae.com/book/tejal-your-expansion-clarity-call-45-minutes"
+          title="Book your Expansion Clarity Call — 45 Minutes"
+          loading="lazy"
+          allow="payment"
+        ></iframe>
+      </div>
+    </div>
+    <p class="cal-note">A confirmation will be sent to your email once booked.</p>
   </section>
 
   <!-- ═══════════ FREE QUIZ ═══════════ -->
