@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/thankyou", "destination": "/thankyou.html" }
+    { "source": "/call-booked-x7r9", "destination": "/cb-x7r9.html" }
   ],
   "headers": [
     {
