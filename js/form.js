@@ -9,7 +9,7 @@
  */
 
 const ENDPOINT   = 'https://api.web3forms.com/submit';
-const ACCESS_KEY = '5c1e2ca1-ad51-4e82-9e77-e00ca2ad6fd9';
+const ACCESS_KEY = '5eb90167-6d6e-4872-9d00-1d73aee4786b';
 
 // ── Razorpay Payment Links ───────────────────────────────────────
 // Replace placeholder values with real Razorpay Short URLs (https://rzp.io/l/...)
@@ -196,10 +196,12 @@ async function handleSubmit(e) {
     botcheck:     '',
   };
 
-  // Add all form fields
+  // Collect all form fields (for both email and sheet)
+  const extraFields = {};
   data.forEach((value, key) => {
     if (key !== 'access_key' && key !== '_honeypot' && key !== 'botcheck') {
       payload[key] = value;
+      extraFields[key] = value;
     }
   });
 
@@ -225,6 +227,9 @@ async function handleSubmit(e) {
     if (json.success) {
       // Clear draft
       try { localStorage.removeItem(STORAGE_KEY); } catch (_) {}
+
+      // Log to Google Sheet (fire-and-forget — doesn't block the UI)
+      logApplicationToSheet(extraFields, program, topType, scores);
 
       // Show success
       if (successMsg) {
@@ -256,6 +261,27 @@ async function handleSubmit(e) {
     }
     console.error('Form error:', err);
   }
+}
+
+/**
+ * Logs the application to Google Sheets via lead-service.
+ * Non-blocking — failures are silently caught.
+ */
+function logApplicationToSheet(fields, program, topType, scores) {
+  import('./lead-service.js').then(({ sendLead }) => {
+    // Only log to sheet (email is already handled by Web3Forms above)
+    sendLead({
+      source:      'Application Form',
+      firstName:   fields.firstName || fields.name || '',
+      lastName:    fields.lastName || '',
+      email:       fields.email || '',
+      phone:       fields.phone || '',
+      program:     program,
+      archetype:   topType || '',
+      scores:      scores || '',
+      extraFields: fields,
+    });
+  }).catch(() => {});
 }
 
 // ── Payment URL resolver ──────────────────────────────────────────

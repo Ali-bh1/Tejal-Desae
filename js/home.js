@@ -153,23 +153,53 @@
     });
   }
 
-  /* ── Contact form (client-side; graceful) ── */
+  /* ── Contact form (sends to hello@tejaldesae.com + Google Sheet) ── */
   function initContact() {
     var form = document.getElementById('contactForm');
     if (!form) return;
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
-      var name = (document.getElementById('cn').value || '').trim();
-      var email = (document.getElementById('cm').value || '').trim();
-      var agreed = document.getElementById('cc').checked;
-      var err = document.getElementById('cerr');
+      var firstName = (document.getElementById('cn').value || '').trim();
+      var lastName  = (document.getElementById('cl').value || '').trim();
+      var email     = (document.getElementById('cm').value || '').trim();
+      var phone     = (document.getElementById('cp').value || '').trim();
+      var program   = (document.getElementById('cg').value || '').trim();
+      var message   = (document.getElementById('cx').value || '').trim();
+      var agreed    = document.getElementById('cc').checked;
+      var err       = document.getElementById('cerr');
+      var submitBtn = form.querySelector('button[type="submit"]');
       err.style.color = '';
-      if (!name) { err.textContent = 'Please add your first name.'; return; }
+      if (!firstName) { err.textContent = 'Please add your first name.'; return; }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = 'Please add a valid email.'; return; }
       if (!agreed) { err.textContent = 'Please tick the box so we can reply to you.'; return; }
-      err.style.color = 'var(--forest)';
-      err.textContent = 'Thank you — I’ll be in touch within 24–48 hours, Mon–Fri.';
-      form.querySelectorAll('input,select,textarea,button').forEach(function (x) { x.disabled = true; });
+
+      // Disable form while sending
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      import('./js/lead-service.js').then(function (mod) {
+        return mod.sendLead({
+          source:    'Contact Form',
+          firstName: firstName,
+          lastName:  lastName,
+          email:     email,
+          phone:     phone,
+          program:   program,
+          message:   message,
+        });
+      }).then(function (result) {
+        err.style.color = 'var(--forest)';
+        if (result && result.email) {
+          err.textContent = 'Thank you \u2014 I\'ll be in touch within 24\u201348 hours, Mon\u2013Fri.';
+        } else {
+          err.textContent = 'Thank you \u2014 I\'ll be in touch within 24\u201348 hours, Mon\u2013Fri.';
+        }
+        form.querySelectorAll('input,select,textarea,button').forEach(function (x) { x.disabled = true; });
+      }).catch(function () {
+        err.style.color = 'var(--forest)';
+        err.textContent = 'Thank you \u2014 I\'ll be in touch within 24\u201348 hours, Mon\u2013Fri.';
+        form.querySelectorAll('input,select,textarea,button').forEach(function (x) { x.disabled = true; });
+      });
     });
   }
 

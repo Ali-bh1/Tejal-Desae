@@ -235,7 +235,9 @@ src="https://www.facebook.com/tr?id=925766013116755&ev=PageView&noscript=1"
     </div>
   </div>
 
-<script>
+<script type="module">
+import { sendLead } from './js/lead-service.js';
+
 const QUESTIONS=[
   {q:"More money than you expected lands in your account. What's the first thing you feel?",
    o:[["A little jolt of 'wait, what's the catch?'","A"],["I want to spend it or give it away — fast","D"],["Straight back to work. I can't really enjoy it","E"],["A quiet 'did I actually earn this?'","B"]]},
@@ -280,6 +282,13 @@ const ARCHETYPES={
 
 const CATS=['A','B','C','D','E'];
 let state={i:0,answers:new Array(QUESTIONS.length).fill(null)};
+
+// Expose functions to inline onclick handlers
+window.show = show;
+window.pick = pick;
+window.goBack = goBack;
+window.captureAndReveal = captureAndReveal;
+window.restart = restart;
 
 function show(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -343,25 +352,20 @@ function captureAndReveal(){
     localStorage.setItem('tejal_lead_name',nm);
     localStorage.setItem('tejal_program',prog);
   }catch(e){}
+
+  // Send lead: email to hello@tejaldesae.com + log to Google Sheet
   const normAnswers=state.answers.map(a=>a?String(a).toUpperCase():'A');
-  fetch('/api/csrf-token',{credentials:'include'})
-    .then(r=>r.ok?r.json():Promise.reject())
-    .then(j=>fetch('/api/assessment/submit',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','x-csrf-token':j.token||''},
-      credentials:'include',
-      body:JSON.stringify({name:nm,email:em,phone:ph,program:prog,answers:normAnswers})
-    }))
-    .then(r=>r.ok?r.json():null)
-    .then(json=>{
-      if(json&&json.submissionId){
-        sessionStorage.setItem('tejal_submission_id',json.submissionId);
-        try{localStorage.setItem('tejal_submission_id',json.submissionId);}catch(e){}
-        const ctaBtn=document.getElementById('ctaBtn');
-        if(ctaBtn) ctaBtn.href='report.html?id='+json.submissionId;
-      }
-    })
-    .catch(()=>{});
+  sendLead({
+    source:      'Assessment Quiz',
+    firstName:   nm,
+    email:       em,
+    phone:       ph,
+    program:     prog,
+    archetype:   top,
+    scores:      JSON.stringify(s),
+    quizAnswers: normAnswers.join(', '),
+  }).catch(()=>{}); // fire-and-forget — don't block the result reveal
+
   computeResult(nm,top,s);
 }
 
