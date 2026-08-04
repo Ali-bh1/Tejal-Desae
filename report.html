@@ -196,12 +196,12 @@ src="https://www.facebook.com/tr?id=925766013116755&ev=PageView&noscript=1"
     </div>
   </div>
 
-  <!-- CTA -->
+  <!-- CTA — Direct to Razorpay booking (simplified funnel) -->
   <div class="cta-section">
     <div class="cta-inner">
-      <h2 id="ctaTitle">Ready to dissolve this pattern — permanently?</h2>
-      <p id="ctaBody">Your profile reveals exactly where we begin. The next step is your enrolment.</p>
-      <a id="ctaBtn" href="apply-money-energetics.html" class="btn-champ">Continue to Enrolment →</a>
+      <h2 id="ctaTitle">Your next step: a clarity call with Tejal</h2>
+      <p id="ctaBody">Your profile reveals exactly where we begin. Book a call and let's map your way forward.</p>
+      <a id="ctaBtn" href="https://pages.razorpay.com/manifested369" class="btn-champ" target="_blank" rel="noopener">Book Your Call →</a>
     </div>
   </div>
 
@@ -243,16 +243,9 @@ const ARCHETYPES = {
 };
 
 const CAT_LABELS = {A:'Safety',B:'Worthiness',C:'Visibility',D:'Receiving',E:'Ease'};
-const PROG_LINKS = {
-  'wealth-expansion-code':'wealth-expansion-code.html',
-  'business-expansion-code':'business-expansion-code.html',
-  // legacy programs (kept for reference)
-  'money-energetics':'apply-money-energetics.html',
-  'wealth-oracle':'apply-wealth-oracle.html',
-  'divine-wealth':'apply-divine-wealth.html',
-  'sovereign-mentor':'apply-sovereign-mentor.html',
-  'inner-sanctum':'apply-inner-sanctum.html'
-};
+
+// Razorpay booking link — simplified funnel (Report → Book a Call)
+const RAZORPAY_BOOKING = 'https://pages.razorpay.com/manifested369';
 
 function loadReport() {
   // Check URL for submissionId first (bookmarkable reports from backend)
@@ -278,14 +271,12 @@ async function loadReportFromAPI(submissionId) {
     // Build synthetic scores for display (from categoryScores)
     const scores = data.categoryScores || {};
     const name   = data.name || 'Your';
-    const prog   = data.program || sessionStorage.getItem('tejal_program') || 'money-energetics';
 
     // Store in sessionStorage so display helpers work
     sessionStorage.setItem('tejal_scores',   JSON.stringify(scores));
     sessionStorage.setItem('tejal_top_type', data.topArchetype);
-    sessionStorage.setItem('tejal_program',  prog);
 
-    renderReport(name, data.topArchetype, scores, prog);
+    renderReport(name, data.topArchetype, scores);
   } catch (err) {
     // Graceful fallback to sessionStorage
     loadReportFromSession();
@@ -298,13 +289,12 @@ function loadReportFromSession() {
   const scores  = JSON.parse(ss('tejal_scores') || 'null');
   const topType = ss('tejal_top_type');
   const name    = ss('tejal_lead_name') || 'Your';
-  const prog    = ss('tejal_program')   || 'money-energetics';
 
   if (!topType) { window.location.href = 'assessment.html'; return; }
-  renderReport(name, topType, scores, prog);
+  renderReport(name, topType, scores);
 }
 
-function renderReport(name, topType, scores, prog) {
+function renderReport(name, topType, scores) {
   const a = ARCHETYPES[topType];
   if (!a) { window.location.href = 'assessment.html'; return; }
 
@@ -371,10 +361,10 @@ function renderReport(name, topType, scores, prog) {
   document.getElementById('edgeName').textContent = a.edge.name;
   document.getElementById('edgeDesc').innerHTML   = a.edge.desc;
 
-  // CTA — routes to correct program's apply/enrol flow
-  document.getElementById('ctaTitle').textContent = 'Ready to dissolve ' + a.name + ' pattern — permanently?';
-  document.getElementById('ctaBody').textContent  = a.next;
-  document.getElementById('ctaBtn').href          = PROG_LINKS[prog] || 'apply-money-energetics.html';
+  // CTA — direct link to Razorpay booking (simplified funnel)
+  document.getElementById('ctaTitle').textContent = 'Your next step: a clarity call with Tejal';
+  document.getElementById('ctaBody').textContent  = 'Your ' + a.name + ' pattern reveals exactly where we begin. Book a call and let\'s map your way forward.';
+  document.getElementById('ctaBtn').href          = RAZORPAY_BOOKING;
 }
 
 loadReport();

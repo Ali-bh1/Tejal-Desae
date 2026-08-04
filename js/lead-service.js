@@ -16,6 +16,10 @@ const WEB3FORMS_KEY      = '5eb90167-6d6e-4872-9d00-1d73aee4786b';
 // See docs/google-sheets-script.js for setup instructions
 const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwDYvs-fPOk-sqfQ0c582G2eg0yw5s5EQwYIAWkpzRW51QEoFGAG7E0wmdndfvtMvQ3/exec';
 
+// Marketing automation platform (Tejal's lead capture webhook)
+// Non-blocking — failures are logged but never block the user flow
+const MARKETING_WEBHOOK_URL = 'https://api.advancedlifecoaching.in/functions/v1/lead-capture/tejal-desae-b9e51bbcd863';
+
 // ── Program display names ────────────────────────────────────
 const PROGRAM_NAMES = {
   'money-energetics':       'Money Energetics (€555)',
@@ -76,15 +80,17 @@ export async function sendLead(data) {
   }
   recentSubmissions.add(fp);
 
-  // Fire both in parallel — one failure doesn't block the other
-  const [emailResult, sheetResult] = await Promise.allSettled([
+  // Fire all three channels in parallel — one failure doesn't block the others
+  const [emailResult, sheetResult, marketingResult] = await Promise.allSettled([
     sendEmail(data),
     logToSheet(data),
+    sendToMarketingPlatform(data),
   ]);
 
   return {
-    email: emailResult.status === 'fulfilled' && emailResult.value,
-    sheet: sheetResult.status === 'fulfilled' && sheetResult.value,
+    email:     emailResult.status === 'fulfilled' && emailResult.value,
+    sheet:     sheetResult.status === 'fulfilled' && sheetResult.value,
+    marketing: marketingResult.status === 'fulfilled' && marketingResult.value,
   };
 }
 
@@ -203,4 +209,48 @@ function formatScores(scores) {
     .sort(([, a], [, b]) => b - a)
     .map(([key, val]) => `${labels[key] || key}: ${val}`)
     .join(', ');
+}
+
+
+// ── Marketing Automation Webhook ─────────────────────────────
+
+/**
+ * Sends lead data to Tejal's marketing automation platform.
+ * Non-blocking — if it fails, we log the error and move on.
+ * The visitor's experience is never affected by this call.
+ */
+async function sendToMarketingPlatform(data) {
+  if (!MARKETING_WEBHOOK_URL) return false;
+
+  const archetypeName = ARCHETYPE_NAMES[data.archetype] || data.archetype || '';
+
+  const payload = {
+    source:    data.source    || '',
+    firstName: data.firstName || '',
+    lastName:  data.lastName  || '',
+    email:     data.email     || '',
+    phone:     data.phone     || '',
+    program:   PROGRAM_NAMES[data.program] || data.program || '',
+    archetype: archetypeName,
+    scores:    formatScores(data.scores),
+  };
+
+  try {
+    const res = await fetch(MARKETING_WEBHOOK_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'text/plain' }, // text/plain avoids CORS preflight
+      body:    JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      console.warn('[lead-service] Marketing webhook returned', res.status);
+      return false;
+    }
+
+    return true;
+  } catch (err) {
+    // Network error or timeout — log and continue silently
+    console.warn('[lead-service] Marketing webhook failed:', err.message);
+    return false;
+  }
 }
